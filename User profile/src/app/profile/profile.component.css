@@ -1,0 +1,216 @@
+.wrapper {
+    padding: 0 1.4%;
+    max-width: 1680px;
+    margin: 0 auto;
+  }
+  
+  .user-main {
+    display: flex;
+    padding: 0 9%;
+    margin-top: 80px;
+  }
+  
+  .user-main__photo {
+    margin-right: 30px;
+  }
+  
+  .user-main__info p {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    max-width: 450px;
+  }
+  
+  .user-main__info h1 {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 48px;
+    margin: 10px 0;
+  }
+  
+  .cookbooks-show {
+    padding: 0 9%;
+  }
+  
+  .cookbooks-show__navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  
+  .navigation-right {
+    display: flex;
+    width: 578px;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  .navigation-right a {
+    text-decoration: none;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #181818;
+    display: flex;
+    align-self: flex-end;
+  }
+  
+  .navigation-right a:hover {
+    color: #FFBC01;
+  }
+  
+  .navigation__link-active {
+    border-bottom: 2px solid #FFBC01;
+  }
+  
+  .cookbooks-show__navigation button {
+    width: 273px;
+    height: 62px;
+    background: #FFBC01;
+    border-radius: 10px;
+    border: 0;
+    outline: none;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+  }
+  
+  .cookbooks-show__navigation button:hover {
+    cursor: pointer;
+  }
+  
+  .cookbooks-show__cookbooks-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .cookbooks-cards__card {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    width: 240px;
+    padding: 24px;
+    margin-top: 10px;
+  }
+  
+  .cookbooks-cards__card:hover {
+    box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.24);
+  }
+  
+  .cookbooks-cards__card:hover path{
+    fill: #FFBC01;
+  }
+  
+  .cookbooks-cards__card:hover {
+    cursor: pointer;
+  }
+  
+  .header__views span,
+  .footer__likes span,
+  .footer__comments span,
+  .main-info__author,
+  .card__description p {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #181818;
+  }
+  
+  .main-info__author {
+    align-self: end;
+  }
+  
+  .card__description {
+    margin-top: 16px;
+  }
+  
+  .header__more {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .card__picture {
+    margin-top: 16px;
+    border-radius: 50px 10px;
+  }
+  
+  .card__main-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  
+  .main-info__name {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #181818;
+  }
+  
+  .card__footer {
+    margin-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  
+  
+  
+  
+  @media screen and (min-width: 1450px) and (max-width: 1871px) {
+    
+  }
+  
+  @media screen and (min-width: 1260px) and (max-width: 1449px) {
+    
+  }
+  
+  @media screen and (min-width: 787px) and (max-width: 1259px) {
+    .cookbooks-show__navigation {
+      flex-direction: column;
+    }
+    .navigation-right {
+      width: 100%;
+      flex-direction: column;
+      margin: 20px 0;
+    }
+    .navigation-right a {
+      align-self: flex-start;
+    }
+  }
+  
+  @media screen and (min-width: 0px) and (max-width: 786px) {
+    .cookbooks-show__navigation {
+      flex-direction: column;
+    }
+    .navigation-right {
+      width: 100%;
+      flex-direction: column;
+      margin: 20px 0;
+    }
+    .navigation-right a {
+      align-self: flex-start;
+    }
+    .user-main {
+      flex-direction: column;
+      text-align: center;
+    }
+    .user-main__photo {
+      margin-right: 0px;
+    }
+  }

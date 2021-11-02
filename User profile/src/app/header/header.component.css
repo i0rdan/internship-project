@@ -1,0 +1,95 @@
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.4% 9%;
+    flex-wrap: wrap;
+  }
+  
+  .label,
+  .recepies,
+  .cookbooks,
+  .search,
+  .create-button,
+  .signIn {
+    display: flex;
+    align-items: center;
+  }
+  
+  .recepies a,
+  .cookbooks a,
+  .signIn a{
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    color: #181818;
+    text-decoration: none;
+  }
+  
+  .label__text {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 33px;
+    color: #181818;
+  }
+  
+  .label__text-yellow {
+    color: #FFBC01;
+  }
+  
+  .label__icon-wrapper:hover svg {
+    transform: rotate(16deg);
+    transition: .4s;
+  }
+  
+  .search input {
+    width: 264px;
+    height: 40px;
+    background: #F7F7F7;
+    border-radius: 10px;
+    border: 0;
+    outline: 0;
+    padding-left: 25px;
+  }
+  
+  .search svg {
+    margin-right: -20px;
+    z-index: 2;
+  }
+  
+  .create-button button {
+    width: 225px;
+    height: 54px;
+    background-color: #fcfcfd;
+    border: 2px solid #FFBC01;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    color: #FFBC01;
+  }
+  
+  .recepies a:hover,
+  .cookbooks a:hover,
+  .signIn a:hover{
+    cursor: pointer;
+    color: #FFBC01;
+    text-decoration: underline;
+  }
+  
+  .create-button button:hover {
+    background-color: #FFBC01;
+    color: #181818;
+    cursor: pointer;
+  }
+  
+  .search,
+  .search input {
+    cursor: pointer;
+  }
