@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +10,13 @@ export class StorageService {
   onSignIn(login: string, password: string): boolean {
     let data: string[] = [login, password];
 
-    if(this.localStore['user'] && this.checkUserLoginPass(login, password)) {
+    if (this.localStore['user'] && this.checkUserLoginPass(login, password)) {
       this.localStore['currentUser'] = JSON.stringify([data]);
-      return true;
-    }
 
-    else return false;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   checkUserLoginPass(login: string, password: string): boolean {
@@ -24,7 +24,9 @@ export class StorageService {
     let matched: boolean = false;
 
     users.forEach(element => {
-      if(element[0] === login && element[1] === password) matched = true;
+      if(element[0] === login && element[1] === password) {
+        matched = true;
+      }
     });
 
     return matched;
@@ -33,24 +35,22 @@ export class StorageService {
   onSignUp(login: string, password: string): boolean {
     let data: string[] = [login, password];
 
-    if(!this.localStore['user']) {
+    if (!this.localStore['user']) {
       this.localStore['user'] = JSON.stringify([data]);
       this.localStore['currentUser'] = JSON.stringify([data]);
+
       return true;
-    }
+    } else {
+        if (this.checkCurrUsersLogin(login)) {
+          return false;
+        } else {
+          let usersArr: string[][] = JSON.parse(this.localStore['user']);
+          usersArr.push(data);
+          this.localStore['user'] = JSON.stringify(usersArr);
+          this.localStore['currentUser'] = JSON.stringify([data]);
 
-    else {
-      if(this.checkCurrUsersLogin(login)) {
-        return false;
-      }
-
-      else {
-        let usersArr: string[][] = JSON.parse(this.localStore['user']);
-        usersArr.push(data);
-        this.localStore['user'] = JSON.stringify(usersArr);
-        this.localStore['currentUser'] = JSON.stringify([data]);
-        return true;
-      }
+          return true;
+        }
     }
   }
 
@@ -59,7 +59,9 @@ export class StorageService {
     let matched: boolean = false;
 
     users.forEach(element => {
-      if(element[0] === login) matched = true;
+      if (element[0] === login) {
+        matched = true;
+      }
     });
 
     return matched;

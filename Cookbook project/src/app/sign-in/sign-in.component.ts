@@ -9,8 +9,8 @@ import { StorageService } from '../storage/storage.service';
   styleUrls: ['./sign-in.component.css'],
   providers: [StorageService]
 })
-export class SignInComponent implements OnInit {
-  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+export class SignInComponent {
+  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
   signInForm = this.fb.group({
     email: ['', 
       [
@@ -29,51 +29,38 @@ export class SignInComponent implements OnInit {
     private route: Router
   ) { }
 
-  ngOnInit(): void {
-  }
-
-  get _email() {
+  get email() {
     return this.signInForm.get('email');
   }
 
-  get _password() {
+  get password() {
     return this.signInForm.get('password');
   }
 
   onSubmit() {
-    if(this.storage.onSignIn(this._email?.value, this._password?.value)) {
-      alert('Welcome!');
+    if (this.storage.onSignIn(this.email?.value, this.password?.value)) {
       this.route.navigate(['/home']);
-    }
-    else {
+    } else {
       alert('Check login or password');
     }
   }
 
-  checkValid(param: string) {
-    let checkRes: boolean | undefined;
+  checkValid(param: string): boolean | undefined{
     switch (param) {
       case 'showEmailErr':
-        checkRes = this._email?.invalid && (this._email?.dirty || this._email?.touched);
-        break;
+        return this.email?.invalid && (this.email?.dirty || this.email?.touched);
       case 'showPassErr':
-        checkRes = this._password?.invalid && (this._password?.dirty || this._password?.touched);
-        break;
+        return this.password?.invalid && (this.password?.dirty || this.password?.touched);
       case 'emailReq':
-        checkRes = this._email?.errors?.required;
-        break;
+        return this.email?.errors?.required;
       case 'emailPattern':
-        checkRes = this._email?.errors?.pattern;
-        break;
+        return this.email?.errors?.pattern;
       case 'passReq':
-        checkRes = this._password?.errors?.required;
-        break;
+        return this.password?.errors?.required;
       case 'buttonCheck':
-        checkRes = !this._password?.valid || !this._email?.valid;
-        break;
+        return !this.password?.valid || !this.email?.valid;
       default:
-        console.log('No correct');
+        return undefined;
     }
-    return checkRes;
   }
 }

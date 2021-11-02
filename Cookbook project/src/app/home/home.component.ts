@@ -6,13 +6,10 @@ import { StorageService } from '../storage/storage.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnDestroy {
   login: string = this.storage.getCurrUserLogin();
 
   constructor(private storage: StorageService) { }
-
-  ngOnInit(): void {
-  }
 
   ngOnDestroy(): void {
     this.storage.clearCurrUser();
