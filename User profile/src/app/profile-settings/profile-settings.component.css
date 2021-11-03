@@ -1,0 +1,97 @@
+h4 {
+  margin: 0;
+}
+
+.user-main__info p {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  max-width: 450px;
+}
+
+.user-main__info h1 {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 48px;
+  margin: 10px 0;
+}
+
+
+
+.profile-show__personal-info {
+  background: #FFFFFF;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 72px 56px;
+}
+
+.personal-info__label {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 48px;
+  margin-bottom: 32px;
+}
+
+.personal-info__information h4,
+.personal-info__information input,
+.personal-info__information button {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.personal-info__information input {
+  background: #F7F7F7;
+  border-radius: 10px;
+  border: 0;
+  outline: 0;
+  padding-left: 25px;
+}
+
+.personal-info__information input:disabled,
+.personal-info__information input[disabled] {
+  background: transparent;
+}
+
+.information__name,
+.information__password,
+.information__mail {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.information__name h4,
+.information__password h4,
+.information__mail h4 {
+  width: 15%;
+}
+
+.personal-info__information button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: #FFBC01;
+}
+
+.personal-info__information button:hover {
+  cursor: pointer;
+  background-color: #FFBC01;
+  color: #181818;
+  border-radius: 3px;
+}
+
+@media screen and (min-width: 0px) and (max-width: 986px) {
+  .information__name,
+  .information__password,
+  .information__mail {
+    flex-direction: column;
+  }
+}

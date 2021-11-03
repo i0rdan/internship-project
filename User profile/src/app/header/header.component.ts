@@ -9,6 +9,6 @@ import { Router } from '@angular/router';
   providers: [StorageService]
 })
 export class HeaderComponent {
-  userName = this.storage.getCurrUserLogin();
+  userName = this.storage.getCurrUserInfo()[0][2];
   constructor(private storage:StorageService) { }
 }

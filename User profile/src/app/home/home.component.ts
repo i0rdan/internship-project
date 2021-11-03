@@ -14,7 +14,6 @@ export class HomeComponent implements OnDestroy {
   constructor(private storage: StorageService) { }
 
   ngOnDestroy(): void {
-    this.storage.clearCurrUser();
   }
 
 }

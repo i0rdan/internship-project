@@ -7,11 +7,14 @@ export class StorageService {
   localStore = window.localStorage;
   constructor() {}
 
-  onSignIn(login: string, password: string): boolean {
-    let data: string[] = [login, password];
+  onSignIn(email: string, password: string): boolean {
+    if (!this.localStore['user']) {
+      return false;
+    }
 
-    if (this.localStore['user'] && this.checkUserLoginPass(login, password)) {
-      this.localStore['currentUser'] = JSON.stringify([data]);
+    let currUser = this.checkUserLoginPass(email, password);
+    if (currUser) {
+      this.localStore['currentUser'] = JSON.stringify([currUser]);
 
       return true;
     } else {
@@ -19,21 +22,21 @@ export class StorageService {
     }
   }
 
-  checkUserLoginPass(login: string, password: string): boolean {
+  checkUserLoginPass(email: string, password: string): string[] | null {
     let users: string[][] = JSON.parse(this.localStore['user']);
-    let matched: boolean = false;
+    let matched: string[] | null = null;
 
     users.forEach(element => {
-      if(element[0] === login && element[1] === password) {
-        matched = true;
+      if(element[0] === email && element[1] === password) {
+        matched = element;
       }
     });
 
     return matched;
   }
 
-  onSignUp(login: string, password: string): boolean {
-    let data: string[] = [login, password];
+  onSignUp(email: string, password: string): boolean {
+    let data: string[] = [email, password, 'Anonim'];
 
     if (!this.localStore['user']) {
       this.localStore['user'] = JSON.stringify([data]);
@@ -41,7 +44,7 @@ export class StorageService {
 
       return true;
     } else {
-        if (this.checkCurrUsersLogin(login)) {
+        if (this.checkCurrUsersLogin(email)) {
           return false;
         } else {
           let usersArr: string[][] = JSON.parse(this.localStore['user']);
@@ -54,12 +57,12 @@ export class StorageService {
     }
   }
 
-  checkCurrUsersLogin(login: string): boolean {
+  checkCurrUsersLogin(email: string): boolean {
     let users: string[][] = JSON.parse(this.localStore['user']);
     let matched: boolean = false;
 
     users.forEach(element => {
-      if (element[0] === login) {
+      if (element[0] === email) {
         matched = true;
       }
     });
@@ -77,5 +80,9 @@ export class StorageService {
 
   getCurrUserLogin(): string {
     return JSON.parse(this.localStore['currentUser'])[0][0];
+  }
+
+  getCurrUserInfo(): String[] {
+    return JSON.parse(this.localStore['currentUser']);
   }
 }

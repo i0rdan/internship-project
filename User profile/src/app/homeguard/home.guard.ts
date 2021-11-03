@@ -9,6 +9,7 @@ export class HomeGuard implements CanActivate {
         if (this.store.checkUser()) {
           return true;
         } else {
+          alert('Check')
           return false;
         }
     }

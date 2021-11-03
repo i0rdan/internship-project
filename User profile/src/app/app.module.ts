@@ -12,6 +12,9 @@ import { HomeGuard } from './homeguard/home.guard';
 import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FooterComponent } from './footer/footer.component';
+import { ProfileCookbooksComponent } from './profile-cookbooks/profile-cookbooks.component';
+import { ProfileRecepiesComponent } from './profile-recepies/profile-recepies.component';
+import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { FooterComponent } from './footer/footer.component';
     HomeComponent,
     HeaderComponent,
     ProfileComponent,
-    FooterComponent
+    FooterComponent,
+    ProfileCookbooksComponent,
+    ProfileRecepiesComponent,
+    ProfileSettingsComponent
   ],
   imports: [
     BrowserModule,

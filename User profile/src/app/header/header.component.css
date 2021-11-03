@@ -15,6 +15,10 @@
     align-items: center;
   }
   
+.label:hover {
+  cursor: pointer;
+}
+
   .recepies a,
   .cookbooks a,
   .signIn a{
