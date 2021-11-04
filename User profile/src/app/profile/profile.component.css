@@ -12,6 +12,33 @@
   
   .user-main__photo {
     margin-right: 30px;
+    width: 160px;
+    height: 160px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 102px;
+    display: flex;
+    text-align: center;
+  }
+
+  .photo-shadow {
+    width: 100%;
+    background: rgba(102, 102, 102, 0.5);
+    height: 100%;
+    border-radius: 102px;
+    justify-content: center;
+  }
+
+  .photo-shadow svg{
+    margin-top: 60px;
+  }
+
+  .photo-shadow:hover {
+    cursor: pointer;
+  }
+
+  .photo-shadow:hover svg path {
+    fill: #FFBC01;
   }
   
   .user-main__info p {

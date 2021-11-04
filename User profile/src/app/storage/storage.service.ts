@@ -36,7 +36,7 @@ export class StorageService {
   }
 
   onSignUp(email: string, password: string): boolean {
-    let data: string[] = [email, password, 'Anonim'];
+    let data: string[] = [email, password, 'Anonim', 'assets/rec11.png'];
 
     if (!this.localStore['user']) {
       this.localStore['user'] = JSON.stringify([data]);

@@ -12,7 +12,8 @@ export class ProfileSettingsComponent {
   currUser = {
     userEmail: this.user[0][0],
     userPassword: this.user[0][1],
-    userName: this.user[0][2]
+    userName: this.user[0][2],
+    userPhoto: this.user[0][3]
   }
 
   constructor (
@@ -40,7 +41,7 @@ export class ProfileSettingsComponent {
             event.target.textContent = 'Change password';
             break;
         }
-        this.storage.saveCurrUserChanges(this.user[0][0], [this.currUser.userEmail, this.currUser.userPassword, this.currUser.userName]);
+        this.storage.saveCurrUserChanges(this.user[0][0], [this.currUser.userEmail, this.currUser.userPassword, this.currUser.userName, this.currUser.userPhoto]);
         this.route.routeReuseStrategy.shouldReuseRoute = () => false;
         this.route.onSameUrlNavigation = 'reload';
         this.route.navigate(['/profile/settings']);
