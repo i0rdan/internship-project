@@ -2,15 +2,15 @@
     padding: 0 1.4%;
     max-width: 1680px;
     margin: 0 auto;
-  }
-  
-  .user-main {
+}
+
+.user-main {
     display: flex;
     padding: 0 9%;
     margin-top: 80px;
-  }
-  
-  .user-main__photo {
+}
+
+.user-main__photo {
     margin-right: 30px;
     width: 160px;
     height: 160px;
@@ -19,64 +19,64 @@
     border-radius: 102px;
     display: flex;
     text-align: center;
-  }
+}
 
-  .photo-shadow {
+.photo-shadow {
     width: 100%;
     background: rgba(102, 102, 102, 0.5);
     height: 100%;
     border-radius: 102px;
     justify-content: center;
-  }
+}
 
-  .photo-shadow svg{
+.photo-shadow svg {
     margin-top: 60px;
-  }
+}
 
-  .photo-shadow:hover {
+.photo-shadow:hover {
     cursor: pointer;
-  }
+}
 
-  .photo-shadow:hover svg path {
+.photo-shadow:hover svg path {
     fill: #FFBC01;
-  }
-  
-  .user-main__info p {
+}
+
+.user-main__info p {
     font-family: Nunito;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 22px;
     max-width: 450px;
-  }
-  
-  .user-main__info h1 {
+}
+
+.user-main__info h1 {
     font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
     font-size: 40px;
     line-height: 48px;
     margin: 10px 0;
-  }
-  
-  .cookbooks-show {
+}
+
+.cookbooks-show {
     padding: 0 9%;
-  }
-  
-  .cookbooks-show__navigation {
+}
+
+.cookbooks-show__navigation {
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
-  }
-  
-  .navigation-right {
+}
+
+.navigation-right {
     display: flex;
     width: 578px;
     justify-content: space-between;
     text-align: center;
-  }
-  
-  .navigation-right a {
+}
+
+.navigation-right a {
     text-decoration: none;
     font-family: Montserrat;
     font-style: normal;
@@ -86,17 +86,17 @@
     color: #181818;
     display: flex;
     align-self: flex-end;
-  }
-  
-  .navigation-right a:hover {
+}
+
+.navigation-right a:hover {
     color: #FFBC01;
-  }
-  
-  .navigation__link-active {
+}
+
+.navigation__link-active {
     border-bottom: 2px solid #FFBC01;
-  }
-  
-  .cookbooks-show__navigation button {
+}
+
+.cookbooks-show__navigation button {
     width: 273px;
     height: 62px;
     background: #FFBC01;
@@ -108,55 +108,49 @@
     font-weight: bold;
     font-size: 20px;
     line-height: 30px;
-  }
-  
-  .cookbooks-show__navigation button:hover {
+}
+
+.cookbooks-show__navigation button:hover {
     cursor: pointer;
-  }
-  
-  
-  
-  
-  
-  @media screen and (min-width: 1450px) and (max-width: 1871px) {
-    
-  }
-  
-  @media screen and (min-width: 1260px) and (max-width: 1449px) {
-    
-  }
-  
-  @media screen and (min-width: 787px) and (max-width: 1259px) {
+}
+
+@media screen and (min-width: 787px) and (max-width: 1259px) {
     .cookbooks-show__navigation {
-      flex-direction: column;
+        flex-direction: column;
     }
+
     .navigation-right {
-      width: 100%;
-      flex-direction: column;
-      margin: 20px 0;
+        width: 100%;
+        flex-direction: column;
+        margin: 20px 0;
     }
+
     .navigation-right a {
-      align-self: flex-start;
+        align-self: flex-start;
     }
-  }
-  
-  @media screen and (min-width: 0px) and (max-width: 786px) {
+}
+
+@media screen and (min-width: 0px) and (max-width: 786px) {
     .cookbooks-show__navigation {
-      flex-direction: column;
+        flex-direction: column;
     }
+
     .navigation-right {
-      width: 100%;
-      flex-direction: column;
-      margin: 20px 0;
+        width: 100%;
+        flex-direction: column;
+        margin: 20px 0;
     }
+
     .navigation-right a {
-      align-self: flex-start;
+        align-self: flex-start;
     }
+
     .user-main {
-      flex-direction: column;
-      text-align: center;
+        flex-direction: column;
+        text-align: center;
     }
+
     .user-main__photo {
-      margin-right: 0px;
+        margin-right: 0px;
     }
-  }
+}

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { StorageService } from '../storage/storage.service';
@@ -8,12 +8,6 @@ import { StorageService } from '../storage/storage.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnDestroy {
-  login: string = this.storage.getCurrUserLogin();
-
+export class HomeComponent {
   constructor(private storage: StorageService) { }
-
-  ngOnDestroy(): void {
-  }
-
 }

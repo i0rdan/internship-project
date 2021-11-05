@@ -45,7 +45,7 @@ export class SignInComponent {
     }
   }
 
-  checkValid(param: string): boolean | undefined{
+  checkValid(param: string): boolean | undefined {
     switch (param) {
       case 'showEmailErr':
         return this.email?.invalid && (this.email?.dirty || this.email?.touched);

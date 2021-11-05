@@ -1,30 +1,29 @@
 <div class="wrapper">
     <app-header></app-header>
     <div class="user-main">
-        <div class="user-main__photo" [ngStyle]="{backgroundImage: 'url(' + userPhoto + ')'}">
-          <input type="file" name="" id="" hidden #fileUpload (change)="onFileSelected($event)" accept=".jpg, .jpeg, .png">
-          <div (click)="fileUpload.click()" class="photo-shadow" *ngIf="settings.className === 'navigation__link-active'">
-            <svg xmlns="http://www.w3.org/2000/svg" width="52" height="44" viewBox="0 0 52 44" fill="none">
-              <path d="M34.3864 25.509C34.3864 30.1334 30.6244 33.8954 26 33.8954C21.3756 33.8954 17.6151 30.1334 17.6151 25.509C17.6151 20.8846 21.3756 17.1227 26 17.1227C30.6244 17.1227 34.3864 20.886 34.3864 25.509ZM52 13.6008V37.4201C52 40.5955 49.4254 43.1701 46.25 43.1701H5.74999C2.57456 43.1701 0 40.5955 0 37.4201V13.6008C0 10.4254 2.57456 7.85081 5.74999 7.85081H12.8225V5.86132C12.8225 3.08264 15.0736 0.830078 17.8537 0.830078H34.1463C36.9264 0.830078 39.1775 3.08264 39.1775 5.86132V7.84937H46.25C49.4254 7.85081 52 10.4254 52 13.6008ZM38.6988 25.509C38.6988 18.507 33.002 12.8102 26 12.8102C18.9994 12.8102 13.3026 18.507 13.3026 25.509C13.3026 32.5111 18.9994 38.2079 26 38.2079C33.002 38.2079 38.6988 32.5111 38.6988 25.509Z" fill="white"/>
-            </svg>
-          </div>
+        <div class="user-main__photo" [ngStyle]="{backgroundImage: 'url(' + currUser.photo + ')'}">
+            <input type="file" name="" id="" hidden #fileUpload (change)="onFileSelected($event)" accept=".jpg, .jpeg, .png">
+            <div (click)="fileUpload.click()" class="photo-shadow" *ngIf="settings.className === 'navigation__link-active'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="44" viewBox="0 0 52 44" fill="none">
+                    <path d="M34.3864 25.509C34.3864 30.1334 30.6244 33.8954 26 33.8954C21.3756 33.8954 17.6151 30.1334 17.6151 25.509C17.6151 20.8846 21.3756 17.1227 26 17.1227C30.6244 17.1227 34.3864 20.886 34.3864 25.509ZM52 13.6008V37.4201C52 40.5955 49.4254 43.1701 46.25 43.1701H5.74999C2.57456 43.1701 0 40.5955 0 37.4201V13.6008C0 10.4254 2.57456 7.85081 5.74999 7.85081H12.8225V5.86132C12.8225 3.08264 15.0736 0.830078 17.8537 0.830078H34.1463C36.9264 0.830078 39.1775 3.08264 39.1775 5.86132V7.84937H46.25C49.4254 7.85081 52 10.4254 52 13.6008ZM38.6988 25.509C38.6988 18.507 33.002 12.8102 26 12.8102C18.9994 12.8102 13.3026 18.507 13.3026 25.509C13.3026 32.5111 18.9994 38.2079 26 38.2079C33.002 38.2079 38.6988 32.5111 38.6988 25.509Z" fill="white"/>
+                </svg>
+            </div>
         </div>
         <div class="user-main__info">
-          <h1>{{ userName }}</h1>
-          <p>I don’t know about you but I love pizza. Especially when that pizza comes with Papa John’s very own garlic pizza sticks.</p>
+            <h1>{{ currUser.username }}</h1>
+            <p>I don’t know about you but I love pizza. Especially when that pizza comes with Papa John’s very own garlic pizza sticks.</p>
         </div>
-      </div>
-      <div class="cookbooks-show">
-        <div class="cookbooks-show__navigation">
-          <div class="navigation-right">
-            <a href="" routerLinkActive="navigation__link-active" routerLink="./cookbooks">My Cookbooks</a>
-            <a href="" routerLinkActive="navigation__link-active" routerLink="./recepies">My Recepies</a>
-            <a href="" routerLinkActive="navigation__link-active" routerLink="./settings" #settings>My Settings</a>
-          </div>
-          <button>Create New CookBook</button>
-        </div>
-        <!--  -->
-        <router-outlet></router-outlet>
-      </div>
     </div>
+    <div class="cookbooks-show">
+        <div class="cookbooks-show__navigation">
+            <div class="navigation-right">
+                <a href="" routerLinkActive="navigation__link-active" routerLink="./cookbooks">My Cookbooks</a>
+                <a href="" routerLinkActive="navigation__link-active" routerLink="./recepies">My Recepies</a>
+                <a href="" routerLinkActive="navigation__link-active" routerLink="./settings" #settings>My Settings</a>
+            </div>
+            <button>Create New CookBook</button>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>
 <app-footer></app-footer>

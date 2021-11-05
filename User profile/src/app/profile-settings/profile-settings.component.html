@@ -1,26 +1,26 @@
 <div class="profile-show__personal-info">
     <p class="personal-info__label">Personal information</p>
     <div class="personal-info__information">
-      <div class="information__name">
-        <h4>Name</h4>
-        <p>
-          <input type="text" [value]="currUser.userName" #username disabled class="name">
-          <button (click)="show($event, username)">Edit</button>
-        </p>
-      </div>
-      <div class="information__mail">
-        <h4>Email</h4>
-        <p>
-          <input type="text" [value]="currUser.userEmail" #email disabled class="mail">
-          <button (click)="show($event, email)">Edit</button>
-        </p>
-      </div>
-      <div class="information__password">
-        <h4>Password</h4>
-        <p>
-          <input type="text" [value]="currUser.userPassword" #password disabled class="password">
-          <button (click)="show($event, password)">Change My Password</button>
-        </p>
-      </div>
+        <div class="information__name">
+            <h4>Name</h4>
+            <p>
+                <input type="text" [value]="currUser.username" #username disabled class="name">
+                <button (click)="show($event, username)">Edit</button>
+            </p>
+        </div>
+        <div class="information__mail">
+            <h4>Email</h4>
+            <p>
+                <input type="text" [value]="currUser.email" #email disabled class="mail">
+                <button (click)="show($event, email)">Edit</button>
+            </p>
+        </div>
+        <div class="information__password">
+            <h4>Password</h4>
+            <p>
+                <input type="text" [value]="currUser.password" #password disabled class="password">
+                <button (click)="show($event, password)">Change My Password</button>
+            </p>
+        </div>
     </div>
-  </div>
+</div>

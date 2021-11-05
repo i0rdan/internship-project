@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +8,6 @@ import { Router } from '@angular/router';
   providers: [StorageService]
 })
 export class HeaderComponent {
-  userName = this.storage.getCurrUserInfo()[0][2];
+  userName = this.storage.getCurrUserInfo().username;
   constructor(private storage:StorageService) { }
 }

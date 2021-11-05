@@ -86,5 +86,4 @@ export class SignUpComponent {
       alert('Such user exists!');
     }
   }
-
 }
