@@ -1,0 +1,10 @@
+@import "~angular-notifier/styles";
+
+body {
+    background-color: #fcfcfd;
+    margin: 0;
+}
+  
+p {
+    margin: 0;
+}
