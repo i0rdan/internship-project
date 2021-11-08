@@ -127,4 +127,34 @@ export class StorageService {
     let creation = document.getElementById('creation');
     show ? creation?.classList.remove('hidden') : creation?.classList.add('hidden');
   }
+
+  addCookbook(cookbook: Cookbook): boolean {
+    let currUser: User = JSON.parse(this.localStore['currentUser']);
+    let mathched: boolean = true;
+    currUser.cookbooks.forEach(element => {
+      if (element.label === cookbook.label) {
+        mathched = false;
+      }
+    });
+
+    if (!mathched) {
+      return false;
+    }
+
+    currUser.cookbooks.push(cookbook);
+    let users: User[] = JSON.parse(this.localStore['user']);
+    let index: number = 0;
+
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].email === currUser.email) {
+        index = i;
+      }
+    }
+
+    users.splice(index, 1, currUser);
+    this.localStore['user'] = JSON.stringify(users);
+    this.localStore['currentUser'] = JSON.stringify(currUser);
+    
+    return true;
+  }
 }

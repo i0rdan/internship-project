@@ -11,8 +11,7 @@
           <span>{{ cookbook.views }} views</span>
         </div>
       </div>
-      <div class="card__picture">
-        <img src="cookbook.photo" alt="">
+      <div class="card__picture" [ngStyle]="{backgroundImage: 'url(' + cookbook.photo + ')'}">
       </div>
       <div class="card__main-info">
         <p class="main-info__name">{{ cookbook.label }}</p>

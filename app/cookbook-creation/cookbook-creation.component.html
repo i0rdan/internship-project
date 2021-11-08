@@ -6,22 +6,29 @@
         </svg>
       </div>
       <div class="cookbook-creation__creation-details">
-        <div class="creation-details"> <!-- form -->
+        <form class="creation-details" [formGroup]="cookbookCreationForm" id="createCookbookForm">
           <p class="creation-details__label">Create New Cookbook</p>
           <div class="creation-details__title">
             <label for="title">Cookbook Title<span>*</span></label>
-            <input type="text" id="title">
+            <input type="text" id="title" formControlName="cookbookLabel">
+            <div *ngIf="checkValid('showLabelErr')">
+              <span *ngIf="checkValid('labelReq')">Label Required</span>
+              <span *ngIf="checkValid('labelMin')">Label must be at least 4 characters</span>
+              <span *ngIf="checkValid('labelMax')">Password must be no longer than 20 characters</span>
           </div>
-          <button class="creation-details__image">Upload Cookbook Image</button>
+          </div>
+          <input type="file" (change)="onFileSelected($event)" hidden #inputFile>
+          <button (click)="inputFile.click()" class="creation-details__image">Upload Cookbook picture</button>
+          <span class="creation-details__error-image" *ngIf="newCookbook.photo">Photo Loaded</span>
           <div class="creation-details__description">
             <label for="description">Description</label>
-            <textarea type="text" id="description"></textarea>
+            <textarea type="text" id="description" formControlName="cookbookDescription"></textarea>
           </div>
           <div class="creation-details__recepies-in-book">
             <label for="recepies">Recepies</label>
             <input type="text" id="recepies">
           </div>
-          <div class="creation-details__recepies-in-book-cards">
+          <div class="creation-details__recepies-in-book-cards" *ngIf="false">
             <div class="recepies-in-book-cards__recepies-card">
               <div class="recepies-card__image">
                 <img src="assets/casey-lee-awj7sRviVXo-unsplash 12.jpg" alt="">
@@ -110,8 +117,8 @@
             </div>
           </div>
           <button class="creation-details__cancel" (click)="storage.creationShow(false)">Cancel</button>
-          <button class="creation-details__confirm" (click)="storage.creationShow(false)">Confirm</button>
-        </div>
+          <button class="creation-details__confirm" type="submit" (click)="storage.creationShow(false); onSubmit()" [disabled]="checkValid('buttonCheck')">Confirm</button>
+        </form>
       </div>
     </div>
   </div>
