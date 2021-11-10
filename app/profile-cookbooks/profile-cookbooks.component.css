@@ -25,6 +25,15 @@
     cursor: pointer;
 }
 
+.card__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card__header svg{
+    align-self: center;
+}
+
 .header__views span,
 .footer__likes span,
 .footer__comments span,
@@ -88,4 +97,28 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+.header__delete-update {
+    position: absolute;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.header__delete-update p {
+    width: 124px;
+    padding: 8px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.header__delete-update p:hover {
+    background: #EDEDED;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+}
+
+.hidden {
+    display: none;
 }

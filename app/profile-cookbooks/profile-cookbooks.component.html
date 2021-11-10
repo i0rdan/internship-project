@@ -10,6 +10,11 @@
           </svg>
           <span>{{ cookbook.views }} views</span>
         </div>
+        <svg (click)="deleteUpdate.classList.contains('hidden') ? deleteUpdate.classList.remove('hidden') : deleteUpdate.classList.add('hidden')" _ngcontent-bjv-c57="" xmlns="http://www.w3.org/2000/svg" width="20" height="4" viewBox="0 0 20 4" fill="none"><circle _ngcontent-bjv-c57="" cx="2" cy="2" r="2" fill="#DADADA"></circle><circle _ngcontent-bjv-c57="" cx="10" cy="2" r="2" fill="#DADADA"></circle><circle _ngcontent-bjv-c57="" cx="18" cy="2" r="2" fill="#DADADA"></circle></svg>
+        <div class="header__delete-update hidden" #deleteUpdate>
+          <p (click)="deleteCookbook(cookbook)">Delete Cookbook</p>
+          <p (click)="updateCookbook(cookbook); deleteUpdate.classList.add('hidden')">Edit Cookbook</p>
+        </div>
       </div>
       <div class="card__picture" [ngStyle]="{backgroundImage: 'url(' + cookbook.photo + ')'}">
       </div>

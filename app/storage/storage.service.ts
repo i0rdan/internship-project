@@ -104,13 +104,7 @@ export class StorageService {
     }
 
     let users: User[] = JSON.parse(this.localStore['user']);
-    let index: number = 0;
-
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].email === email) {
-        index = i;
-      }
-    }
+    let index: number = this.findIndexOfUser(email);
 
     users.splice(index, 1, currUser);
     this.localStore['user'] = JSON.stringify(users);
@@ -123,16 +117,34 @@ export class StorageService {
     return JSON.parse(this.localStore['currentUser']).cookbooks;
   }
 
-  creationShow(show: boolean): void {
+  creationShow(show: boolean, cookbook?: Cookbook): void {
     let creation = document.getElementById('creation');
+    let creationButton = document.getElementById('creationCookbookButton');
     show ? creation?.classList.remove('hidden') : creation?.classList.add('hidden');
+    if (cookbook) {
+      creationButton?.classList.add('update');
+      let cookbookTitle: any = document.getElementById('cookbookTitle');
+      let cookbookDescription: any = document.getElementById('cookbookDescription');
+      cookbookDescription.value = cookbook.description;
+      cookbookTitle.value = cookbook.label;
+      this.localStore['updateCookbook'] = JSON.stringify(cookbook);
+    }
   }
 
-  addCookbook(cookbook: Cookbook): boolean {
+  addCookbook(label: string, description: string, photo: string): boolean {
+    let newCookbook: Cookbook = {
+      label: label,
+      author: this.getCurrUserLogin(),
+      description: description,
+      photo: photo,
+      likes: 0,
+      comments: 0,
+      views: 0
+    };
     let currUser: User = JSON.parse(this.localStore['currentUser']);
     let mathched: boolean = true;
     currUser.cookbooks.forEach(element => {
-      if (element.label === cookbook.label) {
+      if (element.label === newCookbook.label) {
         mathched = false;
       }
     });
@@ -141,20 +153,88 @@ export class StorageService {
       return false;
     }
 
-    currUser.cookbooks.push(cookbook);
+    currUser.cookbooks.push(newCookbook);
     let users: User[] = JSON.parse(this.localStore['user']);
-    let index: number = 0;
-
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].email === currUser.email) {
-        index = i;
-      }
-    }
+    let index: number = this.findIndexOfUser(currUser.email);
 
     users.splice(index, 1, currUser);
     this.localStore['user'] = JSON.stringify(users);
     this.localStore['currentUser'] = JSON.stringify(currUser);
     
     return true;
+  }
+
+  updateCookbook(label: string, description: string, photo: string): boolean {
+    let uploadCookbook: Cookbook = JSON.parse(this.localStore['updateCookbook']);
+    if (this.deleteCookbook(uploadCookbook)) {
+      if(photo) {
+        uploadCookbook.photo = photo;
+      }
+      if(label) {
+        uploadCookbook.label = label;
+      }
+      if(description) {
+        uploadCookbook.description = description;
+      }
+      let currUser: User = JSON.parse(this.localStore['currentUser']);
+      let mathched: boolean = true;
+      currUser.cookbooks.forEach(element => {
+        if (element.label === uploadCookbook.label) {
+          mathched = false;
+        }
+      });
+
+      if (!mathched) {
+        return false;
+      }
+
+      currUser.cookbooks.push(uploadCookbook);
+      let users: User[] = JSON.parse(this.localStore['user']);
+      let index: number = this.findIndexOfUser(currUser.email);
+
+      users.splice(index, 1, currUser);
+      this.localStore['user'] = JSON.stringify(users);
+      this.localStore['currentUser'] = JSON.stringify(currUser);
+      
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  deleteCookbook(cookbook: Cookbook): boolean {
+    let currUser: User = JSON.parse(this.localStore['currentUser']);
+    let indexCookbook: number = 0;
+
+    for (let i = 0; i < currUser.cookbooks.length; i++) {
+      if (currUser.cookbooks[i].label === cookbook.label) {
+        indexCookbook = i;
+      }
+    }
+
+    currUser.cookbooks.splice(indexCookbook, 1);
+
+    let users: User[] = JSON.parse(this.localStore['user']);
+    let index: number = this.findIndexOfUser(currUser.email);
+
+    users.splice(index, 1, currUser);
+    this.localStore['user'] = JSON.stringify(users);
+    this.localStore['currentUser'] = JSON.stringify(currUser);
+    
+    return true;
+  }
+
+  findIndexOfUser(email: string): number {
+    let users: User[] = JSON.parse(this.localStore['user']);
+    let index: number = -1;
+
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].email === email) {
+        index = i;
+      }
+    }
+
+    return index;
   }
 }

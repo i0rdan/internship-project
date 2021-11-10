@@ -12,16 +12,7 @@ import { StorageService } from '../storage/storage.service';
   providers: [StorageService]
 })
 export class CookbookCreationComponent {
-  newCookbook: Cookbook = {
-    label: '',
-    author: this.storage.getCurrUserLogin(),
-    description: '',
-    photo: '',
-    likes: 0,
-    comments: 0,
-    views: 0
-  }
-
+  cookbookPhoto: string = '';
   cookbookCreationForm = this.fb.group({
     cookbookLabel: ['', 
       [
@@ -30,15 +21,13 @@ export class CookbookCreationComponent {
         Validators.maxLength(20)
       ]
     ],
-    cookbookDescription: [''],
-    cookbookPhoto: ['']
+    cookbookDescription: ['']
   });
 
   constructor(
     private fb: FormBuilder, 
     public storage: StorageService,
-    private notifier: NotifierService,
-    private route: Router
+    private notifier: NotifierService
   ) { }
 
   get cookbookLabel() {
@@ -71,29 +60,26 @@ export class CookbookCreationComponent {
       let reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event) => {
-        this.newCookbook.photo = String(event.target?.result);
+        this.cookbookPhoto = String(event.target?.result);
       }
     }
   }
 
-  onSubmit(): void {
-    let form: any = document.getElementById('createCookbookForm');
-    this.newCookbook.label = this.cookbookLabel?.value;
-    this.newCookbook.description = this.cookbookDescription?.value;
-    if (this.storage.addCookbook(this.newCookbook)) {
-      this.notifier.notify('success', 'Succesfully added');
+  onSubmit(event: any): void {
+    if (!event.target.classList.contains('update')) {
+      if (this.storage.addCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto)) {
+        this.notifier.notify('success', 'Succesfully');
+      } else {
+        this.notifier.notify('error', 'You has cookbook with such label');
+      }
     } else {
-      this.notifier.notify('error', 'You has such cookbook!');
+      if (this.storage.updateCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto)) {
+        this.notifier.notify('success', 'Succesfully');
+      } else {
+        this.notifier.notify('error', 'You has cookbook with such label');
+      }
     }
-    form.reset();
-    this.newCookbook = {
-      label: '',
-      author: this.storage.getCurrUserLogin(),
-      description: '',
-      photo: '',
-      likes: 0,
-      comments: 0,
-      views: 0
-    }
+    event.target.classList.remove('update');
+    this.cookbookPhoto = '';
   }
 }

@@ -1,16 +1,16 @@
 <div class="cookbook-creation__wrapper hidden" id="creation">
     <div class="cookbook-creation">
       <div class="cookbook-creation__close">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none" (click)="storage.creationShow(false)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none" (click)="storage.creationShow(false); cookbookConf.classList.remove('update'); form.reset()">
           <path d="M34.6154 31.8456C35.3801 32.6103 35.3801 33.8501 34.6154 34.6148C33.8507 35.3796 32.6108 35.3796 31.8461 34.6149L18 20.7687L4.15383 34.6149C3.38913 35.3796 2.14931 35.3796 1.3846 34.6148C0.6199 33.8501 0.6199 32.6103 1.3846 31.8456L15.2308 17.9995L1.38456 4.15331C0.619859 3.3886 0.61986 2.14878 1.38456 1.38407C2.14926 0.619373 3.38909 0.619369 4.15379 1.38407L18 15.2303L31.8462 1.38407C32.6109 0.619372 33.8507 0.619376 34.6154 1.38408C35.3801 2.14878 35.3801 3.38861 34.6154 4.15331L20.7692 17.9995L34.6154 31.8456Z" fill="#DADADA"/>
         </svg>
       </div>
       <div class="cookbook-creation__creation-details">
-        <form class="creation-details" [formGroup]="cookbookCreationForm" id="createCookbookForm">
+        <form class="creation-details" [formGroup]="cookbookCreationForm" id="createCookbookForm" #form>
           <p class="creation-details__label">Create New Cookbook</p>
           <div class="creation-details__title">
             <label for="title">Cookbook Title<span>*</span></label>
-            <input type="text" id="title" formControlName="cookbookLabel">
+            <input type="text" id="cookbookTitle" formControlName="cookbookLabel">
             <div *ngIf="checkValid('showLabelErr')">
               <span *ngIf="checkValid('labelReq')">Label Required</span>
               <span *ngIf="checkValid('labelMin')">Label must be at least 4 characters</span>
@@ -19,10 +19,10 @@
           </div>
           <input type="file" (change)="onFileSelected($event)" hidden #inputFile>
           <button (click)="inputFile.click()" class="creation-details__image">Upload Cookbook picture</button>
-          <span class="creation-details__error-image" *ngIf="newCookbook.photo">Photo Loaded</span>
+          <span class="creation-details__error-image" *ngIf="cookbookPhoto">Photo Loaded</span>
           <div class="creation-details__description">
             <label for="description">Description</label>
-            <textarea type="text" id="description" formControlName="cookbookDescription"></textarea>
+            <textarea type="text" id="cookbookDescription" formControlName="cookbookDescription"></textarea>
           </div>
           <div class="creation-details__recepies-in-book">
             <label for="recepies">Recepies</label>
@@ -116,8 +116,8 @@
               </div>
             </div>
           </div>
-          <button class="creation-details__cancel" (click)="storage.creationShow(false)">Cancel</button>
-          <button class="creation-details__confirm" type="submit" (click)="storage.creationShow(false); onSubmit()" [disabled]="checkValid('buttonCheck')">Confirm</button>
+          <button class="creation-details__cancel" (click)="storage.creationShow(false); cookbookConf.classList.remove('update'); form.reset()">Cancel</button>
+          <button class="creation-details__confirm" id="creationCookbookButton" type="submit" (click)="storage.creationShow(false); onSubmit($event); form.reset()" [disabled]="checkValid('buttonCheck')" #cookbookConf>Confirm</button>
         </form>
       </div>
     </div>
