@@ -10,40 +10,39 @@ import { filter } from 'rxjs/operators';
 })
 export class StorageService {
   localStore = window.localStorage;
-  users: ReplaySubject<User> = new ReplaySubject<User>();
-  currUser: BehaviorSubject<User> = new BehaviorSubject<User>({
+  initialCurrUser: User = {
     username: 'sdsd',
     password: '',
     email: '',
     cookbooks: [],
     recepies: [],
     photo: ''
-  });
+  };
 
-  constructor() {
-    this.users.next({
+  initialUsers: User[] = [
+    {
       username: 'Jeka',
       password: '11111111',
       email: 'kazusev2000@mail.ru',
       cookbooks: [],
       recepies: [],
       photo: ''
-    });
+    }
+  ]
+  users: ReplaySubject<User[]> = new ReplaySubject<User[]>();
+  example: Subject<string> = new Subject<string>();
+  currUser: BehaviorSubject<User> = new BehaviorSubject<User>(this.initialCurrUser);
 
-    this.currUser.next({
-      username: 'sdsd1',
-      password: '',
-      email: '',
-      cookbooks: [],
-      recepies: [],
-      photo: ''
-    })
+  constructor() {
+    this.users.next(this.initialUsers);
   }
 
   onSignIn(email: string, password: string): boolean {
     let currUser = this.checkUserLoginPass(email, password);
     if (currUser) {
       this.currUser.next(currUser);
+      this.initialCurrUser = currUser;
+      console.log(this.initialCurrUser)
       return true;
     } else {
       return false;
@@ -53,8 +52,8 @@ export class StorageService {
   checkUserLoginPass(email: string, password: string): User | null {
     let matched: User | null = null;
     this.users.subscribe(user => {
-      if(user.email === email && user.password === password) {
-        matched = user;
+      if(user[0].email === email && user[0].password === password) {
+        matched = user[0];
       }
     }).unsubscribe();
 
@@ -74,7 +73,7 @@ export class StorageService {
     if (this.checkCurrUsersLogin(email)) {
       return false;
     } else {
-      this.users.next(newUser);
+      this.users.next([newUser]);
       this.currUser.next(newUser);
       
       return true;
@@ -97,7 +96,7 @@ export class StorageService {
   checkCurrUsersLogin(email: string): boolean {
     let matched: boolean = false;
     this.users.subscribe(user => {
-      if (user.email === email) {
+      if (user[1].email === email) {
         matched = true;
       }
     }).unsubscribe();
@@ -113,8 +112,8 @@ export class StorageService {
     if (currUser.username.length < 4 || currUser.password.length < 8 || this.checkEmails(email, currUser.email)) {
       return false;
     }
-    this.users.pipe(filter(user => user.email !== email));
-    this.users.next(currUser);
+    this.users.pipe(filter(user => user[1].email !== email));
+    this.users.next([currUser]);
     this.currUser.next(currUser);
 
     return true;
