@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
+import { Subscription } from 'rxjs';
 import { Recepi } from '../recepi-interface/recepi-interface';
 import { StorageService } from '../storage/storage.service';
 
@@ -8,8 +9,11 @@ import { StorageService } from '../storage/storage.service';
   templateUrl: './profile-recepies.component.html',
   styleUrls: ['./profile-recepies.component.css']
 })
-export class ProfileRecepiesComponent{
-  recepies: Recepi[] = this.storage.getCurrUserRecepies();
+export class ProfileRecepiesComponent implements OnDestroy, OnInit{
+  recepies: Recepi[] = this.storage.getCurrUserInfo().recepies;
+
+  $subscription: Subscription = new Subscription();
+
   constructor(
     private storage: StorageService,
     private notifier: NotifierService
@@ -25,5 +29,17 @@ export class ProfileRecepiesComponent{
 
   updateRecepi(recepi: Recepi) {
     this.storage.creationShowRecepie(true, recepi);
+  }
+
+  ngOnInit() {
+    this.$subscription.add(
+      this.storage.currUser.subscribe(user => {
+        this.recepies = user.recepies;
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    this.$subscription.unsubscribe();
   }
 }

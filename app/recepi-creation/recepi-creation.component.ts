@@ -24,10 +24,11 @@ export class RecepiCreationComponent implements OnInit{
   });
 
   ngOnInit () {
-    let ingridientsButton: any = document.getElementById('enterEnter')
+    const ingridientsButton: any = document.getElementById('enterEnter');
+
     ingridientsButton?.addEventListener('keydown', (e: { keyCode: number; }) => {
       if (e.keyCode === 16 && ingridientsButton.value) {
-        this.recepiIngridients.push(ingridientsButton.value)
+        this.recepiIngridients.push(ingridientsButton.value);
         ingridientsButton.value = '';
       }
     });
@@ -69,8 +70,9 @@ export class RecepiCreationComponent implements OnInit{
   }
 
   closeForm() {
-    let form: any = document.getElementById('createRecepiForm');
-    let recepiConf: any = document.getElementById('creationRecepiButton');
+    const form: any = document.getElementById('createRecepiForm');
+    const recepiConf: any = document.getElementById('creationRecepiButton');
+
     this.storage.creationShowRecepie(false);
     recepiConf.classList.remove('update');
     form.reset();
@@ -80,7 +82,9 @@ export class RecepiCreationComponent implements OnInit{
   onFileSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();
+
       reader.readAsDataURL(event.target.files[0]);
+
       reader.onload = (event) => {
         this.recepiPhoto = String(event.target?.result);
       }
@@ -101,6 +105,7 @@ export class RecepiCreationComponent implements OnInit{
         this.notifier.notify('error', 'You has cookbook with such label');
       }
     }
+    
     this.closeForm();
     this.recepiPhoto = '';
   }

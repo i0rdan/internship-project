@@ -25,7 +25,7 @@
         <button (click)="storage.creationShow(true)">Create CookBook</button>
     </div>
     <div class="signIn">
-        <a routerLink="/profile/cookbooks">{{ userName }}</a>
+        <a routerLink="/profile/cookbooks">{{ currUser.username }}</a>
     </div>
 </div>
 <app-cookbook-creation></app-cookbook-creation>

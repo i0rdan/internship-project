@@ -1,48 +1,25 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Cookbook } from '../cookbook-interface/cookbook-interface';
 import { Recepi } from '../recepi-interface/recepi-interface';
 import { User } from '../user-interface/user-interface';
-import { filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-  localStore = window.localStorage;
-  initialCurrUser: User = {
-    username: 'sdsd',
-    password: '',
-    email: '',
-    cookbooks: [],
-    recepies: [],
-    photo: ''
-  };
+  storage = window.localStorage;
+  currUser: Subject<User> = new Subject();
+  users: Subject<User[]> = new Subject();
 
-  initialUsers: User[] = [
-    {
-      username: 'Jeka',
-      password: '11111111',
-      email: 'kazusev2000@mail.ru',
-      cookbooks: [],
-      recepies: [],
-      photo: ''
-    }
-  ]
-  users: ReplaySubject<User[]> = new ReplaySubject<User[]>();
-  example: Subject<string> = new Subject<string>();
-  currUser: BehaviorSubject<User> = new BehaviorSubject<User>(this.initialCurrUser);
-
-  constructor() {
-    this.users.next(this.initialUsers);
-  }
+  constructor() {}
 
   onSignIn(email: string, password: string): boolean {
-    let currUser = this.checkUserLoginPass(email, password);
+    const currUser = this.checkUserLoginPass(email, password);
+
     if (currUser) {
-      this.currUser.next(currUser);
-      this.initialCurrUser = currUser;
-      console.log(this.initialCurrUser)
+      this.storage['currentUser'] = JSON.stringify(currUser);
+
       return true;
     } else {
       return false;
@@ -50,18 +27,20 @@ export class StorageService {
   }
 
   checkUserLoginPass(email: string, password: string): User | null {
+    const users: User[] = JSON.parse(this.storage['user']);
     let matched: User | null = null;
-    this.users.subscribe(user => {
-      if(user[0].email === email && user[0].password === password) {
-        matched = user[0];
+
+    users.forEach(element => {
+      if(element.email === email && element.password === password) {
+        matched = element;
       }
-    }).unsubscribe();
+    });
 
     return matched;
   }
 
   onSignUp(email: string, password: string): boolean {
-    let newUser: User = {
+    const initCurrUser: User = {
       username: 'Anonim',
       email: email,
       password: password,
@@ -73,33 +52,34 @@ export class StorageService {
     if (this.checkCurrUsersLogin(email)) {
       return false;
     } else {
-      this.users.next([newUser]);
-      this.currUser.next(newUser);
+      let usersArr: User[] = JSON.parse(this.storage['user']);
+
+      usersArr.push(initCurrUser);
       
+      this.storage['user'] = JSON.stringify(usersArr);
+      this.storage['currentUser'] = JSON.stringify(initCurrUser);
+
       return true;
     }
   }
 
-  clearCurrUser(): void {
-    //this.currUser.next();
-  } 
-
-  getCurrUserLogin(): string {
-    return this.currUser.value.email;
+  checkUser(): boolean {
+    return this.storage['currentUser'];
   }
 
   getCurrUserInfo(): User {
-    console.log(this.currUser.value)
-    return this.currUser.value;
+    return JSON.parse(this.storage['currentUser']);
   }
 
   checkCurrUsersLogin(email: string): boolean {
+    const users: User[] = JSON.parse(this.storage['user']);
     let matched: boolean = false;
-    this.users.subscribe(user => {
-      if (user[1].email === email) {
+
+    users.forEach(element => {
+      if (element.email === email) {
         matched = true;
       }
-    }).unsubscribe();
+    });
 
     return matched;
   }
@@ -112,23 +92,23 @@ export class StorageService {
     if (currUser.username.length < 4 || currUser.password.length < 8 || this.checkEmails(email, currUser.email)) {
       return false;
     }
-    this.users.pipe(filter(user => user[1].email !== email));
-    this.users.next([currUser]);
+
+    let users: User[] = JSON.parse(this.storage['user']);
+    const index: number = this.findIndexOfUser(email);
+
+    users.splice(index, 1, currUser);
+
+    this.storage['user'] = JSON.stringify(users);
+    this.storage['currentUser'] = JSON.stringify(currUser);
+
     this.currUser.next(currUser);
-
+    this.users.next(users);
+    
     return true;
-  }
-
-  getCurrUserCookbooks(): Cookbook[] {
-    return this.currUser.value.cookbooks;
-  }
-
-  getCurrUserRecepies(): Recepi[] {
-    return this.currUser.value.recepies;
   }
   
   getRecepiByTitle(label: string): Recepi {
-    let recepies: Recepi[] = this.getCurrUserRecepies();
+    const recepies: Recepi[] = this.getCurrUserInfo().recepies;
     let index: number = -1;
     for(let i = 0; i < recepies.length; i++) {
       if (recepies[i].title === label) {
@@ -140,7 +120,7 @@ export class StorageService {
   }
 
   getCurrUserRecepiesNames(substr?: string): string[] {
-    let recepies = this.getCurrUserRecepies();
+    const recepies = this.getCurrUserInfo().recepies;
     let recepiesNames: string[] = [];
     if (substr) {
       recepies.forEach((elem) => {
@@ -158,39 +138,49 @@ export class StorageService {
   }
 
   creationShow(show: boolean, cookbook?: Cookbook): void {
-    let creation = document.getElementById('creation');
-    let creationButton = document.getElementById('creationCookbookButton');
+    const creation = document.getElementById('creation');
+    const creationButton = document.getElementById('creationCookbookButton');
+
     show ? creation?.classList.remove('hidden') : creation?.classList.add('hidden');
+
     if (cookbook) {
       creationButton?.classList.add('update');
-      let cookbookTitle: any = document.getElementById('cookbookTitle');
-      let cookbookDescription: any = document.getElementById('cookbookDescription');
+
+      const cookbookTitle: any = document.getElementById('cookbookTitle');
+      const cookbookDescription: any = document.getElementById('cookbookDescription');
+
       cookbookDescription.value = cookbook.description;
       cookbookTitle.value = cookbook.label;
-      this.localStore['updateCookbook'] = JSON.stringify(cookbook);
+
+      this.storage['updateCookbook'] = JSON.stringify(cookbook);
     }
   }
 
   creationShowRecepie(show: boolean, recepi?: Recepi): void {
-    let creation = document.getElementById('creationRecepi');
+    const creation = document.getElementById('creationRecepi');
+    const creationButton = document.getElementById('creationRecepiButton');
+
     show ? creation?.classList.remove('hidden') : creation?.classList.add('hidden');
-    let creationButton = document.getElementById('creationRecepiButton');
+
     if (recepi) {
       creationButton?.classList.add('update');
-      let recepiTitle: any = document.getElementById('recepiTitle');
-      let recepiDirections: any = document.getElementById('recepiDirections');
-      let recepiDescription: any = document.getElementById('recepiDescription');
+
+      const recepiTitle: any = document.getElementById('recepiTitle');
+      const recepiDirections: any = document.getElementById('recepiDirections');
+      const recepiDescription: any = document.getElementById('recepiDescription');
+
       recepiDescription.value = recepi.description;
       recepiDirections.value = recepi.directions;
       recepiTitle.value = recepi.title;
-      this.localStore['updateRecepi'] = JSON.stringify(recepi);
+
+      this.storage['updateRecepi'] = JSON.stringify(recepi);
     }
   }
 
   addCookbook(label: string, description: string, photo: string, recepiNames: string[]): boolean {
-    let newCookbook: Cookbook = {
+    const newCookbook: Cookbook = {
       label: label,
-      author: this.getCurrUserLogin(),
+      author: this.getCurrUserInfo().email,
       description: description,
       photo: photo,
       likes: 0,
@@ -198,33 +188,40 @@ export class StorageService {
       views: 0,
       recepiNames: recepiNames
     };
-    let currUser: User = JSON.parse(this.localStore['currentUser']);
-    let mathched: boolean = true;
+
+    let currUser: User = JSON.parse(this.storage['currentUser']);
+    let matched: boolean = true;
+    
     currUser.cookbooks.forEach(element => {
       if (element.label === newCookbook.label) {
-        mathched = false;
+        matched = false;
       }
     });
 
-    if (!mathched) {
+    if (!matched) {
       return false;
     }
 
     currUser.cookbooks.push(newCookbook);
-    let users: User[] = JSON.parse(this.localStore['user']);
+
+    let users: User[] = JSON.parse(this.storage['user']);
     let index: number = this.findIndexOfUser(currUser.email);
 
     users.splice(index, 1, currUser);
-    this.localStore['user'] = JSON.stringify(users);
-    this.localStore['currentUser'] = JSON.stringify(currUser);
+
+    this.storage['user'] = JSON.stringify(users);
+    this.storage['currentUser'] = JSON.stringify(currUser);
+
+    this.currUser.next(currUser);
+    this.users.next(users);
     
     return true;
   }
 
   addRecepi(label: string, description: string, photo: string, directions: string, ingridients: string[]): boolean {
-    let newRecepi: Recepi = {
+    const newRecepi: Recepi = {
       title: label,
-      author: this.getCurrUserLogin(),
+      author: this.getCurrUserInfo().email,
       description: description,
       directions: directions,
       photo: photo,
@@ -233,43 +230,53 @@ export class StorageService {
       comments: 0,
       views: 0
     };
-    let currUser: User = JSON.parse(this.localStore['currentUser']);
-    let mathched: boolean = true;
+
+    let currUser: User = JSON.parse(this.storage['currentUser']);
+    let matched: boolean = true;
+
     currUser.recepies.forEach(element => {
       if (element.title === newRecepi.title) {
-        mathched = false;
+        matched = false;
       }
     });
 
-    if (!mathched) {
+    if (!matched) {
       return false;
     }
 
     currUser.recepies.push(newRecepi);
-    let users: User[] = JSON.parse(this.localStore['user']);
+
+    let users: User[] = JSON.parse(this.storage['user']);
     let index: number = this.findIndexOfUser(currUser.email);
 
     users.splice(index, 1, currUser);
-    this.localStore['user'] = JSON.stringify(users);
-    this.localStore['currentUser'] = JSON.stringify(currUser);
+
+    this.storage['user'] = JSON.stringify(users);
+    this.storage['currentUser'] = JSON.stringify(currUser);
+
+    this.currUser.next(currUser);
+    this.users.next(users);
     
     return true;
   }
 
   updateCookbook(label: string, description: string, photo: string): boolean {
-    let uploadCookbook: Cookbook = JSON.parse(this.localStore['updateCookbook']);
+    let uploadCookbook: Cookbook = JSON.parse(this.storage['updateCookbook']);
+
     if (this.deleteCookbook(uploadCookbook)) {
-      if(photo) {
+      if (photo) {
         uploadCookbook.photo = photo;
       }
-      if(label) {
+      if (label) {
         uploadCookbook.label = label;
       }
-      if(description) {
+      if (description) {
         uploadCookbook.description = description;
       }
-      let currUser: User = JSON.parse(this.localStore['currentUser']);
+
+      let currUser: User = JSON.parse(this.storage['currentUser']);
       let mathched: boolean = true;
+
       currUser.cookbooks.forEach(element => {
         if (element.label === uploadCookbook.label) {
           mathched = false;
@@ -281,13 +288,18 @@ export class StorageService {
       }
 
       currUser.cookbooks.push(uploadCookbook);
-      let users: User[] = JSON.parse(this.localStore['user']);
+
+      let users: User[] = JSON.parse(this.storage['user']);
       let index: number = this.findIndexOfUser(currUser.email);
 
       users.splice(index, 1, currUser);
-      this.localStore['user'] = JSON.stringify(users);
-      this.localStore['currentUser'] = JSON.stringify(currUser);
-      this.localStore.removeItem('updateCookbook');
+
+      this.storage['user'] = JSON.stringify(users);
+      this.storage['currentUser'] = JSON.stringify(currUser);
+      this.storage.removeItem('updateCookbook');
+
+      this.currUser.next(currUser);
+      this.users.next(users);
 
       return true;
     }
@@ -297,7 +309,8 @@ export class StorageService {
   }
 
   updateRecepi(label: string, description: string, photo: string, directions: string, ingridients: string[]): boolean {
-    let uploadRecepi: Recepi = JSON.parse(this.localStore['updateRecepi']);
+    let uploadRecepi: Recepi = JSON.parse(this.storage['updateRecepi']);
+
     if (this.deleteRecepi(uploadRecepi)) {
       if (photo) {
         uploadRecepi.photo = photo;
@@ -314,8 +327,10 @@ export class StorageService {
       if (ingridients.length) {
         uploadRecepi.ingridiens = ingridients;
       }
-      let currUser: User = JSON.parse(this.localStore['currentUser']);
+
+      let currUser: User = JSON.parse(this.storage['currentUser']);
       let mathched: boolean = true;
+
       currUser.recepies.forEach(element => {
         if (element.title === uploadRecepi.title) {
           mathched = false;
@@ -327,13 +342,18 @@ export class StorageService {
       }
 
       currUser.recepies.push(uploadRecepi);
-      let users: User[] = JSON.parse(this.localStore['user']);
+
+      let users: User[] = JSON.parse(this.storage['user']);
       let index: number = this.findIndexOfUser(currUser.email);
 
       users.splice(index, 1, currUser);
-      this.localStore['user'] = JSON.stringify(users);
-      this.localStore['currentUser'] = JSON.stringify(currUser);
-      this.localStore.removeItem('updateRecepi');
+
+      this.storage['user'] = JSON.stringify(users);
+      this.storage['currentUser'] = JSON.stringify(currUser);
+      this.storage.removeItem('updateRecepi');
+
+      this.currUser.next(currUser);
+      this.users.next(users);
 
       return true;
     }
@@ -343,7 +363,7 @@ export class StorageService {
   }
 
   deleteCookbook(cookbook: Cookbook): boolean {
-    let currUser: User = JSON.parse(this.localStore['currentUser']);
+    let currUser: User = JSON.parse(this.storage['currentUser']);
     let indexCookbook: number = 0;
 
     for (let i = 0; i < currUser.cookbooks.length; i++) {
@@ -354,18 +374,22 @@ export class StorageService {
 
     currUser.cookbooks.splice(indexCookbook, 1);
 
-    let users: User[] = JSON.parse(this.localStore['user']);
+    let users: User[] = JSON.parse(this.storage['user']);
     let index: number = this.findIndexOfUser(currUser.email);
 
     users.splice(index, 1, currUser);
-    this.localStore['user'] = JSON.stringify(users);
-    this.localStore['currentUser'] = JSON.stringify(currUser);
+
+    this.storage['user'] = JSON.stringify(users);
+    this.storage['currentUser'] = JSON.stringify(currUser);
+
+    this.currUser.next(currUser);
+    this.users.next(users);
     
     return true;
   }
 
   deleteRecepi(recepi: Recepi): boolean {
-    let currUser: User = JSON.parse(this.localStore['currentUser']);
+    let currUser: User = JSON.parse(this.storage['currentUser']);
     let indexRecepi: number = 0;
 
     for (let i = 0; i < currUser.recepies.length; i++) {
@@ -376,18 +400,22 @@ export class StorageService {
 
     currUser.recepies.splice(indexRecepi, 1);
 
-    let users: User[] = JSON.parse(this.localStore['user']);
+    let users: User[] = JSON.parse(this.storage['user']);
     let index: number = this.findIndexOfUser(currUser.email);
 
     users.splice(index, 1, currUser);
-    this.localStore['user'] = JSON.stringify(users);
-    this.localStore['currentUser'] = JSON.stringify(currUser);
+
+    this.storage['user'] = JSON.stringify(users);
+    this.storage['currentUser'] = JSON.stringify(currUser);
+
+    this.currUser.next(currUser);
+    this.users.next(users);
     
     return true;
   }
 
   findIndexOfUser(email: string): number {
-    let users: User[] = JSON.parse(this.localStore['user']);
+    const users: User[] = JSON.parse(this.storage['user']);
     let index: number = -1;
 
     for (let i = 0; i < users.length; i++) {

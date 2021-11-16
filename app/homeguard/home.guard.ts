@@ -6,6 +6,10 @@ export class HomeGuard implements CanActivate {
     private store: StorageService = new StorageService;
     
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-        return true;
+        if (this.store.checkUser()) {
+          return true;
+        } else {
+          return false;
+        }
     }
 }
