@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { StorageService } from '../storage/storage.service';
@@ -8,7 +8,7 @@ import { StorageService } from '../storage/storage.service';
   templateUrl: './recepi-creation.component.html',
   styleUrls: ['./recepi-creation.component.css']
 })
-export class RecepiCreationComponent implements OnInit{
+export class RecepiCreationComponent implements OnInit {
   recepiPhoto: string = '';
   recepiIngridients: string[] = [];
   recepiCreationForm = this.fb.group({
@@ -94,13 +94,13 @@ export class RecepiCreationComponent implements OnInit{
   onSubmit(event: any): void {
     if (!event.target.classList.contains('update')) {
       if (this.storage.addRecepi(this.recepiLabel?.value, this.recepiDescription?.value, this.recepiPhoto, this.recepiDirections?.value, this.recepiIngridients)) {
-        this.notifier.notify('success', 'Succesfully');
+        window.location.reload();
       } else {
         this.notifier.notify('error', 'You has cookbook with such label');
       }
     } else {
       if (this.storage.updateRecepi(this.recepiLabel?.value, this.recepiDescription?.value, this.recepiPhoto, this.recepiDirections?.value, this.recepiIngridients)) {
-        this.notifier.notify('success', 'Succesfully');
+        window.location.reload();
       } else {
         this.notifier.notify('error', 'You has cookbook with such label');
       }

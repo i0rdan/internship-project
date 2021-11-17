@@ -114,13 +114,13 @@ export class CookbookCreationComponent {
   onSubmit(event: any): void {
     if (!event.target.classList.contains('update')) {
       if (this.storage.addCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto, this.addRecepiNamesToBook)) {
-        this.notifier.notify('success', 'Succesfully');
+        window.location.reload();
       } else {
         this.notifier.notify('error', 'You has cookbook with such label');
       }
     } else {
       if (this.storage.updateCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto)) {
-        this.notifier.notify('success', 'Succesfully');
+        window.location.reload();
       } else {
         this.notifier.notify('error', 'You has cookbook with such label');
       }
