@@ -3,7 +3,7 @@ export interface Cookbook {
   author: string,
   description: string,
   photo: string,
-  likes: number,
+  likes: string[],
   comments: number,
   views: number,
   recepiNames: string[]

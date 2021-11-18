@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { StorageService } from '../storage/storage.service';
 
 @Component({
@@ -7,13 +8,22 @@ import { StorageService } from '../storage/storage.service';
   styleUrls: ['./header.component.css'],
   providers: [StorageService]
 })
-export class HeaderComponent implements OnInit{
-  userName!: string;
-  constructor(public storage:StorageService) { }
+export class HeaderComponent implements OnInit, OnDestroy{
+  currUser = this.storage.getCurrUserInfo();
+  
+  $subscription: Subscription = new Subscription();
+
+  constructor(public storage: StorageService) { }
 
   ngOnInit() {
-    this.storage.currUser.subscribe(user => {
-      this.userName = user.username;
-    });
+    this.$subscription.add(
+      this.storage.currUser.subscribe(user => {
+        this.currUser = user;
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    this.$subscription.unsubscribe();
   }
 }

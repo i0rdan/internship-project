@@ -6,6 +6,6 @@ export interface Recepi {
   photo: string,
   ingridiens: string[],
   views: number,
-  likes: number,
+  likes: string[],
   comments: number
 }

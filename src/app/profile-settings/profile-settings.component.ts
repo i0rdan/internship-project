@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
+import { Subscription } from 'rxjs';
 import { StorageService } from '../storage/storage.service';
 import { User } from '../user-interface/user-interface';
 
@@ -9,15 +10,16 @@ import { User } from '../user-interface/user-interface';
   templateUrl: './profile-settings.component.html',
   styleUrls: ['./profile-settings.component.css']
 })
-export class ProfileSettingsComponent {
+export class ProfileSettingsComponent implements OnInit, OnDestroy{
   currUser: User = this.storage.getCurrUserInfo();
   emailCopy: string = this.currUser.email;
 
+  $subscription: Subscription = new Subscription();
+
   constructor (
     private storage: StorageService,
-    private route: Router,
     private notifier: NotifierService
-    ) { }
+  ) { }
 
   show(event: any, userInfo:HTMLInputElement) {
     if (userInfo.disabled) {
@@ -29,14 +31,17 @@ export class ProfileSettingsComponent {
           case ('name'):
             this.currUser.username = userInfo.value;
             event.target.textContent = 'Edit';
+
             break;
           case ('mail'):
             this.currUser.email = userInfo.value;
             event.target.textContent = 'Edit';
+
             break;
           case ('password'):
             this.currUser.password = userInfo.value;
             event.target.textContent = 'Change password';
+            
             break;
         }
         if (this.storage.saveCurrUserChanges(this.emailCopy, this.currUser)) {
@@ -44,9 +49,19 @@ export class ProfileSettingsComponent {
         } else {
           this.notifier.notify('error', 'Enter correct information!');
         }
-        this.route.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.route.onSameUrlNavigation = 'reload';
-        this.route.navigate(['/profile/settings']);
     }
+  }
+  
+  ngOnInit() {
+    this.$subscription.add(
+      this.storage.currUser.subscribe(user => {
+        this.currUser = user;
+        this.emailCopy = user.email;
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    this.$subscription.unsubscribe();
   }
 }

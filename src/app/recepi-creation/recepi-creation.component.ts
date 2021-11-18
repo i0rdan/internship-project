@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
 import { StorageService } from '../storage/storage.service';
@@ -8,7 +8,7 @@ import { StorageService } from '../storage/storage.service';
   templateUrl: './recepi-creation.component.html',
   styleUrls: ['./recepi-creation.component.css']
 })
-export class RecepiCreationComponent implements OnInit{
+export class RecepiCreationComponent implements OnInit {
   recepiPhoto: string = '';
   recepiIngridients: string[] = [];
   recepiCreationForm = this.fb.group({
@@ -24,10 +24,11 @@ export class RecepiCreationComponent implements OnInit{
   });
 
   ngOnInit () {
-    let ingridientsButton: any = document.getElementById('enterEnter')
+    const ingridientsButton: any = document.getElementById('enterEnter');
+
     ingridientsButton?.addEventListener('keydown', (e: { keyCode: number; }) => {
       if (e.keyCode === 16 && ingridientsButton.value) {
-        this.recepiIngridients.push(ingridientsButton.value)
+        this.recepiIngridients.push(ingridientsButton.value);
         ingridientsButton.value = '';
       }
     });
@@ -69,8 +70,9 @@ export class RecepiCreationComponent implements OnInit{
   }
 
   closeForm() {
-    let form: any = document.getElementById('createRecepiForm');
-    let recepiConf: any = document.getElementById('creationRecepiButton');
+    const form: any = document.getElementById('createRecepiForm');
+    const recepiConf: any = document.getElementById('creationRecepiButton');
+
     this.storage.creationShowRecepie(false);
     recepiConf.classList.remove('update');
     form.reset();
@@ -80,7 +82,9 @@ export class RecepiCreationComponent implements OnInit{
   onFileSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();
+
       reader.readAsDataURL(event.target.files[0]);
+
       reader.onload = (event) => {
         this.recepiPhoto = String(event.target?.result);
       }
@@ -90,17 +94,18 @@ export class RecepiCreationComponent implements OnInit{
   onSubmit(event: any): void {
     if (!event.target.classList.contains('update')) {
       if (this.storage.addRecepi(this.recepiLabel?.value, this.recepiDescription?.value, this.recepiPhoto, this.recepiDirections?.value, this.recepiIngridients)) {
-        this.notifier.notify('success', 'Succesfully');
+        window.location.reload();
       } else {
         this.notifier.notify('error', 'You has cookbook with such label');
       }
     } else {
       if (this.storage.updateRecepi(this.recepiLabel?.value, this.recepiDescription?.value, this.recepiPhoto, this.recepiDirections?.value, this.recepiIngridients)) {
-        this.notifier.notify('success', 'Succesfully');
+        window.location.reload();
       } else {
         this.notifier.notify('error', 'You has cookbook with such label');
       }
     }
+    
     this.closeForm();
     this.recepiPhoto = '';
   }

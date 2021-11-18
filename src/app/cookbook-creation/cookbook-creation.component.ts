@@ -74,7 +74,9 @@ export class CookbookCreationComponent {
   onFileSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
       let reader = new FileReader();
+
       reader.readAsDataURL(event.target.files[0]);
+
       reader.onload = (event) => {
         this.cookbookPhoto = String(event.target?.result);
       }
@@ -82,11 +84,14 @@ export class CookbookCreationComponent {
   }
 
   closeForm() {
-    let createCookbookForm: any = document.getElementById('createCookbookForm');
-    let creationCookbookButton: any = document.getElementById('creationCookbookButton');
+    const createCookbookForm: any = document.getElementById('createCookbookForm');
+    const creationCookbookButton: any = document.getElementById('creationCookbookButton');
+
     this.storage.creationShow(false);
+
     creationCookbookButton.classList.remove('update');
     createCookbookForm.reset();
+
     this.recepiNames = [];
     this.addRecepiToBook = [];
     this.addRecepiNamesToBook = [];
@@ -109,17 +114,18 @@ export class CookbookCreationComponent {
   onSubmit(event: any): void {
     if (!event.target.classList.contains('update')) {
       if (this.storage.addCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto, this.addRecepiNamesToBook)) {
-        this.notifier.notify('success', 'Succesfully');
+        window.location.reload();
       } else {
         this.notifier.notify('error', 'You has cookbook with such label');
       }
     } else {
       if (this.storage.updateCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto)) {
-        this.notifier.notify('success', 'Succesfully');
+        window.location.reload();
       } else {
         this.notifier.notify('error', 'You has cookbook with such label');
       }
     }
+    
     this.closeForm();
   }
 }
