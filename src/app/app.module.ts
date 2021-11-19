@@ -18,6 +18,9 @@ import { ProfileSettingsComponent } from './profile-settings/profile-settings.co
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { CookbookCreationComponent } from './cookbook-creation/cookbook-creation.component';
 import { RecepiCreationComponent } from './recepi-creation/recepi-creation.component';
+import { CookbookUpdateComponent } from './cookbook-update/cookbook-update.component';
+import { RecepiUpdateComponent } from './recepi-update/recepi-update.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -73,7 +76,10 @@ const customNotifierOptions: NotifierOptions = {
     ProfileRecepiesComponent,
     ProfileSettingsComponent,
     CookbookCreationComponent,
-    RecepiCreationComponent
+    RecepiCreationComponent,
+    CookbookUpdateComponent,
+    RecepiUpdateComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

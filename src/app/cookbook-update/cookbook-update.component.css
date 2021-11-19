@@ -1,0 +1,294 @@
+.cookbook-update__wrapper {
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 400%;
+}
+
+.cookbook-update {
+    position: relative;
+    max-width: 808px;
+    height: 650px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+.cookbook-update__wrapper:target {
+    display: block;
+}
+
+.cookbook-update__update-details {
+    background: #FFFFFF;
+    box-shadow: 0px 18px 60px rgba(24, 24, 24, 0.7);
+    border-radius: 10px;
+    margin-top: 50px;
+    padding: 72px 56px;
+    text-align: initial;
+}
+
+.update-details__label {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 48px;
+}
+
+.cookbook-update__close svg:hover {
+    cursor: pointer;
+}
+
+.update-details__title span {
+    color: #FFBC01;
+}
+
+.update-details__image,
+.update-details__confirm,
+.update-details__cancel {
+    background: #FFBC01;
+    border-radius: 10px;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    outline: none;
+    border: none;
+    margin-top: 24px;
+    padding: 16px 32px;
+}
+
+.update-details__title,
+.update-details__description,
+.update-details__recepies-in-book {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.update-details__title label,
+.update-details__title span,
+.update-details__error span,
+.update-details__description label,
+.update-details__recepies-in-book label {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.update-details__title input,
+.update-details__description textarea,
+.update-details__recepies-in-book input {
+    background: #FFFFFF;
+    border: 1px solid #DADADA;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: none;
+    height: 40px;
+    margin-top: 14px;
+}
+
+.update-details__description textarea {
+    height: 104px;
+    max-width: 100%;
+}
+
+.update-details__recepies-in-book-cards {
+    margin-top: 48px;
+}
+
+.update-details__recepies-in-book p {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.recepies-in-book__recepies-in-book-cards {
+    margin-top: 40px;
+}
+
+.recepies-in-book-cards__recepies-card {
+    height: 309px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 50px 10px 10px 10px;
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.recepies-card__recepies-card-main {
+    margin: 15px;
+    width: 54%;
+}
+
+.recepies-card-main__recepies-card-main-reactions {
+    align-self: flex-end;
+}
+
+.update-details__error-image {
+    color: green;
+    font-size: 16px;
+    display: block;
+}
+
+.recepies-card-main__title,
+.recepies-card-main__recepies-card-main-reactions,
+.recepies-card-main__recepies-card-main-reactions > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.recepies-card-main__title p {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #181818;
+    max-width: 257px;
+}
+
+.recepies-card-main__title span {
+    align-self: flex-start;
+}
+
+.recepies-card-main__title span, 
+.recepies-card-main__info span,
+.recepies-card-main__recepies-card-main-reactions span {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #181818;
+}
+
+.recepies-card-main__info {
+    margin-top: 16px;
+}
+
+.update-details__title div span,
+.update-details__error span {
+    font-size: 14px;
+    color: red;
+}
+
+.recepies-card-main__recepies-card-main-reactions div {
+    display: flex;
+    max-width: 205px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+.recepies-card-main-reactions__comments {
+    margin-top: 20px;
+}
+
+.recepies-card-main-reactions__views span,
+.recepies-card-main-reactions__likes span,
+.recepies-card-main-reactions__comments span {
+    margin-left: 5px;
+}
+
+.recepies-card-main-reactions__views svg {
+    align-self: center;
+}
+
+.recepies-card-main-reactions__likes,
+.recepies-card-main-reactions__comments,
+.recepies-card-main-reactions__views {
+    display: flex;
+    justify-content: center;
+}
+
+.recepies-card__image {
+    width: 288px;
+    height: 309px;
+    border-radius: 50px 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.update-details__cancel {
+    background: transparent;
+    color: #FFBC01;
+    border: 2px solid #FFBC01;
+    margin-right: 10px;
+}
+
+.update-details__cancel:hover {
+    color: #181818;
+    background-color: #FFBC01;
+    cursor: pointer;
+}
+
+.update-details__image:hover,
+.update-details__confirm:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.update-details__variants {
+    width: 94%;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    padding: 3%;
+}
+
+.update-details__variants p {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    color: #181818;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.update-details__variants p:hover {
+    background: #EDEDED;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+}
+
+@media screen and (min-width: 0px) and (max-width: 841px) {
+    .update-details__image {
+        width: 100%;
+    }
+
+    .recepies-in-book__recepies-in-book-cards {
+        margin: 0 auto;
+    }
+
+    .recepies-in-book-cards__recepies-card {
+        flex-direction: column;
+        height: 632px;
+        width: 288px;
+    }
+
+    .recepies-card__recepies-card-main {
+        width: 90%;
+    }
+
+    .recepies-card-main__recepies-card-main-reactions {
+        margin-top: 0px;
+    }
+
+    .recepies-card-main-reactions__views > div {
+        flex-direction: column;
+        margin-top: 0px;
+    }
+}
