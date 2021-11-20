@@ -28,7 +28,7 @@ export class ProfileRecepiesComponent implements OnDestroy, OnInit{
   }
 
   updateRecepi(recepi: Recepi) {
-    this.storage.creationShowRecepie(true, recepi);
+    this.storage.updateRecepiShow(true, recepi);
   }
 
   likeUnlikeRecepi(author: string, label: string) {

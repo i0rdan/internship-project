@@ -28,7 +28,7 @@ export class ProfileCookbooksComponent implements OnInit, OnDestroy{
   }
 
   updateCookbook(cookbook: Cookbook) {
-    this.storage.creationShow(true, cookbook);
+    this.storage.updateBookShow(true, cookbook);
   }
 
   likeUnlikeBook(author: string, label: string) {
