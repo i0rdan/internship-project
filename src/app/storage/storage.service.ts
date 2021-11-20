@@ -11,6 +11,8 @@ export class StorageService {
   storage = window.localStorage;
   currUser: Subject<User> = new Subject();
   users: Subject<User[]> = new Subject();
+  cookbookUpdate: Subject<Cookbook> = new Subject();
+  recepiUpdate: Subject<Recepi> = new Subject();
 
   constructor() {}
 
@@ -157,47 +159,41 @@ export class StorageService {
     return recepiesNames;
   }
 
-  creationShow(show: boolean, cookbook?: Cookbook): void {
+  creationShow(show: boolean): void {
     const creation = document.getElementById('creation');
-    const creationButton = document.getElementById('creationCookbookButton');
 
     show ? creation?.classList.remove('hidden') : creation?.classList.add('hidden');
+  }
+
+  creationShowRecepie(show: boolean): void {
+    const creation = document.getElementById('creationRecepi');
+
+    show ? creation?.classList.remove('hidden') : creation?.classList.add('hidden');
+  }
+
+  updateBookShow(show: boolean, cookbook?: Cookbook) {
+    const update = document.getElementById('updateBook');
 
     if (cookbook) {
-      creationButton?.classList.add('update');
-
-      const cookbookTitle: any = document.getElementById('cookbookTitle');
-      const cookbookDescription: any = document.getElementById('cookbookDescription');
-
-      cookbookDescription.value = cookbook.description;
-      cookbookTitle.value = cookbook.label;
-
+      this.cookbookUpdate.next(cookbook);
       this.storage['updateCookbook'] = JSON.stringify(cookbook);
     }
+
+    show ? update?.classList.remove('hidden') : update?.classList.add('hidden');
   }
 
-  creationShowRecepie(show: boolean, recepi?: Recepi): void {
-    const creation = document.getElementById('creationRecepi');
-    const creationButton = document.getElementById('creationRecepiButton');
-
-    show ? creation?.classList.remove('hidden') : creation?.classList.add('hidden');
+  updateRecepiShow(show: boolean, recepi?: Recepi) {
+    const update = document.getElementById('updateRecepi');
 
     if (recepi) {
-      creationButton?.classList.add('update');
-
-      const recepiTitle: any = document.getElementById('recepiTitle');
-      const recepiDirections: any = document.getElementById('recepiDirections');
-      const recepiDescription: any = document.getElementById('recepiDescription');
-
-      recepiDescription.value = recepi.description;
-      recepiDirections.value = recepi.directions;
-      recepiTitle.value = recepi.title;
-
+      this.recepiUpdate.next(recepi);
       this.storage['updateRecepi'] = JSON.stringify(recepi);
     }
+
+    show ? update?.classList.remove('hidden') : update?.classList.add('hidden');
   }
 
-  addCookbook(label: string, description: string, photo: string, recepiNames: string[]): boolean {
+  addCookbook(label: string, description: string, photo: string, recepiNames: string[], type: string): boolean {
     const newCookbook: Cookbook = {
       label: label,
       author: this.getCurrUserInfo().email,
@@ -206,7 +202,8 @@ export class StorageService {
       likes: [],
       comments: 0,
       views: 0,
-      recepiNames: recepiNames
+      recepiNames: recepiNames,
+      type: type
     };
 
     let currUser: User = JSON.parse(this.storage['currentUser']);
@@ -238,7 +235,7 @@ export class StorageService {
     return true;
   }
 
-  addRecepi(label: string, description: string, photo: string, directions: string, ingridients: string[]): boolean {
+  addRecepi(label: string, description: string, photo: string, directions: string, ingridients: string[], time: number): boolean {
     const newRecepi: Recepi = {
       title: label,
       author: this.getCurrUserInfo().email,
@@ -248,7 +245,8 @@ export class StorageService {
       ingridiens: ingridients,
       likes: [],
       comments: 0,
-      views: 0
+      views: 0,
+      time: time
     };
 
     let currUser: User = JSON.parse(this.storage['currentUser']);
@@ -280,46 +278,12 @@ export class StorageService {
     return true;
   }
 
-  updateCookbook(label: string, description: string, photo: string): boolean {
+  updateCookbook(label: string, description: string, photo: string, addRecepiToBook: string[], type: string): boolean {
     let uploadCookbook: Cookbook = JSON.parse(this.storage['updateCookbook']);
 
     if (this.deleteCookbook(uploadCookbook)) {
-      if (photo) {
-        uploadCookbook.photo = photo;
-      }
-      if (label) {
-        uploadCookbook.label = label;
-      }
-      if (description) {
-        uploadCookbook.description = description;
-      }
-
-      let currUser: User = JSON.parse(this.storage['currentUser']);
-      let mathched: boolean = true;
-
-      currUser.cookbooks.forEach(element => {
-        if (element.label === uploadCookbook.label) {
-          mathched = false;
-        }
-      });
-
-      if (!mathched) {
-        return false;
-      }
-
-      currUser.cookbooks.push(uploadCookbook);
-
-      let users: User[] = JSON.parse(this.storage['user']);
-      let index: number = this.findIndexOfUser(currUser.email);
-
-      users.splice(index, 1, currUser);
-
-      this.storage['user'] = JSON.stringify(users);
-      this.storage['currentUser'] = JSON.stringify(currUser);
+      this.addCookbook(label, description, photo, addRecepiToBook, type);
       this.storage.removeItem('updateCookbook');
-
-      this.currUser.next(currUser);
-      this.users.next(users);
 
       return true;
     }
@@ -328,52 +292,12 @@ export class StorageService {
     }
   }
 
-  updateRecepi(label: string, description: string, photo: string, directions: string, ingridients: string[]): boolean {
+  updateRecepi(label: string, description: string, photo: string, directions: string, ingridients: string[], time: number): boolean {
     let uploadRecepi: Recepi = JSON.parse(this.storage['updateRecepi']);
 
     if (this.deleteRecepi(uploadRecepi)) {
-      if (photo) {
-        uploadRecepi.photo = photo;
-      }
-      if (label) {
-        uploadRecepi.title = label;
-      }
-      if (description) {
-        uploadRecepi.description = description;
-      }
-      if (directions) {
-        uploadRecepi.directions = directions;
-      }
-      if (ingridients.length) {
-        uploadRecepi.ingridiens = ingridients;
-      }
-
-      let currUser: User = JSON.parse(this.storage['currentUser']);
-      let mathched: boolean = true;
-
-      currUser.recepies.forEach(element => {
-        if (element.title === uploadRecepi.title) {
-          mathched = false;
-        }
-      });
-
-      if (!mathched) {
-        return false;
-      }
-
-      currUser.recepies.push(uploadRecepi);
-
-      let users: User[] = JSON.parse(this.storage['user']);
-      let index: number = this.findIndexOfUser(currUser.email);
-
-      users.splice(index, 1, currUser);
-
-      this.storage['user'] = JSON.stringify(users);
-      this.storage['currentUser'] = JSON.stringify(currUser);
+      this.addRecepi(label, description, photo, directions, ingridients, time);
       this.storage.removeItem('updateRecepi');
-
-      this.currUser.next(currUser);
-      this.users.next(users);
 
       return true;
     }
@@ -419,6 +343,13 @@ export class StorageService {
     }
 
     currUser.recepies.splice(indexRecepi, 1);
+    currUser.cookbooks.forEach(book => {
+      const indexOfRecepi = book.recepiNames.indexOf(recepi.title);
+
+      if (indexOfRecepi >= 0) {
+        book.recepiNames.splice(indexOfRecepi, 1);
+      }
+    });
 
     let users: User[] = JSON.parse(this.storage['user']);
     let index: number = this.findIndexOfUser(currUser.email);
@@ -495,5 +426,47 @@ export class StorageService {
     this.storage['user'] = JSON.stringify(users);
 
     this.users.next(users);
+  }
+
+  showPassword(email: string): string {
+    const indexOfUser: number = this.findIndexOfUser(email);
+    const users: User[] = JSON.parse(this.storage['user']);
+
+    return indexOfUser >= 0 ? users[indexOfUser].password : '';
+  }
+
+  changePassword(email: string, password: string): boolean {
+    const indexOfUser: number = this.findIndexOfUser(email);
+    const users: User[] = JSON.parse(this.storage['user']);
+
+    if (indexOfUser >= 0) {
+      users[indexOfUser].password = password;
+      this.storage['user'] = JSON.stringify(users);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getAllCookbooks(): Cookbook[] {
+    let allBooks: Cookbook[] = []
+    const users: User[] = JSON.parse(this.storage['user']);
+
+    users.forEach(user => {
+      allBooks = allBooks.concat(user.cookbooks);
+    });
+
+    return allBooks;
+  }
+
+  getAllResepies(): Recepi[] {
+    let allRecepies: Recepi[] = []
+    const users: User[] = JSON.parse(this.storage['user']);
+
+    users.forEach(user => {
+      allRecepies = allRecepies.concat(user.recepies);
+    });
+
+    return allRecepies;
   }
 }

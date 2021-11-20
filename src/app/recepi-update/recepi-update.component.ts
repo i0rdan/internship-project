@@ -1,17 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
+import { Subscription } from 'rxjs';
 import { StorageService } from '../storage/storage.service';
 
 @Component({
-  selector: 'app-recepi-creation',
-  templateUrl: './recepi-creation.component.html',
-  styleUrls: ['./recepi-creation.component.css']
+  selector: 'app-recepi-update',
+  templateUrl: './recepi-update.component.html',
+  styleUrls: ['./recepi-update.component.css']
 })
-export class RecepiCreationComponent implements OnInit {
+export class RecepiUpdateComponent implements OnInit, OnDestroy {
+  $subscription: Subscription = new Subscription();
   recepiPhoto: string = '';
   recepiIngridients: string[] = [];
-  recepiCreationForm = this.fb.group({
+  recepiUpdateForm = this.fb.group({
     recepiLabel: ['', 
       [
         Validators.required,
@@ -25,7 +27,7 @@ export class RecepiCreationComponent implements OnInit {
   });
 
   ngOnInit () {
-    const ingridientsButton: any = document.getElementById('enterEnter');
+    const ingridientsButton: any = document.getElementById('enterIngridients');
 
     ingridientsButton?.addEventListener('keydown', (e: { keyCode: number; }) => {
       if (e.keyCode === 16 && ingridientsButton.value) {
@@ -33,6 +35,29 @@ export class RecepiCreationComponent implements OnInit {
         ingridientsButton.value = '';
       }
     });
+
+    this.$subscription.add(
+      this.storage.recepiUpdate.subscribe(recepi => {
+        this.recepiPhoto = recepi.photo;
+        this.recepiIngridients = recepi.ingridiens;
+        this.recepiUpdateForm = this.fb.group({
+          recepiLabel: [recepi.title, 
+            [
+              Validators.required,
+              Validators.minLength(4),
+              Validators.maxLength(20)
+            ]
+          ],
+          recepiDescription: [recepi.description],
+          recepiDirections: [recepi.directions],
+          recepiTime: [recepi.time]
+        });
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    this.$subscription.unsubscribe();
   }
 
   constructor(
@@ -42,19 +67,19 @@ export class RecepiCreationComponent implements OnInit {
   ) { }
 
   get recepiLabel() {
-    return this.recepiCreationForm.get('recepiLabel');
+    return this.recepiUpdateForm.get('recepiLabel');
   }
 
   get recepiDescription() {
-    return this.recepiCreationForm.get('recepiDescription');
+    return this.recepiUpdateForm.get('recepiDescription');
   }
 
   get recepiDirections() {
-    return this.recepiCreationForm.get('recepiDirections');
+    return this.recepiUpdateForm.get('recepiDirections');
   }
 
   get recepiTime() {
-    return this.recepiCreationForm.get('recepiTime');
+    return this.recepiUpdateForm.get('recepiTime');
   }
 
   checkValid(param: string): boolean | undefined {
@@ -75,8 +100,8 @@ export class RecepiCreationComponent implements OnInit {
   }
 
   closeForm() {
-    this.storage.creationShowRecepie(false);
-    this.recepiCreationForm.reset();
+    this.storage.updateRecepiShow(false);
+    this.recepiUpdateForm.reset();
     this.recepiIngridients = [];
     this.recepiPhoto = '';
   }
@@ -94,8 +119,8 @@ export class RecepiCreationComponent implements OnInit {
   }
 
   onSubmit(event: any): void {
-    if (this.storage.addRecepi(this.recepiLabel?.value, this.recepiDescription?.value, this.recepiPhoto, this.recepiDirections?.value, this.recepiIngridients, this.recepiTime?.value)) {
-      window.location.reload();
+    if (this.storage.updateRecepi(this.recepiLabel?.value, this.recepiDescription?.value, this.recepiPhoto, this.recepiDirections?.value, this.recepiIngridients, this.recepiTime?.value)) {
+      this.notifier.notify('success', 'Successfully updatet');
     } else {
       this.notifier.notify('error', 'You has recepi with such label');
     }

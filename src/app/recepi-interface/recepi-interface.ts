@@ -7,5 +7,6 @@ export interface Recepi {
   ingridiens: string[],
   views: number,
   likes: string[],
-  comments: number
+  comments: number,
+  time: number
 }

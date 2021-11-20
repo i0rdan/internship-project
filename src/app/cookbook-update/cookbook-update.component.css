@@ -1,4 +1,4 @@
-.cookbook-creation__wrapper {
+.cookbook-update__wrapper {
     background: rgba(102, 102, 102, 0.5);
     width: 100%;
     position: absolute;
@@ -7,7 +7,7 @@
     height: 400%;
 }
 
-.cookbook-creation {
+.cookbook-update {
     position: relative;
     max-width: 808px;
     height: 650px;
@@ -16,11 +16,11 @@
     padding-top: 40px;
 }
 
-.cookbook-creation__wrapper:target {
+.cookbook-update__wrapper:target {
     display: block;
 }
 
-.cookbook-creation__creation-details {
+.cookbook-update__update-details {
     background: #FFFFFF;
     box-shadow: 0px 18px 60px rgba(24, 24, 24, 0.7);
     border-radius: 10px;
@@ -29,7 +29,7 @@
     text-align: initial;
 }
 
-.creation-details__label {
+.update-details__label {
     font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
@@ -37,17 +37,17 @@
     line-height: 48px;
 }
 
-.cookbook-creation__close svg:hover {
+.cookbook-update__close svg:hover {
     cursor: pointer;
 }
 
-.creation-details__title span {
+.update-details__title span {
     color: #FFBC01;
 }
 
-.creation-details__image,
-.creation-details__confirm,
-.creation-details__cancel {
+.update-details__image,
+.update-details__confirm,
+.update-details__cancel {
     background: #FFBC01;
     border-radius: 10px;
     font-family: Nunito;
@@ -61,21 +61,21 @@
     padding: 16px 32px;
 }
 
-.creation-details__title,
-.creation-details__description,
-.creation-details__recepies-in-book,
-.creation-details__type {
+.update-details__title,
+.update-details__description,
+.update-details__recepies-in-book,
+.update-details__type {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
 }
 
-.creation-details__title label,
-.creation-details__title span,
-.creation-details__error span,
-.creation-details__description label,
-.creation-details__recepies-in-book label,
-.creation-details__type label{
+.update-details__title label,
+.update-details__title span,
+.update-details__error span,
+.update-details__description label,
+.update-details__recepies-in-book label,
+.update-details__type label {
     font-family: Montserrat;
     font-style: normal;
     font-weight: 600;
@@ -83,10 +83,10 @@
     line-height: 20px;
 }
 
-.creation-details__title input,
-.creation-details__description textarea,
-.creation-details__recepies-in-book input,
-.creation-details__type input {
+.update-details__title input,
+.update-details__description textarea,
+.update-details__recepies-in-book input,
+.update-details__type input {
     background: #FFFFFF;
     border: 1px solid #DADADA;
     box-sizing: border-box;
@@ -96,16 +96,16 @@
     margin-top: 14px;
 }
 
-.creation-details__description textarea {
+.update-details__description textarea {
     height: 104px;
     max-width: 100%;
 }
 
-.creation-details__recepies-in-book-cards {
+.update-details__recepies-in-book-cards {
     margin-top: 48px;
 }
 
-.creation-details__recepies-in-book p {
+.update-details__recepies-in-book p {
     font-family: Montserrat;
     font-style: normal;
     font-weight: 600;
@@ -135,7 +135,7 @@
     align-self: flex-end;
 }
 
-.creation-details__error-image {
+.update-details__error-image {
     color: green;
     font-size: 16px;
     display: block;
@@ -178,8 +178,8 @@
     margin-top: 16px;
 }
 
-.creation-details__title div span,
-.creation-details__error span {
+.update-details__title div span,
+.update-details__error span {
     font-size: 14px;
     color: red;
 }
@@ -220,21 +220,21 @@
     background-repeat: no-repeat;
 }
 
-.creation-details__cancel {
+.update-details__cancel {
     background: transparent;
     color: #FFBC01;
     border: 2px solid #FFBC01;
     margin-right: 10px;
 }
 
-.creation-details__cancel:hover {
+.update-details__cancel:hover {
     color: #181818;
     background-color: #FFBC01;
     cursor: pointer;
 }
 
-.creation-details__image:hover,
-.creation-details__confirm:hover {
+.update-details__image:hover,
+.update-details__confirm:hover {
     color: white;
     cursor: pointer;
 }
@@ -243,7 +243,7 @@
     display: none;
 }
 
-.creation-details__variants {
+.update-details__variants {
     width: 94%;
     background: #FFFFFF;
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
@@ -251,7 +251,7 @@
     padding: 3%;
 }
 
-.creation-details__variants p {
+.update-details__variants p {
     font-family: Nunito;
     font-style: normal;
     font-weight: normal;
@@ -262,13 +262,13 @@
     border-radius: 10px;
 }
 
-.creation-details__variants p:hover {
+.update-details__variants p:hover {
     background: #EDEDED;
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
 }
 
 @media screen and (min-width: 0px) and (max-width: 841px) {
-    .creation-details__image {
+    .update-details__image {
         width: 100%;
     }
 

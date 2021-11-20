@@ -1,4 +1,4 @@
-.recepie-creation__wrapper {
+.recepie-update__wrapper {
     background: rgba(102, 102, 102, 0.5);
     width: 100%;
     position: absolute;
@@ -7,7 +7,7 @@
     height: 400%;
 }
 
-.recepie-creation {
+.recepie-update {
     position: relative;
     max-width: 808px;
     height: 650px;
@@ -16,11 +16,11 @@
     padding-top: 40px;
 }
 
-.recepie-creation__wrapper:target {
+.recepie-update__wrapper:target {
     display: block;
 }
 
-.recepie-creation__creation-details {
+.recepie-update__update-details {
     background: #FFFFFF;
     box-shadow: 0px 18px 60px rgba(24, 24, 24, 0.7);
     border-radius: 10px;
@@ -29,7 +29,7 @@
     text-align: initial;
 }
 
-.creation-details__label {
+.update-details__label {
     font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
@@ -37,13 +37,13 @@
     line-height: 48px;
 }
 
-.creation-details__title span {
+.update-details__title span {
     color: #FFBC01;
 }
 
-.creation-details__image,
-.creation-details__confirm,
-.creation-details__cancel {
+.update-details__image,
+.update-details__confirm,
+.update-details__cancel {
     background: #FFBC01;
     border-radius: 10px;
     font-family: Nunito;
@@ -57,33 +57,33 @@
     padding: 16px 32px;
 }
 
-.creation-details__title,
-.creation-details__description,
-.creation-details__ingridients,
-.creation-details__directions,
-.creation-details__time {
+.update-details__title,
+.update-details__description,
+.update-details__ingridients,
+.update-details__directions,
+.update-details__time {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
 }
 
-.creation-details__title div span {
+.update-details__title div span {
     font-size: 14px;
     color: red;
 }
 
-.creation-details__error-image {
+.update-details__error-image {
     color: green;
     font-size: 16px;
     display: block;
 }
 
-.creation-details__title label,
-.creation-details__title span,
-.creation-details__description label,
-.creation-details__ingridients label,
-.creation-details__directions label,
-.creation-details__time label {
+.update-details__title label,
+.update-details__title span,
+.update-details__description label,
+.update-details__ingridients label,
+.update-details__directions label,
+.update-details__time label {
     font-family: Montserrat;
     font-style: normal;
     font-weight: 600;
@@ -91,11 +91,11 @@
     line-height: 20px;
 }
 
-.creation-details__title input,
-.creation-details__description textarea,
-.creation-details__ingridients input,
-.creation-details__directions textarea,
-.creation-details__time input {
+.update-details__title input,
+.update-details__description textarea,
+.update-details__ingridients input,
+.update-details__directions textarea,
+.update-details__time input {
     background: #FFFFFF;
     border: 1px solid #DADADA;
     box-sizing: border-box;
@@ -105,13 +105,13 @@
     margin-top: 14px;
 }
 
-.creation-details__description textarea,
-.creation-details__directions textarea {
+.update-details__description textarea,
+.update-details__directions textarea {
     height: 104px;
     max-width: 100%;
 }
 
-.creation-details__choosen-ingridients {
+.update-details__choosen-ingridients {
     width: 100%;
     max-width: 238px;
     margin-top: 48px;
@@ -137,21 +137,21 @@
     cursor: pointer;
 }
 
-.creation-details__cancel {
+.update-details__cancel {
     background: transparent;
     color: #FFBC01;
     border: 2px solid #FFBC01;
     margin-right: 10px;
 }
 
-.creation-details__cancel:hover {
+.update-details__cancel:hover {
     color: #181818;
     background-color: #FFBC01;
     cursor: pointer;
 }
 
-.creation-details__image:hover,
-.creation-details__confirm:hover {
+.update-details__image:hover,
+.update-details__confirm:hover {
     color: white;
     cursor: pointer;
 }
@@ -161,7 +161,7 @@
 }
 
 @media screen and (min-width: 0px) and (max-width: 841px) {
-    .creation-details__image {
+    .update-details__image {
         width: 100%;
     }
 }
