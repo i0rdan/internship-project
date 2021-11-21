@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AllCookbooksComponent } from './all-cookbooks/all-cookbooks.component';
+import { AllRecepiesComponent } from './all-recepies/all-recepies.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { HomeComponent } from './home/home.component';
 import { HomeGuard } from './homeguard/home.guard';
@@ -22,6 +24,14 @@ const routes: Routes = [
   {
     path: 'change-pass', 
     component: ChangePasswordComponent
+  },
+  {
+    path: 'recepies',
+    component: AllRecepiesComponent
+  },
+  {
+    path: 'cookbooks', 
+    component: AllCookbooksComponent
   },
   {
     path: 'profile',
