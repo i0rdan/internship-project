@@ -5,6 +5,7 @@ export interface Cookbook {
   photo: string,
   likes: string[],
   comments: number,
-  views: number,
-  recepiNames: string[]
+  views: string[],
+  recepiNames: string[],
+  type: string
 }

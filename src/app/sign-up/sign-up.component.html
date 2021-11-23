@@ -22,7 +22,7 @@
         <div class="password">
             <div class="password__label-wrapper">
                 <label for="password">Password</label>
-                <a>Forgot password?</a>
+                <a routerLink="/change-pass">Change password</a>
             </div>
             <input id="password" type="text" formControlName="password" class="password__input" type="password">
             <div *ngIf="checkValid('showPassErr')">

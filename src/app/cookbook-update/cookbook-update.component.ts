@@ -1,22 +1,23 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
+import { Subscription } from 'rxjs';
 import { Recepi } from '../recepi-interface/recepi-interface';
 import { StorageService } from '../storage/storage.service';
 
 @Component({
-  selector: 'app-cookbook-creation',
-  templateUrl: './cookbook-creation.component.html',
-  styleUrls: ['./cookbook-creation.component.css'],
-  providers: [StorageService]
+  selector: 'app-cookbook-update',
+  templateUrl: './cookbook-update.component.html',
+  styleUrls: ['./cookbook-update.component.css']
 })
-export class CookbookCreationComponent {
+export class CookbookUpdateComponent implements OnInit, OnDestroy {
+  $subscription: Subscription = new Subscription();
   recepiNames: string[] = [];
   addRecepiToBook: Recepi[] = [];
   addRecepiNamesToBook: string[] = [];
   cookbookPhoto: string = '';
   show3Symbols: boolean = false;
-  cookbookCreationForm = this.fb.group({
+  cookbookUpdateForm = this.fb.group({
     cookbookLabel: ['', 
       [
         Validators.required,
@@ -34,16 +35,43 @@ export class CookbookCreationComponent {
     private notifier: NotifierService
   ) { }
 
+  ngOnInit() {
+    this.$subscription.add(
+      this.storage.cookbookUpdate.subscribe(book => {
+        this.cookbookUpdateForm = this.fb.group({
+          cookbookLabel: [book.label, 
+            [
+              Validators.required,
+              Validators.minLength(4),
+              Validators.maxLength(20)
+            ]
+          ],
+          cookbookDescription: book.description,
+          cookbookType: book.type
+        });
+        this.cookbookPhoto = book.photo;
+        this.addRecepiNamesToBook = book.recepiNames;
+        this.addRecepiNamesToBook.forEach(elem => {
+          this.addRecepiToBook.push(this.storage.getRecepiByTitle(elem));
+        });
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    this.$subscription.unsubscribe();
+  }
+
   get cookbookLabel() {
-    return this.cookbookCreationForm.get('cookbookLabel');
+    return this.cookbookUpdateForm.get('cookbookLabel');
   }
 
   get cookbookDescription() {
-    return this.cookbookCreationForm.get('cookbookDescription');
+    return this.cookbookUpdateForm.get('cookbookDescription');
   }
 
   get cookbookType() {
-    return this.cookbookCreationForm.get('cookbookType');
+    return this.cookbookUpdateForm.get('cookbookType');
   }
 
   checkValid(param: string): boolean | undefined {
@@ -87,8 +115,8 @@ export class CookbookCreationComponent {
   }
 
   closeForm() {
-    this.storage.creationShow(false);
-    this.cookbookCreationForm.reset();
+    this.storage.updateBookShow(false);
+    this.cookbookUpdateForm.reset();
     this.recepiNames = [];
     this.addRecepiToBook = [];
     this.addRecepiNamesToBook = [];
@@ -109,8 +137,8 @@ export class CookbookCreationComponent {
   }
 
   onSubmit(event: any): void {
-    if (this.storage.addCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto, this.addRecepiNamesToBook, this.cookbookType?.value)) {
-      window.location.reload();
+    if (this.storage.updateCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto, this.addRecepiNamesToBook, this.cookbookType?.value)) {
+      this.notifier.notify('success', 'Successfully updated');
     } else {
       this.notifier.notify('error', 'You has cookbook with such label');
     }

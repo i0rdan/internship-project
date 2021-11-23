@@ -1,16 +1,16 @@
-<div class="cookbook-creation__wrapper hidden" id="creation">
-    <div class="cookbook-creation">
-      <div class="cookbook-creation__close">
+<div class="cookbook-update__wrapper hidden" id="updateBook">
+    <div class="cookbook-update">
+      <div class="cookbook-update__close">
         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none" (click)="closeForm()">
           <path d="M34.6154 31.8456C35.3801 32.6103 35.3801 33.8501 34.6154 34.6148C33.8507 35.3796 32.6108 35.3796 31.8461 34.6149L18 20.7687L4.15383 34.6149C3.38913 35.3796 2.14931 35.3796 1.3846 34.6148C0.6199 33.8501 0.6199 32.6103 1.3846 31.8456L15.2308 17.9995L1.38456 4.15331C0.619859 3.3886 0.61986 2.14878 1.38456 1.38407C2.14926 0.619373 3.38909 0.619369 4.15379 1.38407L18 15.2303L31.8462 1.38407C32.6109 0.619372 33.8507 0.619376 34.6154 1.38408C35.3801 2.14878 35.3801 3.38861 34.6154 4.15331L20.7692 17.9995L34.6154 31.8456Z" fill="#DADADA"/>
         </svg>
       </div>
-      <div class="cookbook-creation__creation-details">
-        <form class="creation-details" [formGroup]="cookbookCreationForm" id="createCookbookForm">
-          <p class="creation-details__label">Create New Cookbook</p>
-          <div class="creation-details__title">
+      <div class="cookbook-update__update-details">
+        <form class="update-details" [formGroup]="cookbookUpdateForm" id="updateCookbookForm">
+          <p class="update-details__label">Update Cookbook</p>
+          <div class="update-details__title">
             <label for="title">Cookbook Title<span>*</span></label>
-            <input type="text" id="cookbookTitle" formControlName="cookbookLabel">
+            <input type="text" id="cookbookTitleUpdate" formControlName="cookbookLabel">
             <div *ngIf="checkValid('showLabelErr')">
               <span *ngIf="checkValid('labelReq')">Label Required</span>
               <span *ngIf="checkValid('labelMin')">Label must be at least 4 characters</span>
@@ -18,27 +18,27 @@
             </div>
           </div>
           <input type="file" (change)="onFileSelected($event)" hidden #inputFile accept=".jpg, .jpeg, .png">
-          <button (click)="inputFile.click()" class="creation-details__image">Upload Cookbook picture</button>
-          <span class="creation-details__error-image" *ngIf="cookbookPhoto">Photo Loaded</span>
-          <div class="creation-details__description">
+          <button (click)="inputFile.click()" class="update-details__image">Upload Cookbook picture</button>
+          <span class="update-details__error-image" *ngIf="cookbookPhoto">Photo Loaded</span>
+          <div class="update-details__description">
             <label for="description">Description</label>
-            <textarea type="text" id="cookbookDescription" formControlName="cookbookDescription"></textarea>
+            <textarea type="text" id="cookbookDescriptionUpdate" formControlName="cookbookDescription"></textarea>
           </div>
-          <div class="creation-details__type">
-            <label for="typeBook">Cookbook type</label>
-            <input type="text" id="typeBook" formControlName="cookbookType">
+          <div class="update-details__type">
+            <label for="cookbookType">Cookbook type</label>
+            <input type="text" id="cookbookType" formControlName="cookbookType">
           </div>
-          <div class="creation-details__recepies-in-book">
+          <div class="update-details__recepies-in-book">
             <label for="recepies">Recepies</label>
-            <input type="text" id="cookbookRecepies" (keyup)="showFoundedRecepies($event)">
+            <input type="text" id="cookbookRecepiesUpdate" (keyup)="showFoundedRecepies($event)">
           </div>
-          <div *ngIf="show3Symbols" class="creation-details__error">
+          <div *ngIf="show3Symbols" class="update-details__error">
             <span>Please, enter 3 symbols!</span>
           </div>
-          <div class="creation-details__variants" *ngIf="recepiNames.length">
+          <div class="update-details__variants" *ngIf="recepiNames.length">
             <p *ngFor="let recepiName of recepiNames; let i = index" (click)="showAddedRecepiesInForm(recepiName)">{{ recepiName }}</p>
           </div>
-          <div class="creation-details__recepies-in-book-cards" *ngIf="addRecepiToBook.length">
+          <div class="update-details__recepies-in-book-cards" *ngIf="addRecepiToBook.length">
             <div class="recepies-in-book-cards__recepies-card" *ngFor="let recepi of addRecepiToBook; let i = index">
               <div class="recepies-card__image" [ngStyle]="{backgroundImage: 'url(' + recepi.photo + ')'}"></div>
               <div class="recepies-card__recepies-card-main">
@@ -79,8 +79,8 @@
               </div>
             </div>
           </div>
-          <button class="creation-details__cancel" (click)="closeForm()">Cancel</button>
-          <button class="creation-details__confirm" id="creationCookbookButton" type="submit" (click)="onSubmit($event)" [disabled]="checkValid('buttonCheck')">Confirm</button>
+          <button class="update-details__cancel" (click)="closeForm()">Cancel</button>
+          <button class="update-details__confirm" id="updateCookbookButton" type="submit" (click)="onSubmit($event)" [disabled]="checkValid('buttonCheck')">Confirm</button>
         </form>
       </div>
     </div>

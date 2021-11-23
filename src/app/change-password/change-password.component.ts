@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { StorageService } from '../storage/storage.service';
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css'],
-  providers: [StorageService]
+  selector: 'app-change-password',
+  templateUrl: './change-password.component.html',
+  styleUrls: ['./change-password.component.css']
 })
-export class SignInComponent {
+export class ChangePasswordComponent {
   emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
-  signInForm = this.fb.group({
+  changePasswordForm = this.fb.group({
     email: ['', 
       [
         Validators.required,
@@ -32,28 +31,18 @@ export class SignInComponent {
   ) { }
 
   get email() {
-    return this.signInForm.get('email');
+    return this.changePasswordForm.get('email');
   }
 
   get password() {
-    return this.signInForm.get('password');
+    return this.changePasswordForm.get('password');
   }
 
   onSubmit() {
-    if (this.storage.onSignIn(this.email?.value, this.password?.value)) {
-      this.route.navigate(['/home']);
+    if (this.storage.changePassword(this.email?.value, this.password?.value)) {
+      this.route.navigate(['/sign-in']);
     } else {
-      this.notifier.notify('error', 'Check login or password!');
-    }
-  }
-
-  showPassword() {
-    const forgotUser = this.storage.showPassword(this.email?.value);
-
-    if (forgotUser) {
-      this.notifier.notify('success', `Your password: ${forgotUser}`);
-    } else {
-      this.notifier.notify('error', `Check provided email!`);
+      this.notifier.notify('error', 'Check provided email!');
     }
   }
 

@@ -5,7 +5,8 @@ export interface Recepi {
   directions: string,
   photo: string,
   ingridiens: string[],
-  views: number,
+  views: string[],
   likes: string[],
-  comments: number
+  comments: number,
+  time: number
 }

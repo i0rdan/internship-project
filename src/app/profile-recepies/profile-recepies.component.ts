@@ -11,6 +11,7 @@ import { StorageService } from '../storage/storage.service';
 })
 export class ProfileRecepiesComponent implements OnDestroy, OnInit{
   recepies: Recepi[] = this.storage.getCurrUserInfo().recepies;
+  userMail: string = this.storage.getCurrUserInfo().email;
 
   $subscription: Subscription = new Subscription();
 
@@ -28,7 +29,7 @@ export class ProfileRecepiesComponent implements OnDestroy, OnInit{
   }
 
   updateRecepi(recepi: Recepi) {
-    this.storage.creationShowRecepie(true, recepi);
+    this.storage.updateRecepiShow(true, recepi);
   }
 
   likeUnlikeRecepi(author: string, label: string) {
@@ -45,5 +46,10 @@ export class ProfileRecepiesComponent implements OnDestroy, OnInit{
 
   ngOnDestroy() {
     this.$subscription.unsubscribe();
+  }
+
+  showRecepi(show: boolean, recepi: Recepi) {
+    this.storage.viewRecepi(recepi.author, recepi.title, this.userMail)
+    this.storage.showRecepi(show, recepi);
   }
 }
