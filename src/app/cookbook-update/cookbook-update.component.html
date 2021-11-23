@@ -24,6 +24,10 @@
             <label for="description">Description</label>
             <textarea type="text" id="cookbookDescriptionUpdate" formControlName="cookbookDescription"></textarea>
           </div>
+          <div class="update-details__type">
+            <label for="cookbookType">Cookbook type</label>
+            <input type="text" id="cookbookType" formControlName="cookbookType">
+          </div>
           <div class="update-details__recepies-in-book">
             <label for="recepies">Recepies</label>
             <input type="text" id="cookbookRecepiesUpdate" (keyup)="showFoundedRecepies($event)">

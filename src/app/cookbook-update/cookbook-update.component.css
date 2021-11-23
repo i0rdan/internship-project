@@ -63,6 +63,7 @@
 
 .update-details__title,
 .update-details__description,
+.update-details__type {
 .update-details__recepies-in-book {
     margin-top: 40px;
     display: flex;
@@ -73,7 +74,8 @@
 .update-details__title span,
 .update-details__error span,
 .update-details__description label,
-.update-details__recepies-in-book label {
+.update-details__recepies-in-book label,
+.update-details__type label {
     font-family: Montserrat;
     font-style: normal;
     font-weight: 600;
@@ -83,7 +85,8 @@
 
 .update-details__title input,
 .update-details__description textarea,
-.update-details__recepies-in-book input {
+.update-details__recepies-in-book input,
+.update-details__type input {
     background: #FFFFFF;
     border: 1px solid #DADADA;
     box-sizing: border-box;

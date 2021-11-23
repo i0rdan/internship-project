@@ -25,7 +25,8 @@ export class CookbookUpdateComponent implements OnInit, OnDestroy {
         Validators.maxLength(20)
       ]
     ],
-    cookbookDescription: ['']
+    cookbookDescription: [''],
+    cookbookType: ['']
   });
 
   constructor(
@@ -45,7 +46,8 @@ export class CookbookUpdateComponent implements OnInit, OnDestroy {
               Validators.maxLength(20)
             ]
           ],
-          cookbookDescription: book.description
+          cookbookDescription: book.description,
+          cookbookType: book.type
         });
         this.cookbookPhoto = book.photo;
         this.addRecepiNamesToBook = book.recepiNames;
@@ -66,6 +68,10 @@ export class CookbookUpdateComponent implements OnInit, OnDestroy {
 
   get cookbookDescription() {
     return this.cookbookUpdateForm.get('cookbookDescription');
+  }
+
+  get cookbookType() {
+    return this.cookbookUpdateForm.get('cookbookType');
   }
 
   checkValid(param: string): boolean | undefined {
@@ -131,7 +137,7 @@ export class CookbookUpdateComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(event: any): void {
-    if (this.storage.updateCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto, this.addRecepiNamesToBook)) {
+    if (this.storage.updateCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto, this.addRecepiNamesToBook, this.cookbookType?.value)) {
       this.notifier.notify('success', 'Successfully updated');
     } else {
       this.notifier.notify('error', 'You has cookbook with such label');

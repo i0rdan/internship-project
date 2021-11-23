@@ -21,6 +21,8 @@ import { RecepiCreationComponent } from './recepi-creation/recepi-creation.compo
 import { CookbookUpdateComponent } from './cookbook-update/cookbook-update.component';
 import { RecepiUpdateComponent } from './recepi-update/recepi-update.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AllRecepiesComponent } from './all-recepies/all-recepies.component';
+import { AllCookbooksComponent } from './all-cookbooks/all-cookbooks.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -79,6 +81,9 @@ const customNotifierOptions: NotifierOptions = {
     RecepiCreationComponent,
     CookbookUpdateComponent,
     RecepiUpdateComponent,
+    ChangePasswordComponent,
+    AllRecepiesComponent,
+    AllCookbooksComponent
     ChangePasswordComponent
   ],
   imports: [

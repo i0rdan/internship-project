@@ -24,6 +24,10 @@
             <label for="description">Description</label>
             <textarea type="text" id="cookbookDescription" formControlName="cookbookDescription"></textarea>
           </div>
+          <div class="creation-details__type">
+            <label for="typeBook">Cookbook type</label>
+            <input type="text" id="typeBook" formControlName="cookbookType">
+          </div>
           <div class="creation-details__recepies-in-book">
             <label for="recepies">Recepies</label>
             <input type="text" id="cookbookRecepies" (keyup)="showFoundedRecepies($event)">

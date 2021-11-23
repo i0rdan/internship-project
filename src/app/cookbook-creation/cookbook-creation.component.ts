@@ -24,7 +24,8 @@ export class CookbookCreationComponent {
         Validators.maxLength(20)
       ]
     ],
-    cookbookDescription: ['']
+    cookbookDescription: [''],
+    cookbookType: ['']
   });
 
   constructor(
@@ -39,6 +40,10 @@ export class CookbookCreationComponent {
 
   get cookbookDescription() {
     return this.cookbookCreationForm.get('cookbookDescription');
+  }
+
+  get cookbookType() {
+    return this.cookbookCreationForm.get('cookbookType');
   }
 
   checkValid(param: string): boolean | undefined {
@@ -104,6 +109,7 @@ export class CookbookCreationComponent {
   }
 
   onSubmit(event: any): void {
+    if (this.storage.addCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto, this.addRecepiNamesToBook, this.cookbookType?.value)) {
     if (this.storage.addCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto, this.addRecepiNamesToBook)) {
       window.location.reload();
     } else {

@@ -60,7 +60,8 @@
 .update-details__title,
 .update-details__description,
 .update-details__ingridients,
-.update-details__directions {
+.update-details__directions,
+.update-details__time {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
@@ -81,7 +82,8 @@
 .update-details__title span,
 .update-details__description label,
 .update-details__ingridients label,
-.update-details__directions label {
+.update-details__directions label,
+.update-details__time label {
     font-family: Montserrat;
     font-style: normal;
     font-weight: 600;
@@ -92,7 +94,8 @@
 .update-details__title input,
 .update-details__description textarea,
 .update-details__ingridients input,
-.update-details__directions textarea {
+.update-details__directions textarea,
+.update-details__time input {
     background: #FFFFFF;
     border: 1px solid #DADADA;
     box-sizing: border-box;

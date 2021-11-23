@@ -20,7 +20,8 @@ export class RecepiCreationComponent implements OnInit {
       ]
     ],
     recepiDescription: [''],
-    recepiDirections: ['']
+    recepiDirections: [''],
+    recepiTime: ['']
   });
 
   ngOnInit () {
@@ -50,6 +51,10 @@ export class RecepiCreationComponent implements OnInit {
 
   get recepiDirections() {
     return this.recepiCreationForm.get('recepiDirections');
+  }
+
+  get recepiTime() {
+    return this.recepiCreationForm.get('recepiTime');
   }
 
   checkValid(param: string): boolean | undefined {
@@ -89,7 +94,7 @@ export class RecepiCreationComponent implements OnInit {
   }
 
   onSubmit(event: any): void {
-    if (this.storage.addRecepi(this.recepiLabel?.value, this.recepiDescription?.value, this.recepiPhoto, this.recepiDirections?.value, this.recepiIngridients)) {
+    if (this.storage.addRecepi(this.recepiLabel?.value, this.recepiDescription?.value, this.recepiPhoto, this.recepiDirections?.value, this.recepiIngridients, this.recepiTime?.value)) {
       window.location.reload();
     } else {
       this.notifier.notify('error', 'You has recepi with such label');

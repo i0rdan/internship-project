@@ -178,7 +178,7 @@ export class StorageService {
       this.cookbookUpdate.next(cookbook);
       this.storage['updateCookbook'] = JSON.stringify(cookbook);
     }
-
+    
     show ? update?.classList.remove('hidden') : update?.classList.add('hidden');
   }
 
@@ -193,7 +193,7 @@ export class StorageService {
     show ? update?.classList.remove('hidden') : update?.classList.add('hidden');
   }
 
-  addCookbook(label: string, description: string, photo: string, recepiNames: string[]): boolean {
+  addCookbook(label: string, description: string, photo: string, recepiNames: string[], type: string): boolean {
     const newCookbook: Cookbook = {
       label: label,
       author: this.getCurrUserInfo().email,
@@ -202,7 +202,8 @@ export class StorageService {
       likes: [],
       comments: 0,
       views: 0,
-      recepiNames: recepiNames
+      recepiNames: recepiNames,
+      type: type
     };
 
     let currUser: User = JSON.parse(this.storage['currentUser']);
@@ -234,7 +235,7 @@ export class StorageService {
     return true;
   }
 
-  addRecepi(label: string, description: string, photo: string, directions: string, ingridients: string[]): boolean {
+  addRecepi(label: string, description: string, photo: string, directions: string, ingridients: string[], time: number): boolean {
     const newRecepi: Recepi = {
       title: label,
       author: this.getCurrUserInfo().email,
@@ -244,7 +245,8 @@ export class StorageService {
       ingridiens: ingridients,
       likes: [],
       comments: 0,
-      views: 0
+      views: 0,
+      time: time
     };
 
     let currUser: User = JSON.parse(this.storage['currentUser']);
@@ -276,11 +278,12 @@ export class StorageService {
     return true;
   }
 
-  updateCookbook(label: string, description: string, photo: string, addRecepiToBook: string[]): boolean {
+  updateCookbook(label: string, description: string, photo: string, addRecepiToBook: string[], type: string): boolean {
     let uploadCookbook: Cookbook = JSON.parse(this.storage['updateCookbook']);
 
     if (this.deleteCookbook(uploadCookbook)) {
-      this.addCookbook(label, description, photo, addRecepiToBook);
+      this.addCookbook(label, description, photo, addRecepiToBook, type);
+
       this.storage.removeItem('updateCookbook');
 
       return true;
@@ -290,11 +293,13 @@ export class StorageService {
     }
   }
 
-  updateRecepi(label: string, description: string, photo: string, directions: string, ingridients: string[]): boolean {
+  updateRecepi(label: string, description: string, photo: string, directions: string, ingridients: string[], time: number): boolean {
     let uploadRecepi: Recepi = JSON.parse(this.storage['updateRecepi']);
 
     if (this.deleteRecepi(uploadRecepi)) {
-      this.addRecepi(label, description, photo, directions, ingridients);
+
+      this.addRecepi(label, description, photo, directions, ingridients, time);
+      
       this.storage.removeItem('updateRecepi');
 
       return true;
@@ -427,14 +432,14 @@ export class StorageService {
   }
 
   showPassword(email: string): string {
-    const indexOfUser = this.findIndexOfUser(email);
+    const indexOfUser: number = this.findIndexOfUser(email);
     const users: User[] = JSON.parse(this.storage['user']);
 
     return indexOfUser >= 0 ? users[indexOfUser].password : '';
   }
 
-  changePassword(email: string, password: string) {
-    const indexOfUser = this.findIndexOfUser(email);
+  changePassword(email: string, password: string): boolean {
+    const indexOfUser: number = this.findIndexOfUser(email);
     const users: User[] = JSON.parse(this.storage['user']);
 
     if (indexOfUser >= 0) {
@@ -444,5 +449,27 @@ export class StorageService {
     } else {
       return false;
     }
+  }
+  
+  getAllCookbooks(): Cookbook[] {
+    let allBooks: Cookbook[] = []
+    const users: User[] = JSON.parse(this.storage['user']);
+
+    users.forEach(user => {
+      allBooks = allBooks.concat(user.cookbooks);
+    });
+
+    return allBooks;
+  }
+
+  getAllResepies(): Recepi[] {
+    let allRecepies: Recepi[] = []
+    const users: User[] = JSON.parse(this.storage['user']);
+
+    users.forEach(user => {
+      allRecepies = allRecepies.concat(user.recepies);
+    });
+
+    return allRecepies;
   }
 }

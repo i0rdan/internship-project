@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProfileCookbooksComponent implements OnInit, OnDestroy{
   cookbooks: Cookbook[] = this.storage.getCurrUserInfo().cookbooks;
-
+  currUserMail: string = this.storage.getCurrUserInfo().email;
   $subscription: Subscription = new Subscription();
   
   constructor(
@@ -32,7 +32,7 @@ export class ProfileCookbooksComponent implements OnInit, OnDestroy{
   }
 
   likeUnlikeBook(author: string, label: string) {
-    this.storage.likeUnlikeBook(author, label, this.storage.getCurrUserInfo().email);
+    this.storage.likeUnlikeBook(author, label, this.currUserMail);
   }
 
   ngOnInit() {

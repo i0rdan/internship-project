@@ -60,7 +60,8 @@
 .creation-details__title,
 .creation-details__description,
 .creation-details__ingridients,
-.creation-details__directions {
+.creation-details__directions,
+.creation-details__time {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
@@ -81,7 +82,8 @@
 .creation-details__title span,
 .creation-details__description label,
 .creation-details__ingridients label,
-.creation-details__directions label {
+.creation-details__directions label,
+.creation-details__time label {
     font-family: Montserrat;
     font-style: normal;
     font-weight: 600;
@@ -92,7 +94,8 @@
 .creation-details__title input,
 .creation-details__description textarea,
 .creation-details__ingridients input,
-.creation-details__directions textarea {
+.creation-details__directions textarea,
+.creation-details__time input {
     background: #FFFFFF;
     border: 1px solid #DADADA;
     box-sizing: border-box;

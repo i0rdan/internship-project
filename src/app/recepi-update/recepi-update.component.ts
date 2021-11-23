@@ -22,7 +22,8 @@ export class RecepiUpdateComponent implements OnInit, OnDestroy {
       ]
     ],
     recepiDescription: [''],
-    recepiDirections: ['']
+    recepiDirections: [''],
+    recepiTime: ['']
   });
 
   ngOnInit () {
@@ -48,7 +49,8 @@ export class RecepiUpdateComponent implements OnInit, OnDestroy {
             ]
           ],
           recepiDescription: [recepi.description],
-          recepiDirections: [recepi.directions]
+          recepiDirections: [recepi.directions],
+          recepiTime: [recepi.time]
         });
       })
     );
@@ -76,6 +78,9 @@ export class RecepiUpdateComponent implements OnInit, OnDestroy {
     return this.recepiUpdateForm.get('recepiDirections');
   }
 
+  get recepiTime() {
+    return this.recepiUpdateForm.get('recepiTime');
+  }
   checkValid(param: string): boolean | undefined {
     switch (param) {
       case 'showLabelErr':
@@ -113,7 +118,7 @@ export class RecepiUpdateComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(event: any): void {
-    if (this.storage.updateRecepi(this.recepiLabel?.value, this.recepiDescription?.value, this.recepiPhoto, this.recepiDirections?.value, this.recepiIngridients)) {
+    if (this.storage.updateRecepi(this.recepiLabel?.value, this.recepiDescription?.value, this.recepiPhoto, this.recepiDirections?.value, this.recepiIngridients, this.recepiTime?.value)) {
       this.notifier.notify('success', 'Successfully updatet');
     } else {
       this.notifier.notify('error', 'You has recepi with such label');
