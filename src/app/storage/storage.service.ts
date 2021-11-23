@@ -187,7 +187,7 @@ export class StorageService {
       this.cookbookUpdate.next(cookbook);
       this.storage['updateCookbook'] = JSON.stringify(cookbook);
     }
-
+    
     show ? update?.classList.remove('hidden') : update?.classList.add('hidden');
   }
 
@@ -312,6 +312,7 @@ export class StorageService {
 
     if (this.deleteCookbook(uploadCookbook)) {
       this.addCookbook(label, description, photo, addRecepiToBook, type);
+
       this.storage.removeItem('updateCookbook');
 
       return true;
@@ -326,6 +327,7 @@ export class StorageService {
 
     if (this.deleteRecepi(uploadRecepi)) {
       this.addRecepi(label, description, photo, directions, ingridients, time);
+
       this.storage.removeItem('updateRecepi');
 
       return true;
@@ -498,7 +500,7 @@ export class StorageService {
 
     return allRecepies;
   }
-
+  
   viewRecepi(author: string, label: string, whoViewed: string) {
     const users: User[] = JSON.parse(this.storage['user']);
     let index: number = this.findIndexOfUser(author);

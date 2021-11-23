@@ -81,7 +81,7 @@ export class AllRecepiesComponent implements OnInit {
   clearFilter() {
     window.location.reload();
   }
-
+  
   showRecepi(show: boolean, recepi: Recepi) {
     this.storage.viewRecepi(recepi.author, recepi.title, this.currUserMail)
     this.storage.showRecepi(show, recepi);
