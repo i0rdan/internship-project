@@ -26,7 +26,7 @@ const routes: Routes = [
     component: ChangePasswordComponent
   },
   {
-    path: 'recepies',
+    path: 'recepies/:name',
     component: AllRecepiesComponent
   },
   {

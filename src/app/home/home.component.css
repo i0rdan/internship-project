@@ -166,6 +166,10 @@
 .card__picture {
     margin-top: 16px;
     border-radius: 50px 10px;
+    width: 240px;
+    height: 240px;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .card__main-info {

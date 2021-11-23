@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StorageService } from '../storage/storage.service';
+import { User } from '../user-interface/user-interface';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,9 @@ import { StorageService } from '../storage/storage.service';
   providers: [StorageService]
 })
 export class HeaderComponent implements OnInit, OnDestroy{
-  currUser = this.storage.getCurrUserInfo();
+  currUser: User = this.storage.getCurrUserInfo();
+  allRecepi: string[] = [];
+  allCookbooks: string[] = [];
   
   $subscription: Subscription = new Subscription();
 
@@ -25,5 +28,18 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
   ngOnDestroy() {
     this.$subscription.unsubscribe();
+  }
+
+  showFoundedRecepies(event: any) {
+    if (event.target.value < 3) {
+      this.allRecepi = [];
+    } else {
+      this.allRecepi = this.storage.getCurrUserRecepiesNames(event.target.value, true);
+    }
+  }
+
+  showRecepi(recepiName: string) {
+    this.allRecepi = [];
+    this.storage.showRecepi(true, this.storage.getRecepiByTitle(recepiName));
   }
 }
