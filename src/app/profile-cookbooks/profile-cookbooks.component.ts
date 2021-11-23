@@ -15,7 +15,7 @@ export class ProfileCookbooksComponent implements OnInit, OnDestroy{
   $subscription: Subscription = new Subscription();
   
   constructor(
-    private storage: StorageService,
+    public storage: StorageService,
     private notifier: NotifierService,
   ) { }
 
@@ -45,5 +45,10 @@ export class ProfileCookbooksComponent implements OnInit, OnDestroy{
 
   ngOnDestroy() {
     this.$subscription.unsubscribe();
+  }
+
+  showCookbook(show: boolean, cookbook: Cookbook) {
+    this.storage.viewCookbook(cookbook.author, cookbook.label, this.currUserMail)
+    this.storage.showCookbook(show, cookbook);
   }
 }

@@ -85,7 +85,7 @@ export class AllCookbooksComponent implements OnInit, OnDestroy {
     switch (option) {
       case 'popularity':
         return books.sort((book1, book2) => {
-          return book2.views - book1.views;
+          return book2.views.length - book1.views.length;
         });
       case 'likes':
         return books.sort((book1, book2) => {
@@ -106,5 +106,10 @@ export class AllCookbooksComponent implements OnInit, OnDestroy {
 
   clearFilter() {
     window.location.reload();
+  }
+
+  showCookbook(show: boolean, cookbook: Cookbook) {
+    this.storage.viewCookbook(cookbook.author, cookbook.label, this.currUserMail)
+    this.storage.showCookbook(show, cookbook);
   }
 }

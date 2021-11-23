@@ -110,7 +110,6 @@ export class CookbookCreationComponent {
 
   onSubmit(event: any): void {
     if (this.storage.addCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto, this.addRecepiNamesToBook, this.cookbookType?.value)) {
-    if (this.storage.addCookbook(this.cookbookLabel?.value, this.cookbookDescription?.value, this.cookbookPhoto, this.addRecepiNamesToBook)) {
       window.location.reload();
     } else {
       this.notifier.notify('error', 'You has cookbook with such label');

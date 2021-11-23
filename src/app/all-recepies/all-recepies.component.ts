@@ -15,8 +15,8 @@ export class AllRecepiesComponent implements OnInit {
   $subscription: Subscription = new Subscription();
 
   constructor(
-    public storage: StorageService,
-    public router: Router
+    private storage: StorageService,
+    private router: Router
   ) { }
 
   likeUnlikeRecepi(author: string, label: string) {
@@ -59,7 +59,7 @@ export class AllRecepiesComponent implements OnInit {
     switch (option) {
       case 'popularity':
         return recepies.sort((rec1, rec2) => {
-          return rec2.views - rec1.views;
+          return rec2.views.length - rec1.views.length;
         });
       case 'likes':
         return recepies.sort((rec1, rec2) => {
@@ -80,5 +80,10 @@ export class AllRecepiesComponent implements OnInit {
 
   clearFilter() {
     window.location.reload();
+  }
+  
+  showRecepi(show: boolean, recepi: Recepi) {
+    this.storage.viewRecepi(recepi.author, recepi.title, this.currUserMail)
+    this.storage.showRecepi(show, recepi);
   }
 }

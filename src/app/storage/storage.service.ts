@@ -12,7 +12,9 @@ export class StorageService {
   currUser: Subject<User> = new Subject();
   users: Subject<User[]> = new Subject();
   cookbookUpdate: Subject<Cookbook> = new Subject();
+  cookbookView: Subject<Cookbook> = new Subject();
   recepiUpdate: Subject<Recepi> = new Subject();
+  recepiView: Subject<Recepi> = new Subject();
 
   constructor() {}
 
@@ -129,9 +131,16 @@ export class StorageService {
     return true;
   }
   
-  getRecepiByTitle(label: string): Recepi {
-    const recepies: Recepi[] = this.getCurrUserInfo().recepies;
+  getRecepiByTitle(label: string, author?: string): Recepi {
+    let recepies: Recepi[] = this.getCurrUserInfo().recepies;
+    const users: User[] = JSON.parse(this.storage['user']);
     let index: number = -1;
+
+    if (author) {
+      const indexOfUser: number = this.findIndexOfUser(author);
+      recepies = users[indexOfUser].recepies;
+    }
+
     for(let i = 0; i < recepies.length; i++) {
       if (recepies[i].title === label) {
         index = i;
@@ -193,6 +202,26 @@ export class StorageService {
     show ? update?.classList.remove('hidden') : update?.classList.add('hidden');
   }
 
+  showRecepi(show: boolean, recepi?: Recepi): void {
+    const recepiView = document.getElementById('recepiDetails');
+
+    if (recepi) {
+      this.recepiView.next(recepi);
+    }
+
+    show ? recepiView?.classList.remove('hidden') : recepiView?.classList.add('hidden');
+  }
+
+  showCookbook(show: boolean, cookbook?: Cookbook): void {
+    const cookbookView = document.getElementById('cookbookDetails');
+
+    if (cookbook) {
+      this.cookbookView.next(cookbook);
+    }
+
+    show ? cookbookView?.classList.remove('hidden') : cookbookView?.classList.add('hidden');
+  }
+
   addCookbook(label: string, description: string, photo: string, recepiNames: string[], type: string): boolean {
     const newCookbook: Cookbook = {
       label: label,
@@ -201,7 +230,7 @@ export class StorageService {
       photo: photo,
       likes: [],
       comments: 0,
-      views: 0,
+      views: [],
       recepiNames: recepiNames,
       type: type
     };
@@ -245,7 +274,7 @@ export class StorageService {
       ingridiens: ingridients,
       likes: [],
       comments: 0,
-      views: 0,
+      views: [],
       time: time
     };
 
@@ -297,9 +326,8 @@ export class StorageService {
     let uploadRecepi: Recepi = JSON.parse(this.storage['updateRecepi']);
 
     if (this.deleteRecepi(uploadRecepi)) {
-
       this.addRecepi(label, description, photo, directions, ingridients, time);
-      
+
       this.storage.removeItem('updateRecepi');
 
       return true;
@@ -450,7 +478,7 @@ export class StorageService {
       return false;
     }
   }
-  
+
   getAllCookbooks(): Cookbook[] {
     let allBooks: Cookbook[] = []
     const users: User[] = JSON.parse(this.storage['user']);
@@ -471,5 +499,51 @@ export class StorageService {
     });
 
     return allRecepies;
+  }
+  
+  viewRecepi(author: string, label: string, whoViewed: string) {
+    const users: User[] = JSON.parse(this.storage['user']);
+    let index: number = this.findIndexOfUser(author);
+
+    users[index].recepies.forEach(recepi => {
+      if (recepi.title === label && !recepi.views.includes(whoViewed)) {
+        recepi.views.push(whoViewed);
+      }
+    });
+
+    if (author === whoViewed) {
+      const currUser = users[index];
+
+      this.storage['currentUser'] = JSON.stringify(currUser);
+
+      this.currUser.next(currUser);
+    }
+
+    this.storage['user'] = JSON.stringify(users);
+
+    this.users.next(users);
+  }
+
+  viewCookbook(author: string, label: string, whoViewed: string) {
+    const users: User[] = JSON.parse(this.storage['user']);
+    let index: number = this.findIndexOfUser(author);
+
+    users[index].cookbooks.forEach(cookbook => {
+      if (cookbook.label === label && !cookbook.views.includes(whoViewed)) {
+        cookbook.views.push(whoViewed);
+      }
+    });
+
+    if (author === whoViewed) {
+      const currUser = users[index];
+
+      this.storage['currentUser'] = JSON.stringify(currUser);
+
+      this.currUser.next(currUser);
+    }
+
+    this.storage['user'] = JSON.stringify(users);
+
+    this.users.next(users);
   }
 }
