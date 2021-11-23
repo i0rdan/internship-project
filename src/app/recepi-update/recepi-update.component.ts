@@ -81,7 +81,6 @@ export class RecepiUpdateComponent implements OnInit, OnDestroy {
   get recepiTime() {
     return this.recepiUpdateForm.get('recepiTime');
   }
-
   checkValid(param: string): boolean | undefined {
     switch (param) {
       case 'showLabelErr':

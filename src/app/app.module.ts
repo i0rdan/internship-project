@@ -84,6 +84,7 @@ const customNotifierOptions: NotifierOptions = {
     ChangePasswordComponent,
     AllRecepiesComponent,
     AllCookbooksComponent
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

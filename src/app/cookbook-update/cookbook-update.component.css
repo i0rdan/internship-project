@@ -63,8 +63,8 @@
 
 .update-details__title,
 .update-details__description,
-.update-details__recepies-in-book,
 .update-details__type {
+.update-details__recepies-in-book {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
