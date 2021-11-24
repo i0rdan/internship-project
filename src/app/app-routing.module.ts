@@ -30,7 +30,7 @@ const routes: Routes = [
     component: AllRecepiesComponent
   },
   {
-    path: 'cookbooks', 
+    path: 'cookbooks/:name', 
     component: AllCookbooksComponent
   },
   {

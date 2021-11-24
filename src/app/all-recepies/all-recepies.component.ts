@@ -12,7 +12,7 @@ import { StorageService } from '../storage/storage.service';
 export class AllRecepiesComponent implements OnInit {
   allRecepi: Recepi[] = this.storage.getAllResepies();
   currUserMail: string = this.storage.getCurrUserInfo().email;
-  name: string = ''
+  name: string = '';
   $subscription: Subscription = new Subscription();
 
   constructor(
@@ -34,19 +34,12 @@ export class AllRecepiesComponent implements OnInit {
         this.filter();
       })
     );
-    this.router.params.subscribe(params => {
-      this.name = params['name'];
-    });
-    // this.filter();
-    // switch (this.name) {
-    //   case 'popularity':
-    //     return this.sortRecepi(this.allRecepi, 'popularity')
-    //   case 'likes':
-    //     return this.sortRecepi(this.allRecepi, 'likes')
-    //   case 'comments':
-    //     return this.sortRecepi(this.allRecepi, 'comments')
-    //   default:
-    // }
+    this.$subscription.add(
+      this.router.params.subscribe(params => {
+        this.name = params['name'];
+        this.sortRecepi(this.allRecepi, this.name);
+      })
+    );
   }
 
   filter() {

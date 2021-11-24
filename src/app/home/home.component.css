@@ -18,6 +18,10 @@
     flex-direction: column;
 }
 
+.liked svg path {
+    fill: #FFBC01;
+}
+
 .find-recepies__main-label p {
     max-width: 808px;
     font-family: Montserrat;
@@ -432,7 +436,6 @@
 
 .carousel__gallery {
     width: 100%;
-    overflow: hidden;
     display: flex;
     justify-content: space-around;
 }
@@ -455,6 +458,10 @@
 .trending-card__picture {
     margin-top: 16px;
     border-radius: 50px 10px;
+    width: 344px;
+    height: 344px;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .trending-card__main-info-trend-card {

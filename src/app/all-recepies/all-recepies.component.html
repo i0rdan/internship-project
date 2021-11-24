@@ -30,8 +30,8 @@
         </div>
         <div class="recepies-show">
             <div class="recepies-show__navigation">
-                <a routerLink="/cookbooks">Cookbooks</a>
-                <a routerLink="/recepies" class="navigation__link-active">Recepies</a>
+                <a routerLink="/cookbooks/all">Cookbooks</a>
+                <a routerLink="/recepies/all" class="navigation__link-active">Recepies</a>
             </div>
             <div class="recepies-show__recepies-cards" *ngIf="allRecepi.length">
                 <div class="recepies-cards__card" *ngFor="let recepi of allRecepi">
