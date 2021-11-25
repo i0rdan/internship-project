@@ -38,8 +38,8 @@
         </div>
         <div class="cookbooks-show">
             <div class="cookbooks-show__navigation">
-                <a routerLink="/cookbooks" class="navigation__link-active">Cookbooks</a>
-                <a routerLink="/recepies">Recepies</a>
+                <a routerLink="/cookbooks/all" class="navigation__link-active">Cookbooks</a>
+                <a routerLink="/recepies/all">Recepies</a>
             </div>
             <div class="cookbooks-show__cookbooks-cards" *ngIf="allBooks.length">
                 <div class="cookbooks-cards__card" *ngFor="let cookbook of allBooks">

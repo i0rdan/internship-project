@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Cookbook } from '../cookbook-interface/cookbook-interface';
 import { StorageService } from '../storage/storage.service';
@@ -12,11 +12,13 @@ import { StorageService } from '../storage/storage.service';
 export class AllCookbooksComponent implements OnInit, OnDestroy {
   allBooks: Cookbook[] = this.storage.getAllCookbooks();
   currUserMail: string = this.storage.getCurrUserInfo().email;
+  name: string = '';
   $subscription: Subscription = new Subscription();
 
   constructor(
     public storage: StorageService,
-    public router: Router
+    public router: Router,
+    public route: ActivatedRoute
   ) { }
 
   likeUnlikeBook(author: string, label: string) {
@@ -33,6 +35,49 @@ export class AllCookbooksComponent implements OnInit, OnDestroy {
         this.filter();
       })
     );
+    this.$subscription.add(
+      this.route.params.subscribe(params => {
+        this.name = params['name'];
+        this.paramsFilter(this.name);
+      })
+    );
+  }
+
+  paramsFilter(option: string) {
+    const allBooks: Cookbook[] = this.storage.getAllCookbooks();
+    let filterBooks: Cookbook[] = [];
+
+    if (option.includes('#')) {
+      option = option.split('#')[1];
+      filterBooks = filterBooks.concat(allBooks.filter(book => {
+        return book.label.includes(option.toLowerCase());
+      }));
+    } else {
+      filterBooks = filterBooks.concat(allBooks.filter(book => {
+        switch(option) {
+          case 'vegeterian': 
+            return book.type.toLowerCase() === 'vegeterian';
+          case 'mexican': 
+            return book.type.toLowerCase() === 'mexican';
+          case 'greecekithcen': 
+            return book.type.toLowerCase() === 'greece';
+          case 'italypizza': 
+            return book.type.toLowerCase() === 'italy pizza';
+          case 'philippines': 
+            return book.type.toLowerCase() === 'philippines';
+          case 'japansushi': 
+            return book.type.toLowerCase() === 'japan sushi';
+          default: 
+            return false;
+        }
+      }));
+    }
+
+    this.allBooks = filterBooks;
+
+    if (option === 'all') {
+      this.allBooks = this.storage.getAllCookbooks();
+    }
   }
 
   filter() {

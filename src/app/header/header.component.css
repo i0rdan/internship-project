@@ -97,3 +97,28 @@
 .search input {
     cursor: pointer;
 }
+
+.creation-details__variants {
+    top: 75px;
+    position: absolute;
+    width: 260px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+}
+
+.creation-details__variants p {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    color: #181818;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.creation-details__variants p:hover {
+    background: #EDEDED;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+}

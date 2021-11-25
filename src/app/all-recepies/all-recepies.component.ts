@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Recepi } from '../recepi-interface/recepi-interface';
 import { StorageService } from '../storage/storage.service';
@@ -12,11 +12,12 @@ import { StorageService } from '../storage/storage.service';
 export class AllRecepiesComponent implements OnInit {
   allRecepi: Recepi[] = this.storage.getAllResepies();
   currUserMail: string = this.storage.getCurrUserInfo().email;
+  name: string = '';
   $subscription: Subscription = new Subscription();
 
   constructor(
     private storage: StorageService,
-    private router: Router
+    private router: ActivatedRoute
   ) { }
 
   likeUnlikeRecepi(author: string, label: string) {
@@ -31,6 +32,12 @@ export class AllRecepiesComponent implements OnInit {
           this.allRecepi = this.allRecepi.concat(user.recepies);
         });
         this.filter();
+      })
+    );
+    this.$subscription.add(
+      this.router.params.subscribe(params => {
+        this.name = params['name'];
+        this.sortRecepi(this.allRecepi, this.name);
       })
     );
   }
@@ -81,7 +88,7 @@ export class AllRecepiesComponent implements OnInit {
   clearFilter() {
     window.location.reload();
   }
-  
+
   showRecepi(show: boolean, recepi: Recepi) {
     this.storage.viewRecepi(recepi.author, recepi.title, this.currUserMail)
     this.storage.showRecepi(show, recepi);
