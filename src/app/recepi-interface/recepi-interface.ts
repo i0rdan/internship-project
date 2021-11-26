@@ -1,3 +1,5 @@
+import { Comment } from "../comment-interface/comment-interface";
+
 export interface Recepi {
   title: string,
   author: string,
@@ -7,6 +9,6 @@ export interface Recepi {
   ingridiens: string[],
   views: string[],
   likes: string[],
-  comments: number,
+  comments: Comment[],
   time: number
 }
