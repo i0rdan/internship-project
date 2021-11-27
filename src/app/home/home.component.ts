@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit{
   $subscription: Subscription = new Subscription();
   
   commentedRecepies: Recepi[] = this.allRecepies.sort((rec1, rec2) => {
-    return rec2.comments - rec1.comments;
+    return rec2.comments.length - rec1.comments.length;
   })
   .slice(0, 3);
 
@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit{
         });
 
         this.commentedRecepies = this.allRecepies.sort((rec1, rec2) => {
-          return rec2.comments - rec1.comments;
+          return rec2.comments.length - rec1.comments.length;
         })
         .slice(0, 3);
 

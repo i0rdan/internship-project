@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Comment } from '../comment-interface/comment-interface';
 import { Cookbook } from '../cookbook-interface/cookbook-interface';
 import { Recepi } from '../recepi-interface/recepi-interface';
 import { User } from '../user-interface/user-interface';
@@ -234,7 +235,7 @@ export class StorageService {
       description: description,
       photo: photo,
       likes: [],
-      comments: 0,
+      comments: [],
       views: [],
       recepiNames: recepiNames,
       type: type
@@ -278,7 +279,7 @@ export class StorageService {
       photo: photo,
       ingridiens: ingridients,
       likes: [],
-      comments: 0,
+      comments: [],
       views: [],
       time: time
     };
@@ -538,6 +539,149 @@ export class StorageService {
     });
 
     if (author === whoViewed) {
+      const currUser = users[index];
+
+      this.storage['currentUser'] = JSON.stringify(currUser);
+
+      this.currUser.next(currUser);
+    }
+
+    this.storage['user'] = JSON.stringify(users);
+
+    this.users.next(users);
+  }
+
+  cloneBook(cookbook: Cookbook): boolean {
+    const currUserRecepiNames: string[] = this.getCurrUserRecepiesNames();
+    const currUserCookbooks: Cookbook[] = this.getCurrUserInfo().cookbooks;
+    let index = false;
+
+    cookbook.recepiNames.forEach(recepiName => {
+      if (currUserRecepiNames.includes(recepiName)) {
+        index = true;
+      }
+    });
+
+    currUserCookbooks.forEach(book => {
+      if (book.label === cookbook.label) {
+        index = true;
+      }
+    })
+
+    if (index) {
+      return false;
+    } else {
+      cookbook.recepiNames.forEach(rec => {
+        const recepiToAdd = this.getRecepiByTitle(rec, cookbook.author)
+
+        this.addRecepi(
+          recepiToAdd.title, 
+          recepiToAdd.description, 
+          recepiToAdd.photo, 
+          recepiToAdd.directions, 
+          recepiToAdd.ingridiens, 
+          recepiToAdd.time
+        );
+      });
+
+      this.addCookbook(cookbook.label, cookbook.description, cookbook.photo, cookbook.recepiNames, cookbook.type);
+      
+      return true;
+    }
+  }
+
+  addCommentForRecepi(comment: Comment, recepi: Recepi) {
+    const users: User[] = JSON.parse(this.storage['user']);
+    let index: number = this.findIndexOfUser(recepi.author);
+
+    users[index].recepies.forEach(elem => {
+      if (elem.title === recepi.title) {
+        elem.comments.push(comment);
+
+        this.recepiView.next(elem);
+      }
+    })
+
+    if (recepi.author === comment.authorUsername) {
+      const currUser = users[index];
+
+      this.storage['currentUser'] = JSON.stringify(currUser);
+
+      this.currUser.next(currUser);
+    }
+
+    this.storage['user'] = JSON.stringify(users);
+
+    this.users.next(users);
+  }
+
+  deleteCommentForRecepi(comment: Comment, recepi: Recepi) {
+    const users: User[] = JSON.parse(this.storage['user']);
+    let index: number = this.findIndexOfUser(recepi.author);
+
+    users[index].recepies.forEach(elem => {
+      if (elem.title === recepi.title) {
+        const indexOfComment = elem.comments.indexOf(comment);
+
+        elem.comments.splice(indexOfComment, 1);
+
+        this.recepiView.next(elem);
+      }
+    })
+
+    if (recepi.author === comment.authorUsername) {
+      const currUser = users[index];
+
+      this.storage['currentUser'] = JSON.stringify(currUser);
+
+      this.currUser.next(currUser);
+    }
+
+    this.storage['user'] = JSON.stringify(users);
+
+    this.users.next(users);
+  }
+
+  addCommentForCookbook(comment: Comment, cookbook: Cookbook) {
+    const users: User[] = JSON.parse(this.storage['user']);
+    let index: number = this.findIndexOfUser(cookbook.author);
+
+    users[index].cookbooks.forEach(elem => {
+      if (elem.label === cookbook.label) {
+        elem.comments.push(comment);
+
+        this.cookbookView.next(elem);
+      }
+    })
+
+    if (cookbook.author === comment.authorUsername) {
+      const currUser = users[index];
+
+      this.storage['currentUser'] = JSON.stringify(currUser);
+
+      this.currUser.next(currUser);
+    }
+
+    this.storage['user'] = JSON.stringify(users);
+
+    this.users.next(users);
+  }
+
+  deleteCommentForCookbook(comment: Comment, cookbook: Cookbook) {
+    const users: User[] = JSON.parse(this.storage['user']);
+    let index: number = this.findIndexOfUser(cookbook.author);
+
+    users[index].cookbooks.forEach(elem => {
+      if (elem.label === cookbook.label) {
+        const indexOfComment = elem.comments.indexOf(comment);
+
+        elem.comments.splice(indexOfComment, 1);
+
+        this.cookbookView.next(elem);
+      }
+    })
+
+    if (cookbook.author === comment.authorUsername) {
       const currUser = users[index];
 
       this.storage['currentUser'] = JSON.stringify(currUser);
