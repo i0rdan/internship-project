@@ -10,7 +10,8 @@
 .cookbooks,
 .search,
 .create-button,
-.signIn {
+.signIn,
+.admin-page {
     display: flex;
     align-items: center;
 }
@@ -21,7 +22,8 @@
 
 .recepies a,
 .cookbooks a,
-.signIn a{
+.signIn a,
+.admin-page a {
     font-family: Nunito;
     font-style: normal;
     font-weight: normal;
@@ -81,7 +83,8 @@
 
 .recepies a:hover,
 .cookbooks a:hover,
-.signIn a:hover{
+.signIn a:hover,
+.admin-page a:hover {
     cursor: pointer;
     color: #FFBC01;
     text-decoration: underline;

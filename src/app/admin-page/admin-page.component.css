@@ -1,0 +1,98 @@
+.wrapper {
+    padding: 0 1.4%;
+    max-width: 1680px;
+    margin: 0 auto;
+}
+
+.admin-show {
+    padding: 0 9%;
+}
+
+.admin-show p {
+    margin-top: 20px;
+    text-decoration: none;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 24px;
+    color: #181818; 
+}
+
+.admin-show__navigation {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.navigation-right {
+    display: flex;
+    width: 578px;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.navigation-right a {
+    text-decoration: none;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #181818;
+    display: flex;
+    align-self: flex-end;
+}
+
+.navigation-right a:hover {
+    color: #FFBC01;
+}
+
+.navigation__link-active {
+    border-bottom: 2px solid #FFBC01;
+}
+
+.navigation-right__active-users {
+    color: green;
+}
+
+.navigation-right__blocked-users {
+    color: red;
+}
+
+.navigation-right__deleted-users {
+    color: black;
+}
+
+@media screen and (min-width: 787px) and (max-width: 1259px) {
+    .admin-show__navigation {
+        flex-direction: column;
+    }
+
+    .navigation-right {
+        width: 100%;
+        flex-direction: column;
+        margin: 20px 0;
+    }
+
+    .navigation-right a {
+        align-self: flex-start;
+    }
+}
+
+@media screen and (min-width: 0px) and (max-width: 786px) {
+    .admin-show__navigation {
+        flex-direction: column;
+    }
+
+    .navigation-right {
+        width: 100%;
+        flex-direction: column;
+        margin: 20px 0;
+    }
+
+    .navigation-right a {
+        align-self: flex-start;
+    }
+}

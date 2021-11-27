@@ -30,6 +30,9 @@
     <div class="signIn">
         <a routerLink="/profile/cookbooks">{{ currUser.username }}</a>
     </div>
+    <div class="admin-page" *ngIf="currUser.admin">
+        <a routerLink="/admin/cookbooks"> Admin page</a>
+    </div>
 </div>
 <app-cookbook-creation></app-cookbook-creation>
 <app-recepi-creation></app-recepi-creation>

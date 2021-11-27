@@ -36,7 +36,7 @@ export class StorageService {
     let matched: User | null = null;
 
     users.forEach(element => {
-      if(element.email === email && element.password === password) {
+      if(element.email === email && element.password === password && element.state === 'active') {
         matched = element;
       }
     });
@@ -51,7 +51,9 @@ export class StorageService {
       password: password,
       photo: '',
       cookbooks: [],
-      recepies: []
+      recepies: [],
+      state: 'active',
+      admin: false
     }
 
     if (this.checkCurrUsersLogin(email)) {
@@ -74,6 +76,10 @@ export class StorageService {
 
   getCurrUserInfo(): User {
     return JSON.parse(this.storage['currentUser']);
+  }
+
+  getAllUsersInfo(): User[] {
+    return JSON.parse(this.storage['user']);
   }
 
   checkCurrUsersLogin(email: string): boolean {
@@ -344,24 +350,25 @@ export class StorageService {
   deleteCookbook(cookbook: Cookbook): boolean {
     let currUser: User = JSON.parse(this.storage['currentUser']);
     let indexCookbook: number = 0;
+    let users: User[] = JSON.parse(this.storage['user']);
+    let index: number = this.findIndexOfUser(cookbook.author);
 
-    for (let i = 0; i < currUser.cookbooks.length; i++) {
-      if (currUser.cookbooks[i].label === cookbook.label) {
+    for (let i = 0; i < users[index].cookbooks.length; i++) {
+      if (users[index].cookbooks[i].label === cookbook.label) {
         indexCookbook = i;
       }
     }
 
-    currUser.cookbooks.splice(indexCookbook, 1);
+    users[index].cookbooks.splice(indexCookbook, 1);
 
-    let users: User[] = JSON.parse(this.storage['user']);
-    let index: number = this.findIndexOfUser(currUser.email);
+    if (cookbook.author = currUser.email) {
+      this.storage['currentUser'] = JSON.stringify(users[index]);
 
-    users.splice(index, 1, currUser);
+      this.currUser.next(users[index]);
+    }
 
     this.storage['user'] = JSON.stringify(users);
-    this.storage['currentUser'] = JSON.stringify(currUser);
 
-    this.currUser.next(currUser);
     this.users.next(users);
     
     return true;
@@ -369,16 +376,18 @@ export class StorageService {
 
   deleteRecepi(recepi: Recepi): boolean {
     let currUser: User = JSON.parse(this.storage['currentUser']);
+    let users: User[] = JSON.parse(this.storage['user']);
+    let index: number = this.findIndexOfUser(recepi.author);
     let indexRecepi: number = 0;
 
-    for (let i = 0; i < currUser.recepies.length; i++) {
-      if (currUser.recepies[i].title === recepi.title) {
+    for (let i = 0; i < users[index].recepies.length; i++) {
+      if (users[index].recepies[i].title === recepi.title) {
         indexRecepi = i;
       }
     }
 
-    currUser.recepies.splice(indexRecepi, 1);
-    currUser.cookbooks.forEach(book => {
+    users[index].recepies.splice(indexRecepi, 1);
+    users[index].cookbooks.forEach(book => {
       const indexOfRecepi = book.recepiNames.indexOf(recepi.title);
 
       if (indexOfRecepi >= 0) {
@@ -386,15 +395,14 @@ export class StorageService {
       }
     });
 
-    let users: User[] = JSON.parse(this.storage['user']);
-    let index: number = this.findIndexOfUser(currUser.email);
+    if (recepi.author = currUser.email) {
+      this.storage['currentUser'] = JSON.stringify(users[index]);
 
-    users.splice(index, 1, currUser);
+      this.currUser.next(users[index]);
+    }
 
     this.storage['user'] = JSON.stringify(users);
-    this.storage['currentUser'] = JSON.stringify(currUser);
 
-    this.currUser.next(currUser);
     this.users.next(users);
     
     return true;
@@ -692,5 +700,43 @@ export class StorageService {
     this.storage['user'] = JSON.stringify(users);
 
     this.users.next(users);
+  }
+
+  addUser(email: string, password: string): boolean {
+    const newUser: User = {
+      username: 'Anonim',
+      email: email,
+      password: password,
+      photo: '',
+      cookbooks: [],
+      recepies: [],
+      state: 'active',
+      admin: false
+    }
+
+    if (this.checkCurrUsersLogin(email)) {
+      return false;
+    } else {
+      let usersArr: User[] = JSON.parse(this.storage['user']);
+
+      usersArr.push(newUser);
+      
+      this.storage['user'] = JSON.stringify(usersArr);
+      
+      this.users.next(usersArr);
+
+      return true;
+    }
+  }
+
+  changeUserStatus(status: string, user: User) {
+    let users: User[] = JSON.parse(this.storage['user']);
+    let index: number = this.findIndexOfUser(user.email);
+
+    users[index].state = status;
+
+    this.users.next(users);
+
+    this.storage['user'] = JSON.stringify(users);
   }
 }
