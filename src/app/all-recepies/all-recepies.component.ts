@@ -74,7 +74,7 @@ export class AllRecepiesComponent implements OnInit {
         });
       case 'comments':
         return recepies.sort((rec1, rec2) => {
-          return rec2.comments - rec1.comments;
+          return rec2.comments.length - rec1.comments.length;
         });
       default:
         return recepies;

@@ -37,6 +37,15 @@
     background-size: cover;
 }
 
+.comment__photo {
+    width: 68px;
+    height: 68px;
+    border-radius: 50px;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    margin-right: 10px;
+}
+
 .info-main__details-of-recepi {
     display: flex;
 }
@@ -150,13 +159,15 @@
     height: 40px;
 }
 
-.comments__send-comment button {
+.comments__send-comment button,
+.comment__edit {
     width: 88px;
     height: 40px;
     background: #FFBC01;
     border-radius: 10px;
     outline: none;
     border: none;
+    color: white;
 }
 
 .comments__send-comment button:hover {
@@ -187,7 +198,8 @@
 }
 
 .comment__main-text div span,
-.comment__main-text p {
+.comment__main-text p,
+.comment__edit {
     font-family: Nunito;
     font-style: normal;
     font-weight: normal;
@@ -205,6 +217,33 @@
 
 .hidden {
     display: none;
+}
+
+.comment__delete,
+.comment__edit {
+    align-self: center;
+}
+
+.comment__main-text {
+    width: 80%;
+    margin-right: 10px;
+}
+
+.comment__edit {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: #FFBC01;
+}
+
+.comment__edit:hover {
+    color: black;
+}
+
+.comment__edit:hover,
+.comment__delete:hover,
+.close-info svg:hover {
+    cursor: pointer;
 }
 
 @media screen and (min-width: 410px) and (max-width: 841px) {

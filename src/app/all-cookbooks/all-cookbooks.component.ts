@@ -138,7 +138,7 @@ export class AllCookbooksComponent implements OnInit, OnDestroy {
         });
       case 'comments':
         return books.sort((book1, book2) => {
-          return book2.comments - book1.comments;
+          return book2.comments.length - book1.comments.length;
         });
       default:
         return books;

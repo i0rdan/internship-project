@@ -162,6 +162,18 @@
     color: #181818;
 }
 
+.footer__likes,
+.footer__comments {
+    display: flex;
+    justify-content: center;
+}
+
+.header__views span,
+.footer__likes span,
+.footer__comments span {
+    margin-left: 8px;
+}
+
 .header__more {
     display: flex;
     justify-content: center;
