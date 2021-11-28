@@ -25,6 +25,10 @@ import { AllRecepiesComponent } from './all-recepies/all-recepies.component';
 import { AllCookbooksComponent } from './all-cookbooks/all-cookbooks.component';
 import { CookbookViewComponent } from './cookbook-view/cookbook-view.component';
 import { RecepiViewComponent } from './recepi-view/recepi-view.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminCookbooksComponent } from './admin-cookbooks/admin-cookbooks.component';
+import { AdminRecepiesComponent } from './admin-recepies/admin-recepies.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -87,7 +91,11 @@ const customNotifierOptions: NotifierOptions = {
     AllRecepiesComponent,
     AllCookbooksComponent,
     CookbookViewComponent,
-    RecepiViewComponent
+    RecepiViewComponent,
+    AdminPageComponent,
+    AdminCookbooksComponent,
+    AdminRecepiesComponent,
+    AdminUsersComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminCookbooksComponent } from './admin-cookbooks/admin-cookbooks.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminRecepiesComponent } from './admin-recepies/admin-recepies.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AllCookbooksComponent } from './all-cookbooks/all-cookbooks.component';
 import { AllRecepiesComponent } from './all-recepies/all-recepies.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
@@ -40,6 +44,15 @@ const routes: Routes = [
       {path: 'cookbooks', component: ProfileCookbooksComponent},
       {path: 'recepies', component: ProfileRecepiesComponent},
       {path: 'settings', component: ProfileSettingsComponent},
+    ]
+  },
+  {
+    path: 'admin',
+    component: AdminPageComponent,
+    children: [
+      {path: 'cookbooks', component: AdminCookbooksComponent},
+      {path: 'recepies', component: AdminRecepiesComponent},
+      {path: 'users', component: AdminUsersComponent},
     ]
   },
   {

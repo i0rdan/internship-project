@@ -1,0 +1,231 @@
+.main-users {
+    display: flex;
+    margin-top: 10px;
+}
+
+.user-creation {
+    width: 238px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    padding: 32px 24px;
+    max-height: 200px;
+    margin-right: 70px;
+}
+
+.user-creation__label {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.user-creation__label p {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #181818;
+}
+
+.user-creation__label span {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #FFBC01;
+}
+
+.email span,
+.password span,
+.confirm-password span {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: red;
+}
+
+.sorting {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #181818;
+}
+
+.sorting:hover {
+    cursor: pointer;
+    color: #FFBC01;
+}
+
+.email__input,
+.password__input,
+.confirm-password__input {
+    display: block;
+    max-width: 488px;
+    width: 100%;
+    border: 1px solid #DADADA;
+    box-sizing: border-box;
+    border-radius: 8px;
+    height: 28px;
+    outline: 0;
+}
+
+.create-user:disabled,
+.create-user[disabled]{
+  opacity: 0.6;
+  background: #FFBC01;
+}
+
+.create-user {
+    max-width: 488px;
+    width: 100%;
+    height: 28px;
+    background: #FFBC01;
+    border-radius: 10px;
+    border: 0;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    color: #181818;
+}
+
+.create-user:hover {
+    cursor: pointer;
+}
+
+.email,
+.password,
+.create-user {
+    margin-top: 20px;
+}
+
+.user-show__users-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.users-cards__card {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    width: 240px;
+    padding: 24px;
+    margin-top: 10px;
+}
+
+.users-cards__card:hover {
+    box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.24);
+}
+
+.users-cards__card:hover path{
+    fill: #FFBC01;
+}
+
+.users-cards__card:hover {
+    cursor: pointer;
+}
+
+.header__views span,
+.footer__likes span,
+.footer__comments span,
+.main-info__author,
+.card__description p {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #181818;
+}
+
+.main-info__author {
+    align-self: end;
+}
+
+.card__description {
+    margin-top: 16px;
+}
+
+.header__more {
+    display: flex;
+    justify-content: center;
+}
+
+.card__picture {
+    margin-top: 16px;
+    border-radius: 50px 10px;
+    width: 240px;
+    height: 240px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card__main-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.main-info__name {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #181818;
+}
+
+.change-status select {
+    width: 100%;
+    height: 28px;
+    background: #FFFFFF;
+    border: 1px solid #DADADA;
+    border-radius: 4px;
+    margin-top: 16px;
+    outline: none;
+}
+
+.card__footer {
+    margin-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.header__views span,
+.footer__likes span,
+.footer__comments span {
+    margin-left: 5px;
+}
+
+.header__more,
+.footer__likes,
+.footer__comments {
+    display: flex;
+    justify-content: center;
+}
+
+.liked svg path {
+    fill: #FFBC01;
+}
+
+.filter__label span:hover,
+.filter__sort select:hover,
+.checkbox-custom label:hover {
+    cursor: pointer;
+}
+
+@media screen and (min-width: 0px) and (max-width: 1259px) {
+    .main-users {
+        flex-direction: column;
+    }
+}

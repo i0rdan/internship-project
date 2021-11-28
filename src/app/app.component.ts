@@ -14,7 +14,9 @@ export class AppComponent {
         email: 'kazusev2000@mail.ru',
         cookbooks: [],
         recepies: [],
-        photo: ''
+        photo: '',
+        admin: true,
+        state: 'active'
       }
     ]
   ));

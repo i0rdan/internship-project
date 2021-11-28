@@ -7,5 +7,7 @@ export interface User {
   email: string,
   photo: string,
   cookbooks: Cookbook[],
-  recepies: Recepi[]
+  recepies: Recepi[],
+  admin: boolean,
+  state: string
 }
