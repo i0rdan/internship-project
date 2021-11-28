@@ -1,0 +1,134 @@
+.cookbooks-show__cookbooks-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.cookbooks-cards__card {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    width: 240px;
+    padding: 24px;
+    margin-top: 10px;
+}
+
+.cookbooks-cards__card:hover {
+    box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.24);
+}
+
+.liked svg path {
+    fill: #FFBC01;
+}
+
+.cookbooks-cards__card:hover {
+    cursor: pointer;
+}
+
+.card__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card__header svg {
+    align-self: center;
+}
+
+.header__views span,
+.footer__likes span,
+.footer__comments span,
+.main-info__author,
+.card__description p,
+.cookbooks-cards__no-cookbooks {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #181818;
+}
+
+.cookbooks-cards__no-cookbooks {
+    font-size: 30px;
+    margin-bottom: 150px;
+    color: rgba(102, 102, 102, 0.5);
+}
+
+.main-info__author {
+    align-self: end;
+}
+
+.card__description {
+    margin-top: 16px;
+}
+
+.header__views span,
+.footer__likes span,
+.footer__comments span {
+    margin-left: 5px;
+}
+
+.header__more,
+.footer__likes,
+.footer__comments {
+    display: flex;
+    justify-content: center;
+}
+
+.card__picture {
+    margin-top: 16px;
+    border-radius: 50px 10px;
+    width: 240px;
+    height: 240px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card__main-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.main-info__name {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #181818;
+}
+
+.card__footer {
+    margin-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.header__delete-update {
+    position: absolute;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.header__delete-update p {
+    width: 124px;
+    padding: 8px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: Nunito;
+    font-style: normal;
+}
+
+.header__delete-update p:hover {
+    background: #EDEDED;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+}
+
+.hidden {
+    display: none;
+}

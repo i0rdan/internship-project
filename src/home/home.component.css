@@ -1,0 +1,585 @@
+.wrapper {
+    padding: 0 1.4%;
+    max-width: 1900px;
+    margin: 0 auto;
+}
+
+.find-recepies {
+    background-image: url(/assets/home/joseph-gonzalez-fdlZBWIP0aM-unsplash\ 1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 74%;
+    height: 814px;
+    border-radius: 10px 50px;
+    display: flex;
+    justify-content: center;
+    padding: 0 13%;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.liked svg path {
+    fill: #FFBC01;
+}
+
+.find-recepies__main-label p {
+    max-width: 808px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 56px;
+    line-height: 72px;
+    color: #FFFFFF;
+}
+
+.find-recepies__search, 
+.find-recepies__examples {
+    margin-top: 40px;
+}
+
+.find-recepies__search input {
+    width: 80%;
+    height: 70px;
+    outline: none;
+    border: none;
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.find-recepies__search button {
+    width: 146px;
+    height: 54px;
+    outline: none;
+    border: none;
+    background: #FFBC01;
+    border-radius: 10px;
+    position: static;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    text-transform: uppercase;
+    margin-left: -160px;
+}
+
+.find-recepies__examples {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 800px;
+}
+
+.find-recepies__examples p {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+.find-recepies__search button:hover {
+    cursor: pointer;
+    color: #FFFFFF;
+}
+
+.find-recepies__examples p:hover {
+    cursor: pointer;
+    color: #FFBC01;
+    text-decoration: underline;
+}
+
+.user-choice,
+.our-choice {
+    margin-top: 104px;
+}
+
+.user-choice__text,
+.our-choice__text {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FFBC01;
+}
+
+.user-choice__recipes,
+.our-choice__cookbooks {
+    margin-top: 24px;
+}
+
+.recepies__main-label,
+.cookbooks__main-label {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+    color: #181818;
+}
+
+.recepies__recepies-cards {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 17%;
+    margin-top: 48px;
+}
+
+.recepies-cards__card {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    width: 240px;
+    padding: 24px;
+    margin-top: 10px;
+}
+
+.recepies-cards__card:hover {
+    cursor: pointer;
+}
+
+.card__header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.header__views span,
+.footer__likes span,
+.footer__comments span {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #181818;
+}
+
+.footer__likes,
+.footer__comments {
+    display: flex;
+    justify-content: center;
+}
+
+.header__views span,
+.footer__likes span,
+.footer__comments span {
+    margin-left: 8px;
+}
+
+.header__more {
+    display: flex;
+    justify-content: center;
+}
+
+.card__picture {
+    margin-top: 16px;
+    border-radius: 50px 10px;
+    width: 240px;
+    height: 240px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card__main-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.main-info__name {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #181818;
+}
+
+.main-info__author {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #181818;
+}
+
+.card__footer {
+    margin-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.recepies__button,
+.cookbooks__button {
+    margin-top: 48px;
+    text-align: center;
+}
+
+.recepies__button button,
+.cookbooks__button button {
+    width: 169px;
+    height: 62px;
+    border: 2px solid #FFBC01;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: #fcfcfd;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    text-transform: capitalize;
+    color: #FFBC01;
+}
+
+.recepies__button button:hover {
+    background-color: #FFBC01;
+    color: #181818;
+    cursor: pointer;
+}
+
+.cookbooks__cookbooks-cards {
+    display: flex;
+    padding: 0 17%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 48px;
+}
+
+.cookbooks-cards__left-card {
+    width: 47%;
+    height: 512px;
+    padding: 14px;
+    background-image: url(/assets/home/monika-grabkowska-P1aohbiT-EY-unsplash\ 1.jpg);
+    background-size: cover;
+    border-radius: 50px 10px;
+}
+
+.cookbooks-cards__right-cards {
+    max-width: 600px;
+    width: 50%;
+    height: 540px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.right-cards__top-card {
+    max-width: 572px;
+    width: 100%;
+    height: 230px;
+    padding: 14px;
+    display: flex;
+    background: url(/assets/home/pablo-merchan-montes-MXovqM130UI-unsplash\ 1.jpg);
+    background-size: cover;
+    border-radius: 50px 10px;
+}
+
+.right-cards__bottom-cards {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom-cards__left-bottom-card {
+    max-width: 260px;
+    width: 50%;
+    height: 230px;
+    padding: 14px;
+    background: url(/assets/home/image\ 6.jpg);
+    background-size: cover;
+    border-radius: 50px 10px;
+}
+
+.bottom-cards__right-bottom-card {
+    max-width: 260px;
+    width: 50%;
+    height: 230px;
+    padding: 14px;
+    background: url(/assets/home/image\ 8.jpg);
+    background-size: cover;
+    border-radius: 50px 10px;
+}
+
+.cookbooks-cards__button-and-more {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cookbooks-cards__button {
+    align-self: flex-end;
+}
+
+.cookbooks-cards__button button {
+    padding: 8px 24px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    outline: none;
+    border: 0;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.cookbooks-cards__button button:hover {
+    background: #FFBC01;
+    cursor: pointer;
+}
+
+.cookbooks__button button:hover {
+    background: #FFBC01;
+    cursor: pointer;
+    color: #181818;
+}
+
+.trending {
+    width: 90%;
+    height: 986px;
+    text-align: center;
+    margin-top: 104px;
+    background: #FFBC01;
+    border-radius: 50px 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 5%;
+}
+
+.trending__text {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-top: 100px;
+}
+
+.trending__trend-recepies {
+    display: flex;
+    text-align: center; 
+    flex-direction: column;
+}
+
+.trend-recepies__main-label {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 48px;
+    color: #181818;
+    margin-top: 30px;
+}
+
+.trend-recepies__button {
+  margin-top: 90px;
+}
+
+.trend-recepies__button button {
+    padding: 16px 32px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    outline: none;
+    border: 0;
+    position: static;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    color: #FFBC01;
+}
+
+.trend-recepies__button button:hover {
+    background: #FFBC01;
+    cursor: pointer;
+    color: #181818;
+}
+
+.trend-recepies__carousel {
+    position: relative;
+    padding: 10px 40px;
+    margin-top: 30px;
+}
+
+.arrow {
+    position: absolute;
+    top: 60px;
+    padding: 0;
+    font-size: 24px;
+    line-height: 24px;
+    display: block;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    margin-top: 160px;
+}
+
+.arrow:focus {
+    outline: none;
+}
+
+.arrow:hover {
+    cursor: pointer;
+}
+
+.carousel__prev {
+    transform: rotate(180deg);
+    left: 7px;
+}
+
+.carousel__next {
+    right: 7px;
+}
+
+.carousel__gallery {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.gallery__trending-card {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    width: 344px;
+    padding: 24px;
+    margin-top: 10px;
+}
+
+.trending-card__header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.trending-card__picture {
+    margin-top: 16px;
+    border-radius: 50px 10px;
+    width: 344px;
+    height: 344px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.trending-card__main-info-trend-card {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.main-info-trend-card__name {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #181818;
+}
+
+.main-info-trend-card__author {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #181818;
+}
+
+@media screen and (min-width: 1450px) and (max-width: 1871px) {
+    .cookbooks__cookbooks-cards {
+        justify-content: center;
+    }
+}
+
+@media screen and (min-width: 1260px) and (max-width: 1449px) {
+    .cookbooks__cookbooks-cards {
+        justify-content: center;
+    }
+}
+
+@media screen and (min-width: 787px) and (max-width: 1259px) {
+    .find-recepies__main-label p {
+        max-width: 808px;
+        font-size: 26px;
+        line-height: 42px;
+    }
+
+    .find-recepies__search button {
+        width: 66px;
+        height: 54px;
+        font-size: 13px;
+        line-height: 30px;
+        margin-left: -75px;
+    }
+
+    .cookbooks__cookbooks-cards {
+        justify-content: center;
+    }
+}
+
+@media screen and (min-width: 0px) and (max-width: 786px) {
+    .find-recepies__main-label p {
+        max-width: 808px;
+        font-size: 26px;
+        line-height: 42px;
+    }
+
+    .find-recepies__search button {
+        width: 66px;
+        height: 54px;
+        font-size: 13px;
+        line-height: 30px;
+        margin-left: -75px;
+    }
+
+    .recepies__recepies-cards {
+        padding: 0;
+        justify-content: space-around;
+    }
+
+    .cookbooks__cookbooks-cards {
+        justify-content: center;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .cookbooks-cards__left-card {
+        width: 90%;
+    }
+
+    .cookbooks-cards__right-cards {
+        max-width: 600px;
+        width: 90%;
+        height: 800px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+
+    .right-cards__bottom-cards {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .bottom-cards__left-bottom-card,
+    .bottom-cards__right-bottom-card {
+        max-width: 400px;
+        width: 100%;
+    }
+}

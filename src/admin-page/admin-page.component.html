@@ -1,0 +1,19 @@
+<div class="wrapper">
+    <app-header></app-header>
+    <div class="admin-show">
+        <p>Admin functionality</p>
+        <div class="admin-show__navigation">
+            <div class="navigation-right">
+                <a href="" routerLinkActive="navigation__link-active" routerLink="./users">Users (
+                    <span class="navigation-right__active-users">{{ activeUsers.length }}</span>/ 
+                    <span class="navigation-right__blocked-users">{{ blockedUsers.length }}</span>/
+                    <span class="navigation-right__deleted-users">{{ deletedUsers.length }}</span>)</a>
+                <a href="" routerLinkActive="navigation__link-active" routerLink="./recepies">Recepies ({{ allRecepi.length }})</a>
+                <a href="" routerLinkActive="navigation__link-active" routerLink="./cookbooks">Cookbooks ({{ allCookbooks.length }})</a>
+            </div>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+<notifier-container></notifier-container>
+<app-footer></app-footer>

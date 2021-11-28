@@ -1,0 +1,165 @@
+.cookbooks-show__cookbooks-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.recepies-cards__card {
+    height: 212px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 50px 10px 10px 10px;
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.recepies-cards__card:hover {
+    box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.24);
+}
+
+.liked svg path {
+    fill: #FFBC01;
+}
+
+.recepies-cards__card:hover {
+    cursor: pointer;
+}
+
+.card__main {
+    margin: 15px;
+    width: 80%;
+}
+
+.recepies-cards__no-recepies {
+    font-size: 30px;
+    margin-bottom: 150px;
+    color: rgba(102, 102, 102, 0.5);
+}
+
+.card__image {
+    width: 288px;
+    height: 212px;
+    border-radius: 50px 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.main__title,
+.main__reactions,
+.main__reactions > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main__title p {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #181818;
+    max-width: 576px;
+}
+
+.main__title span, 
+.main__info span,
+.main__reactions span {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #181818;
+}
+
+.main__info {
+    margin-top: 10px;
+    height: 130px;
+}
+
+.main__reactions div div {
+    margin-right: 30px;
+}
+
+.header__views span,
+.footer__likes span,
+.footer__comments span,
+.main-info__author,
+.card__description p,
+.sorting {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #181818;
+}
+
+.sorting:hover {
+    cursor: pointer;
+    color: #FFBC01;
+}
+
+.header__delete-update {
+    position: absolute;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.header__delete-update p {
+    width: 124px;
+    padding: 8px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: Nunito;
+    font-style: normal;
+}
+
+.header__delete-update p:hover {
+    background: #EDEDED;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
+}
+
+.reactions__views span,
+.reactions__likes span,
+.reactions__comments span {
+    margin-left: 5px;
+}
+
+.reactions__likes,
+.reactions__comments {
+    display: flex;
+    justify-content: center;
+}
+
+.hidden {
+    display: none;
+}
+
+@media screen and (min-width: 0px) and (max-width: 986px) {
+    .main-recepies {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .recepies-cards__card {
+        height: auto;
+        max-width: 288px;
+        flex-direction: column;
+    }
+
+    .main__title {
+        display: block;
+    }
+
+    .main__reactions {
+        margin-top: 15px;
+        flex-direction: column;
+    }
+
+    .main__reactions > div {
+        flex-direction: column;
+    }
+}
