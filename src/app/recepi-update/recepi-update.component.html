@@ -1,0 +1,53 @@
+<div class="recepie-update__wrapper hidden" id="updateRecepi">
+    <div class="recepie-update">
+      <div class="recepie-update__close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none" 
+          (click)="closeForm()">
+          <path d="M34.6154 31.8456C35.3801 32.6103 35.3801 33.8501 34.6154 34.6148C33.8507 35.3796 32.6108 35.3796 31.8461 34.6149L18 20.7687L4.15383 34.6149C3.38913 35.3796 2.14931 35.3796 1.3846 34.6148C0.6199 33.8501 0.6199 32.6103 1.3846 31.8456L15.2308 17.9995L1.38456 4.15331C0.619859 3.3886 0.61986 2.14878 1.38456 1.38407C2.14926 0.619373 3.38909 0.619369 4.15379 1.38407L18 15.2303L31.8462 1.38407C32.6109 0.619372 33.8507 0.619376 34.6154 1.38408C35.3801 2.14878 35.3801 3.38861 34.6154 4.15331L20.7692 17.9995L34.6154 31.8456Z" fill="#DADADA"/>
+        </svg>
+      </div>
+      <div class="recepie-update__update-details">
+        <form class="update-details" [formGroup]="recepiUpdateForm" id="updateRecepiForm">
+          <p class="update-details__label">Update Recepie</p>
+          <div class="update-details__title">
+            <label for="title">Recepie Title<span>*</span></label>
+            <input type="text" id="recepiTitle" formControlName="recepiLabel">
+            <div *ngIf="checkValid('showLabelErr')">
+                <span *ngIf="checkValid('labelReq')">Label Required</span>
+                <span *ngIf="checkValid('labelMin')">Label must be at least 4 characters</span>
+                <span *ngIf="checkValid('labelMax')">Password must be no longer than 20 characters</span>
+            </div>
+          </div>
+          <input type="file" (change)="onFileSelected($event)" hidden #inputFile accept=".jpg, .jpeg, .png">
+          <button id="fileRecepi" (click)="inputFile.click()" class="update-details__image">Upload Recepie Image</button>
+          <span class="update-details__error-image" *ngIf="recepiPhoto">Photo Loaded</span>
+          <div class="update-details__description">
+            <label for="description">Description</label>
+            <textarea type="text" id="recepiDescription" formControlName="recepiDescription"></textarea>
+          </div>
+          <div class="update-details__time">
+            <label for="time">Time (minutes)</label>
+            <input type="number" id="recepiTime" formControlName="recepiTime">
+          </div>
+          <div class="update-details__ingridients">
+            <label for="ingridients">Ingridients</label>
+            <input type="text" id="enterIngridients">
+          </div>
+          <div class="update-details__choosen-ingridients" *ngIf="recepiIngridients.length">
+            <div class="choosen-ingridients__item" *ngFor="let ingridient of recepiIngridients; let i = index" #ingridientRecepi>
+              <span>{{ ingridient }}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" (click)="ingridientRecepi.classList.add('hidden'); recepiIngridients.splice(i, 1)">
+                <path d="M17.3074 15.9228C17.6898 16.3052 17.6898 16.9251 17.3074 17.3074C16.9251 17.6898 16.3052 17.6898 15.9228 17.3074L8.99975 10.3844L2.07667 17.3074C1.69432 17.6898 1.07441 17.6898 0.692057 17.3074C0.309706 16.9251 0.309706 16.3052 0.692057 15.9228L7.61513 8.99974L0.692038 2.07665C0.309685 1.6943 0.309686 1.07439 0.692037 0.692037C1.07439 0.309686 1.6943 0.309685 2.07665 0.692037L8.99975 7.61513L15.9228 0.692037C16.3052 0.309686 16.9251 0.309688 17.3075 0.692039C17.6898 1.07439 17.6898 1.6943 17.3075 2.07665L10.3844 8.99974L17.3074 15.9228Z" fill="#494949"/>
+              </svg>
+            </div>
+          </div>
+          <div class="update-details__directions">
+            <label for="directions">Directions</label>
+            <textarea type="text" id="recepiDirections" formControlName="recepiDirections"></textarea>
+          </div>
+          <button class="update-details__cancel" (click)="closeForm()">Cancel</button>
+          <button class="update-details__confirm" id="updateRecepiButton" type="submit" (click)="onSubmit()" [disabled]="checkValid('buttonCheck')" #recepiConf>Confirm</button>
+        </form>
+      </div>
+    </div>
+  </div>
