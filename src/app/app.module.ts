@@ -34,6 +34,10 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AboutUsComponent } from './about-us/about-us.component';
 
+import { NgxsModule } from '@ngxs/store';
+import { TutorialState } from './ngxs/state';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+
 const customNotifierOptions: NotifierOptions = {
   position: {
 		horizontal: {
@@ -111,7 +115,11 @@ const customNotifierOptions: NotifierOptions = {
     BrowserAnimationsModule,
     MatSliderModule,
     MatSlideToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxsModule.forRoot([
+      TutorialState
+    ]),
+    NgxsLoggerPluginModule.forRoot()
   ],
   providers: [
     HomeGuard

@@ -1,12 +1,20 @@
 <app-header></app-header>
-<mat-slider aria-label="unit(s)"></mat-slider>
-<mat-slide-toggle>Hi</mat-slide-toggle>
-<mat-form-field appearance="fill">
-  <mat-select>
-    <mat-option *ngFor="let food of foods" [value]="food.value">
-      {{food.viewValue}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+
+<div class="left">
+  <input type="text" placeholder="name" #name>
+
+  <button (click)="addTutorial(name.value)">Add a Tutorial</button>
+</div>
+
+<div class="right" *ngIf="tutorials$">
+
+  <h3>Tutorials</h3>
+  <ul>
+    <li (click)="delTutorial(tutorial)" *ngFor="let tutorial of tutorials$ | async">
+      <a target="_blank">{{ tutorial }}</a>
+    </li>
+  </ul>
+
+</div>
 
 <app-footer></app-footer>

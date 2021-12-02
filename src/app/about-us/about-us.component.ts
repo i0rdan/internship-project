@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, Select } from '@ngxs/store';
+import { TutorialState } from '../ngxs/state';
+import { RemoveTutorial, AddTutorial } from '../ngxs/actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-about-us',
@@ -7,17 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutUsComponent implements OnInit {
 
-  constructor() { }
+  tutorials$: Observable<string>
 
-  ngOnInit(): void {
+  constructor(private store: Store) {
+    this.tutorials$ = this.store.select(state => state.tutorials.tutorials);
   }
 
-  count: number = 2;
+  addTutorial(name: string) {
+    this.store.dispatch(new AddTutorial(name))
+  }
 
-  foods: any = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
+  delTutorial(name: string) {
+    this.store.dispatch(new RemoveTutorial(name));
+  }
+
+  ngOnInit() {}
 
 }
