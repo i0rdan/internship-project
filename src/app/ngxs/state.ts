@@ -1,36 +1,38 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { AddTutorial, RemoveTutorial } from './actions'
+import { AddReaction, RemoveReaction } from './actions'
 
-export class TutorialStateModel {
-    tutorials!: string[];
+export class ReactionStateModel {
+    reactions!: string[];
 }
 
-@State<TutorialStateModel>({
-    name: 'tutorials',
+@State<ReactionStateModel>({
+    name: 'reactions',
     defaults: {
-        tutorials: []
+        reactions: []
     }
 })
-export class TutorialState {
+export class ReactionState {
 
     @Selector()
-    static getTutorials(state: TutorialStateModel) {
-        return state.tutorials;
+    static getReactions(state: ReactionStateModel) {
+        return state.reactions;
     }
 
-    @Action(AddTutorial)
-    add({getState, patchState }: StateContext<TutorialStateModel>, { payload }:AddTutorial) {
+    @Action(AddReaction)
+    add({getState, patchState }: StateContext<ReactionStateModel>, { payload }: AddReaction) {
         const state = getState();
+
         patchState({
-            tutorials: [...state.tutorials, payload]
+            reactions: [...state.reactions, payload]
         })
     }
 
-    @Action(RemoveTutorial)
-    remove({getState, patchState }: StateContext<TutorialStateModel>, { payload }:RemoveTutorial) {
+    @Action(RemoveReaction)
+    remove({getState, patchState }: StateContext<ReactionStateModel>, { payload }: RemoveReaction) {
         patchState({
-            tutorials: getState().tutorials.filter(a => a != payload)
+            reactions: getState().reactions.filter((reaction) => {
+                reaction != payload;
+            })
         })
     }
-
 }

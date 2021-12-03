@@ -1,11 +1,11 @@
-export class AddTutorial {
-    static readonly type = '[TUTORIAL] Add'
+export class AddReaction {
+    static readonly type = '[REACTION] Add'
 
     constructor(public payload: string) {}
 }
 
-export class RemoveTutorial {
-    static readonly type = '[TUTORIAL] Remove'
+export class RemoveReaction {
+    static readonly type = '[REACTION] Remove'
 
     constructor(public payload: string) {}
 }

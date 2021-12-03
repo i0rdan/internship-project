@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { TutorialState } from '../ngxs/state';
-import { RemoveTutorial, AddTutorial } from '../ngxs/actions';
+import { ReactionState } from '../ngxs/state';
+import { RemoveReaction, AddReaction } from '../ngxs/actions';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,22 +9,19 @@ import { Observable } from 'rxjs';
   templateUrl: './about-us.component.html',
   styleUrls: ['./about-us.component.css']
 })
-export class AboutUsComponent implements OnInit {
+export class AboutUsComponent {
 
-  tutorials$: Observable<string>
+  reactions$: Observable<string>
 
   constructor(private store: Store) {
-    this.tutorials$ = this.store.select(state => state.tutorials.tutorials);
+    this.reactions$ = this.store.select((state) => state.reactions.reactions);
   }
 
-  addTutorial(name: string) {
-    this.store.dispatch(new AddTutorial(name))
+  addReaction(name: string) {
+    this.store.dispatch(new AddReaction(name));
   }
 
-  delTutorial(name: string) {
-    this.store.dispatch(new RemoveTutorial(name));
+  delReaction(name: string) {
+    this.store.dispatch(new RemoveReaction(name));
   }
-
-  ngOnInit() {}
-
 }

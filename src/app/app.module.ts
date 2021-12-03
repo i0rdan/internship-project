@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -35,7 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AboutUsComponent } from './about-us/about-us.component';
 
 import { NgxsModule } from '@ngxs/store';
-import { TutorialState } from './ngxs/state';
+import { ReactionState } from './ngxs/state';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 const customNotifierOptions: NotifierOptions = {
@@ -113,11 +113,11 @@ const customNotifierOptions: NotifierOptions = {
     ReactiveFormsModule,
     NotifierModule.withConfig(customNotifierOptions),
     BrowserAnimationsModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSelectModule,
+    MatInputModule,
+    MatListModule,
+    MatButtonModule,
     NgxsModule.forRoot([
-      TutorialState
+      ReactionState
     ]),
     NgxsLoggerPluginModule.forRoot()
   ],

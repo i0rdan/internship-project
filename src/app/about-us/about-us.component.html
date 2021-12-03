@@ -1,20 +1,12 @@
 <app-header></app-header>
-
-<div class="left">
-  <input type="text" placeholder="name" #name>
-
-  <button (click)="addTutorial(name.value)">Add a Tutorial</button>
+<mat-form-field class="example-full-width" appearance="fill">
+  <input type="email" matInput placeholder="Ex. pat@example.com" #name>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="addReaction(name.value)">Add a Tutorial</button>
+<div class="right" *ngIf="reactions$">
+  <h3>Reactions</h3>
+  <mat-list role="list">
+    <mat-list-item role="listitem" (click)="delReaction(reaction)" *ngFor="let reaction of reactions$ | async">{{ reaction }}</mat-list-item>
+  </mat-list>
 </div>
-
-<div class="right" *ngIf="tutorials$">
-
-  <h3>Tutorials</h3>
-  <ul>
-    <li (click)="delTutorial(tutorial)" *ngFor="let tutorial of tutorials$ | async">
-      <a target="_blank">{{ tutorial }}</a>
-    </li>
-  </ul>
-
-</div>
-
 <app-footer></app-footer>
