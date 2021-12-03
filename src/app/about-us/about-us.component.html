@@ -1,0 +1,20 @@
+<app-header></app-header>
+
+<div class="left">
+  <input type="text" placeholder="name" #name>
+
+  <button (click)="addTutorial(name.value)">Add a Tutorial</button>
+</div>
+
+<div class="right" *ngIf="tutorials$">
+
+  <h3>Tutorials</h3>
+  <ul>
+    <li (click)="delTutorial(tutorial)" *ngFor="let tutorial of tutorials$ | async">
+      <a target="_blank">{{ tutorial }}</a>
+    </li>
+  </ul>
+
+</div>
+
+<app-footer></app-footer>

@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
-
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -29,6 +31,12 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AdminCookbooksComponent } from './admin-cookbooks/admin-cookbooks.component';
 import { AdminRecepiesComponent } from './admin-recepies/admin-recepies.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AboutUsComponent } from './about-us/about-us.component';
+
+import { NgxsModule } from '@ngxs/store';
+import { TutorialState } from './ngxs/state';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -95,14 +103,23 @@ const customNotifierOptions: NotifierOptions = {
     AdminPageComponent,
     AdminCookbooksComponent,
     AdminRecepiesComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NotifierModule.withConfig(customNotifierOptions)
+    NotifierModule.withConfig(customNotifierOptions),
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    NgxsModule.forRoot([
+      TutorialState
+    ]),
+    NgxsLoggerPluginModule.forRoot()
   ],
   providers: [
     HomeGuard

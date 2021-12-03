@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutUsComponent } from './about-us/about-us.component';
 import { AdminCookbooksComponent } from './admin-cookbooks/admin-cookbooks.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AdminRecepiesComponent } from './admin-recepies/admin-recepies.component';
@@ -61,6 +62,10 @@ const routes: Routes = [
     canActivate: [
       HomeGuard
     ]
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent
   },
   {
     path: '', 
