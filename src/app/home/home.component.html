@@ -92,7 +92,7 @@
             <button routerLink="/recepies/comments">Show More</button>
         </div>
     </div>
-    <div class="trending">
+    <div class="trending" *ngIf="likedRecepies.length">
         <p class="trending__text">top 10</p>
         <div class="trending__trend-recepies">
             <p class="trend-recepies__main-label">Trending Recepies</p>

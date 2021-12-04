@@ -33,6 +33,7 @@ import { AdminRecepiesComponent } from './admin-recepies/admin-recepies.componen
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { HttpClientModule } from '@angular/common/http';
 
 import { NgxsModule } from '@ngxs/store';
 import { ReactionState } from './ngxs/state';
@@ -119,7 +120,8 @@ const customNotifierOptions: NotifierOptions = {
     NgxsModule.forRoot([
       ReactionState
     ]),
-    NgxsLoggerPluginModule.forRoot()
+    NgxsLoggerPluginModule.forRoot(),
+    HttpClientModule
   ],
   providers: [
     HomeGuard
