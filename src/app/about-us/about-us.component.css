@@ -1,3 +1,21 @@
+.wrapper {
+    padding: 0 9%;
+    max-width: 1900px;
+    margin: 0 auto;
+}
+
 img {
     width: 200px;
+    border-radius: 150px;
+    margin-right: 50px;
 }
+
+.description {
+    display: flex;
+}
+
+.example-full-width {
+    width: 80%;
+    margin-right: 30px;
+}
+

@@ -1,20 +1,28 @@
 <app-header></app-header>
-<mat-form-field class="example-full-width" appearance="fill">
-  <input type="email" matInput placeholder="Ex. pat@example.com" #name>
-</mat-form-field>
-<button mat-raised-button color="primary" (click)="addReaction(name.value)">Add a Reaction</button>
-<div class="right" *ngIf="reactions$">
-  <h3>Reactions</h3>
-  <mat-list role="list">
-    <mat-list-item role="listitem" (click)="delReaction(reaction)" *ngFor="let reaction of reactions$ | async">{{ reaction }}</mat-list-item>
-  </mat-list>
-</div>
-<div *ngIf="!this.httpService.errorMessage">
-  <img [src]="photo" alt="my-photo">
-  <p>{{ authname }}</p>
-  <p>{{ description }}</p>
-</div>
-<div *ngIf="this.httpService.errorMessage">
-  <p>{{ this.httpService.errorMessage }}</p>
+<div class="wrapper">
+  <div *ngIf="!this.httpService.errorMessage" class="description">
+    <div class="description__photo">
+      <img [src]="photo" alt="my-photo">
+    </div>
+    <div class="description__descrip">
+      <p>{{ authname }}</p>
+      <p>{{ description }}</p>
+    </div>
+    <div *ngIf="this.httpService.errorMessage">
+      <p>{{ this.httpService.errorMessage }}</p>
+    </div>
+  </div>
+  <div class="addcomment">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <input type="text" matInput #name>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addReaction(name.value)">Add a Reaction</button>
+  </div>
+  <div class="right" *ngIf="reactions$">
+    <h3>Reactions</h3>
+    <mat-list role="list">
+      <mat-list-item role="listitem" (click)="delReaction(reaction)" *ngFor="let reaction of reactions$ | async">{{ reaction }}</mat-list-item>
+    </mat-list>
+  </div>
 </div>
 <app-footer></app-footer>
