@@ -5,8 +5,8 @@
       <img [src]="photo" alt="my-photo">
     </div>
     <div class="description__descrip">
-      <p>{{ authname }}</p>
-      <p>{{ description }}</p>
+      <p class="descrip__authname">{{ authname }}</p>
+      <p class="descrip__descr">{{ description }}</p>
     </div>
     <div *ngIf="this.httpService.errorMessage">
       <p>{{ this.httpService.errorMessage }}</p>
@@ -19,7 +19,7 @@
     <button mat-raised-button color="primary" (click)="addReaction(name.value)">Add a Reaction</button>
   </div>
   <div class="right" *ngIf="reactions$">
-    <h3>Reactions</h3>
+    <h3 class="reactions">Reactions</h3>
     <mat-list role="list">
       <mat-list-item role="listitem" (click)="delReaction(reaction)" *ngFor="let reaction of reactions$ | async">{{ reaction }}</mat-list-item>
     </mat-list>
